@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mysql -u root -e "CREATE DATABASE mtbsystem "
+mysql -u root -e "CREATE DATABASE mtbsystem"
 
 R=/data/deploy/mtbsystem
 cd $R
