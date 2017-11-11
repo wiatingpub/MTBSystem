@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mysql -u root -e "CREATE DATABASE gomicro "
+mysql -u root -e "CREATE DATABASE mtbsystem "
 
-R=/data/deploy/gomicro
+R=/data/deploy/mtbsystem
 cd $R
 bash build_local.sh all
