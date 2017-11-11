@@ -2,14 +2,14 @@
 
 -------------------
 
-####模块划分：
+#### 模块划分：
 ![模块划分.png](http://upload-images.jianshu.io/upload_images/3365849-dfaec3d3a064fd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-####服务划分：
+#### 服务划分：
 ![服务划分.png](http://upload-images.jianshu.io/upload_images/3365849-005e52ef50e643ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
-####技术方案：
+#### 技术方案：
 - 服务端：go-micro
 - 数据库：mysql
 - 缓    存：redis
@@ -19,7 +19,7 @@
 - 容器：Docker
 - 进程管理：supervisor
 
-####开发进程：
+#### 开发进程：
 - 1、搭建好开发框架 (ing)
 - 2、数据库设计(ing)
 - 3、服务端开发
