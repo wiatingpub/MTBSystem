@@ -1,0 +1,14 @@
+{
+  "datacenter": "dc1",
+  "advertise_addr": "127.0.0.1",
+  "bootstrap": false,
+  "client_addr": "0.0.0.0",
+  "bind_addr": "0.0.0.0",
+  "data_dir": "/data/consul",
+  "bootstrap_expect": 1,
+  "log_level": "INFO",
+  "server": true,
+  "telemetry": {
+     "statsd_address": "127.0.0.1:8125"
+  }
+}
