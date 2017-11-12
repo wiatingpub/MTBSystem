@@ -8,6 +8,8 @@
 #### 服务划分：
 ![服务划分.png](http://upload-images.jianshu.io/upload_images/3365849-005e52ef50e643ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+#### 数据库ER图
+![数据库ER关系图.png](http://upload-images.jianshu.io/upload_images/3365849-9c1abcd5fedd1043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 #### 技术方案：
 - 服务端：go-micro
