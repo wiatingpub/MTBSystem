@@ -5,7 +5,7 @@ if [ $1 == "all" ]; then
     for srv in `ls src`; do
         if [[ ${srv:0-4} == "-srv" ]]; then
             echo "开始更新$srv"
-            GOROOT=/data/services/go GOBIN=/data/goapp/mtbsystem/bin GOPATH=`pwd`:`pwd`/vendor /data/services/go/bin/go install $srv && sudo supervisorctl restart class-$srv:*
+            GOROOT=/data/services/go GOBIN=/data/goapp/mtbsystem/bin GOPATH=`pwd`:`pwd`/vendor /data/services/go/bin/go install $srv && sudo supervisorctl restart $srv:*
         fi
     done
 else
