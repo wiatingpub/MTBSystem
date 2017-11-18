@@ -13,7 +13,7 @@
 
 #### 技术方案：
 - 服务端：go-micro
-- 数据库：mysql
+- 数据库：mysql/mogondb
 - 缓    存：redis
 - 前   端：el & vue
 - 服务器： centos 7 & nginx
