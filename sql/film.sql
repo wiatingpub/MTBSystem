@@ -7,7 +7,6 @@ CREATE TABLE film
   film_price FLOAT DEFAULT 0 COMMENT '影片价格',
   film_screenwriter CHAR(255) DEFAULT '' COMMENT '影片编剧',
   comment_num  int(11)  DEFAULT 0 COMMENT '评论人数',
-  film_play_time CHAR(20) DEFAULT '' COMMENT '影片上映时间',
   film_name CHAR(20) COMMENT '影片名字',
   is_support_inline_watch INT(11) DEFAULT  0 COMMENT '是否支持线上观看',
   create_at CHAR(20) DEFAULT '' COMMENT '记录创建时间',
@@ -21,5 +20,15 @@ CREATE TABLE film
   company_issued  CHAR(255) DEFAULT '' COMMENT '发行公司',
   country   CHAR(50) DEFAULT '' COMMENT '发行国家',
   comment_score FLOAT DEFAULT 0 COMMENT '评分',
+  is_3D INT(11) DEFAULT 0 COMMENT '是否3d',
+  is_DMAX INT(11) DEFAULT 0 COMMENT '是否is_DMAX',
+  is_filter INT(11) DEFAULT 0 COMMENT '是否is_filter',
+  is_hot INT(11) DEFAULT 0 COMMENT '是否热播',
+  is_IMAX INT(11) DEFAULT 0 COMMENT '是否is_IMAX',
+  is_IMAX3D INT(11) DEFAULT 0 COMMENT '是否is_IMAX3D',
+  is_new INT(11) DEFAULT 0 COMMENT '是否新片',
+  r_day  INT(11) DEFAULT 0 COMMENT '上映时间-日',
+  r_month INT(11) DEFAULT 0 COMMENT '上映时间-月',
+  r_year INT(11) DEFAULT 0 COMMENT '上映时间-年',
   PRIMARY KEY ( `film_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

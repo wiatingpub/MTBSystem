@@ -1,0 +1,59 @@
+INSERT INTO film (
+    `logo`,
+    `film_long`,
+    `film_price`,
+    `film_screenwriter`,
+    `film_name`,
+    `big_type`,
+    `film_drama`,
+    `film_director`,
+    `company_issued`,
+    `country`,
+    `r_day`,
+    `r_month`,
+    `r_year`
+) values (
+  'http://img5.mtime.cn/mt/2017/10/23/101938.17733324_1280X720X2.jpg',
+  109,
+  39,
+  '李编剧',
+  '寻梦环游记',
+  1,
+  '墨西哥男孩亡灵世界重逢家人',
+  '李·昂克里奇',
+  '李公司',
+  '中国',
+  '25',
+  '11',
+  '2017'
+);
+
+INSERT INTO film (
+    `logo`,
+    `film_long`,
+    `film_price`,
+    `film_screenwriter`,
+    `film_name`,
+    `big_type`,
+    `film_drama`,
+    `film_director`,
+    `company_issued`,
+    `country`,
+    `r_day`,
+    `r_month`,
+    `r_year`
+) values (
+  'http://img5.mtime.cn/mt/2017/11/22/115051.54720032_1280X720X2.jpg',
+  120,
+  40,
+  '李编剧',
+  '正义联盟',
+  1,
+  '神奇女侠完美海王闪电侠抢',
+  '扎克·施奈德',
+  '李公司',
+  '中国',
+  '25',
+  '11',
+  '2017'
+);

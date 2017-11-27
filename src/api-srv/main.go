@@ -19,12 +19,10 @@ var (
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleRPC)
-	log.Println("Listen on :8888")
-	http.ListenAndServe(":8888", mux)
+	http.ListenAndServe(":8084", mux)
 }
 
 func handleRPC(w http.ResponseWriter, r *http.Request) {
-	log.Println("handleRPC coming ....")
 	if r.URL.Path == "/" {
 		w.Write([]byte("ok,this is the server ..."))
 		return

@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package pb;
+
+service FilmExtService {
+
+	// 获取最新上映的影片
+	rpc HotPlayMovies(HotPlayMoviesReq) returns(HotPlayMoviesRep){}
+}
+
+message HotPlayMoviesReq {
+    int64 location = 1 ; // 位置id
+}
+
+message HotPlayMoviesRep {
+
+}
+
+message FilmAllMessage {
+    string logo = 1 ;
+    int64 filmLong = 2 ;
+    int64 isSelectSeat = 3 ;
+    float filmPrice = 4 ;
+    string filmScreenwriter = 5 ;
+    int64 commentNum = 6 ;
+    string filmName = 7 ;
+    int64 isSupportInlineWatch = 8 ;
+    string createAt = 9 ;
+    int64 bigType = 10 ;
+    string filmDrama = 11 ;
+    int64 userAccessTimes = 12;
+    float filmBoxoffice = 13;
+    string filmDirector = 14 ;
+    int64 userLikeWatchTimes = 15 ;
+    int64 userCommentTimes = 16 ;
+    string companyIssued = 17 ;
+    string country = 18 ;
+    float commentScore = 19 ;
+    int64 is3D = 20 ;
+    int64 isDMAX = 21 ;
+    int64 isFilter = 22 ;
+    int64 isHot = 23 ;
+    int64 isIMAX = 24 ;
+    int64 isIMAX3D = 25 ;
+    int64 isNew = 26 ;
+    int64 rDay = 27 ;
+    int64 rMonth = 28 ;
+    int64 rYear = 29 ;
+}

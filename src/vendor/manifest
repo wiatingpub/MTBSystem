@@ -26,6 +26,14 @@
 			"notests": true
 		},
 		{
+			"importpath": "github.com/go-sql-driver/mysql",
+			"repository": "https://github.com/go-sql-driver/mysql",
+			"vcs": "git",
+			"revision": "cd4cb909ce1a31435164be29bf3682031f61539a",
+			"branch": "master",
+			"notests": true
+		},
+		{
 			"importpath": "github.com/golang/protobuf/proto",
 			"repository": "https://github.com/golang/protobuf",
 			"vcs": "git",
@@ -107,6 +115,14 @@
 			"notests": true
 		},
 		{
+			"importpath": "github.com/jmoiron/sqlx",
+			"repository": "https://github.com/jmoiron/sqlx",
+			"vcs": "git",
+			"revision": "3379e5993990b1f927fc8db926485e6f6becf2d2",
+			"branch": "master",
+			"notests": true
+		},
+		{
 			"importpath": "github.com/micro/cli",
 			"repository": "https://github.com/micro/cli",
 			"vcs": "git",
@@ -123,93 +139,11 @@
 			"notests": true
 		},
 		{
-			"importpath": "github.com/micro/go-micro/broker",
+			"importpath": "github.com/micro/go-micro",
 			"repository": "https://github.com/micro/go-micro",
 			"vcs": "git",
 			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
 			"branch": "master",
-			"path": "broker",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/client",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "client",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/cmd",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "/cmd",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/codec",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "codec",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/errors",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "/errors",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/metadata",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "metadata",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/registry",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "/registry",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/selector",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "selector",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/server",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "server",
-			"notests": true
-		},
-		{
-			"importpath": "github.com/micro/go-micro/transport",
-			"repository": "https://github.com/micro/go-micro",
-			"vcs": "git",
-			"revision": "1f03681d8277f683237cc3cdd99fd58e5128f61a",
-			"branch": "master",
-			"path": "transport",
 			"notests": true
 		},
 		{
@@ -292,6 +226,30 @@
 			"repository": "https://github.com/sirupsen/logrus",
 			"vcs": "git",
 			"revision": "89742aefa4b206dcf400792f3bd35b542998eb3b",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "go.uber.org/atomic",
+			"repository": "https://github.com/uber-go/atomic",
+			"vcs": "git",
+			"revision": "8474b86a5a6f79c443ce4b2992817ff32cf208b8",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "go.uber.org/multierr",
+			"repository": "https://github.com/uber-go/multierr",
+			"vcs": "git",
+			"revision": "fb7d312c2c04c34f0ad621048bbb953b168f9ff6",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "go.uber.org/zap",
+			"repository": "https://github.com/uber-go/zap",
+			"vcs": "git",
+			"revision": "f85c78b1dd998214c5f2138155b320a4a43fbe36",
 			"branch": "master",
 			"notests": true
 		},
@@ -381,6 +339,14 @@
 			"repository": "https://github.com/golang/appengine",
 			"vcs": "git",
 			"revision": "9d8544a6b2c7df9cff240fcf92d7b2f59bc13416",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "gopkg.in/natefinch/lumberjack.v2",
+			"repository": "https://gopkg.in/natefinch/lumberjack.v2",
+			"vcs": "git",
+			"revision": "a96e63847dc3c67d17befa69c303767e2f84e54f",
 			"branch": "master",
 			"notests": true
 		},
