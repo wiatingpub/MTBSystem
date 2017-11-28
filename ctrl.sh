@@ -10,7 +10,7 @@ case "$1" in
         cd ..
     ;;
     run)
-        docker run --name=$Container -p 18084:8084 -p 18500:8500 -d -v `pwd`:/data/deploy/$ProjectName ricoder/go-env
+        docker run --name=$Container -p 18089:8084 -p 18505:8500 -d -v `pwd`:/data/deploy/$ProjectName ricoder/go-env
     ;;
     init)
         docker exec $Container bash /data/deploy/$ProjectName/dockerbase/init.sh

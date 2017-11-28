@@ -19,6 +19,8 @@ func NewFilmServiceExtHandler() *FilmServiceExtHandler{
 
 func (f *FilmServiceExtHandler)HotPlayMovies(ctx context.Context,req *pb.HotPlayMoviesReq,rsp *pb.HotPlayMoviesRep) error {
 
-	f.logger.Debug("info",zap.Any("info","test"))
+	f.logger.Info("info",zap.Any("info","test"))
+	rsp.Test = 5
+
 	return nil
 }
