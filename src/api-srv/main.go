@@ -5,21 +5,28 @@ import (
 	"github.com/micro/go-micro/cmd"
 	"domain/apid"
 	"share/config"
-	"log"
 	microErrors "github.com/micro/go-micro/errors"
 	"encoding/json"
 	"io/ioutil"
 	"strconv"
+	"go.uber.org/zap"
+	"share/utils/log"
 )
 
 var (
 	cors = map[string]bool{"*": true}
+	logger *zap.Logger
 )
+func init() {
+	logger = log.Init("api")
+
+}
 
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleRPC)
-	http.ListenAndServe(":8084", mux)
+	http.ListenAndServe(":8082", mux)
+	logger.Info("Listen on :8082")
 }
 
 func handleRPC(w http.ResponseWriter, r *http.Request) {
@@ -53,19 +60,24 @@ func handleRPC(w http.ResponseWriter, r *http.Request) {
 func handleJSONRPC(w http.ResponseWriter, r *http.Request) {
 
 	service, method := apid.PathToReceiver(config.Namespace, r.URL.Path)
-	log.Println("service:" + service)
-	log.Println("method:" + method)
+
 	br, _ := ioutil.ReadAll(r.Body)
 
 	request := json.RawMessage(br)
 
 	var response json.RawMessage
+	logger.Info("info",zap.Any("request",request))
 	req := (*cmd.DefaultOptions().Client).NewJsonRequest(service, method, &request)
 	ctx := apid.RequestToContext(r)
 	err := (*cmd.DefaultOptions().Client).Call(ctx, req, &response)
+	logger.Info("info",zap.Any("ctx",ctx))
+	logger.Info("info",zap.Any("req",req))
+	logger.Info("info",zap.Any("response",response))
+	logger.Info("info",zap.Any("err",err))
 	// make the call
 	if err != nil {
 		ce := microErrors.Parse(err.Error())
+		logger.Info("info",zap.Any("ce.Code",err))
 		switch ce.Code {
 		case 0:
 			// assuming it's totally screwed

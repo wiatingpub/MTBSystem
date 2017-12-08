@@ -20,9 +20,10 @@ func Instance() *zap.Logger {
 	return instance
 }
 
-// Init 初始化,srvName 生成的日志文件夹名字
-func Init(srvName string){
-	instance = NewLogger(srvName)
+// Init 初始化
+func Init(serviceName string) *zap.Logger {
+	instance = NewLogger(serviceName)
+	return instance
 }
 
 // NewLogger 新建日志
@@ -31,16 +32,15 @@ func NewLogger(srvName string) *zap.Logger {
 	directory := path.Join(config.LogPath,srvName)
 	writers := []zapcore.WriteSyncer{newRollingFile(directory)}
 	writers = append(writers, os.Stdout)
-	logger, _ := newZapLogger(true, zapcore.NewMultiWriteSyncer(writers...))
+	logger, dyn := newZapLogger(true, zapcore.NewMultiWriteSyncer(writers...))
 	zap.RedirectStdLog(logger)
 
-	//go func() {
-	//	ticker := time.NewTicker(30 * time.Second)
-	//	for range ticker.C {
-	//		dyn := &zap.AtomicLevel{}
-	//		updateLogLevel( srvName, dyn, false)
-	//	}
-	//}()
+	go func() {
+		ticker := time.NewTicker(30 * time.Second)
+		for range ticker.C {
+			updateLogLevel( srvName, dyn, false)
+		}
+	}()
 
 	return logger
 }
