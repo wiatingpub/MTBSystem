@@ -5,6 +5,7 @@ import (
 	"go.uber.org/zap"
 	"context"
 	"share/utils/log"
+	"film-srv/db"
 )
 
 type FilmServiceExtHandler struct {
@@ -19,8 +20,17 @@ func NewFilmServiceExtHandler() *FilmServiceExtHandler{
 
 func (f *FilmServiceExtHandler)HotPlayMovies(ctx context.Context,req *pb.HotPlayMoviesReq,rsp *pb.HotPlayMoviesRep) error {
 
-	f.logger.Info("info",zap.Any("info","test"))
+	films,err := db.GetTickingFilims()
+	if err != nil {
+		f.logger.Error("err",zap.Any("films",err))
+		return err
+	}
+	hotMoviesPB := []*pb.HotMovie{}
+	for _,film := range films {
+		filmPB := film.ToProtoDBHotPlayMovies()
+		hotMoviesPB = append(hotMoviesPB,filmPB)
+	}
 	rsp.Test = 5
-
+	rsp.Movies = hotMoviesPB
 	return nil
 }
