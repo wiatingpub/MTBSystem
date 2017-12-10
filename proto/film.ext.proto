@@ -4,8 +4,10 @@ package pb;
 
 service FilmExtService {
 
-	// 获取最新上映的影片
+	// 获取正在售票的影片
 	rpc HotPlayMovies(HotPlayMoviesReq) returns(HotPlayMoviesRep){}
+    // 电影详情
+    rpc MovieDetail(MovieDetailReq) returns(MovieDetailRep) {}
 }
 
 message HotPlayMoviesReq {
@@ -73,4 +75,22 @@ message FilmAllMessage {
     int64 rMonth = 28 ;
     int64 rYear = 29 ;
     string commonSpecial = 30 ;
+}
+
+message MovieDetailReq {
+    int64 locationId = 1 ;
+    int64 movieId = 2 ;
+}
+
+message MovieDetailRep {
+    string image    = 1 ;
+    string titleCn  = 2 ;
+    string titleEn  = 3 ;
+    string rating   = 4 ;
+    int64   year    = 5 ;
+    string  content = 6 ;
+    repeated string  type    = 7 ;
+    string  runTime = 8 ;
+    string  commonSpecial   = 9 ;
+    string  director    =   10 ;
 }

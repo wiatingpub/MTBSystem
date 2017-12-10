@@ -15,10 +15,20 @@ R=/data/deploy/mtbsystem/sql/
 cd $R
 for var in `ls`
 do
-   mysql -u root -D "$Database" -e "source $var"
+    if [[ "${var}" != "data" ]]; then
+           mysql -u root -D "$Database" -e "source $var"
+    fi
 done
 
+cd data
+for var in `ls`
+do
+    mysql -u root -D "$Database" -e "source $var"
+done
+
+
 # 更新服务
+cd ..
 cd ..
 bash build_local.sh all
 

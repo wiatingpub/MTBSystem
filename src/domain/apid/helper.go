@@ -1,17 +1,18 @@
 package apid
 
 import (
-	"net/http"
-	"path"
-	"strings"
 	"github.com/micro/go-micro/metadata"
 	"golang.org/x/net/context"
+	"net/http"
+	"path"
 	"regexp"
+	"strings"
 )
 
 var (
-	versionRe  = regexp.MustCompilePOSIX("^v[0-9]+$")
+	versionRe = regexp.MustCompilePOSIX("^v[0-9]+$")
 )
+
 // Translates /foo/bar/zool into api service go.micro.api.foo method Bar.Zool
 // Translates /foo/bar into api service go.micro.api.foo method Foo.Bar
 func PathToReceiver(ns, p string) (string, string) {

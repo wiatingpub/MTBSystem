@@ -1,15 +1,15 @@
 /*
 这是一个数据库辅助代码，建议使用该demo的时候运行一下文件，当然了运行之前数据库的账户和密码要做相应的修改。
- */
+*/
 package main
 
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"log"
-	"time"
 	"math/rand"
 	"share/config"
+	"time"
 )
 
 var schema = `
@@ -21,15 +21,12 @@ CREATE TABLE IF NOT EXISTS user (
 	PRIMARY KEY (id)
 )`
 
-
-
 type User struct {
-	id int32 `db:"id"`
-	name  string `DB:"NAME"`
-	Address     string `db:"address"`
-	Phone     string `db:"phone"`
+	id      int32  `db:"id"`
+	name    string `DB:"NAME"`
+	Address string `db:"address"`
+	Phone   string `db:"phone"`
 }
-
 
 func main() {
 	// 同时打开并连接数据库，返回错误信息
@@ -52,7 +49,7 @@ func main() {
 
 }
 
-func GetRandomString(leng int) string{
+func GetRandomString(leng int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	bytes := []byte(str)
 	result := []byte{}

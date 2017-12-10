@@ -29,7 +29,7 @@ func Init(serviceName string) *zap.Logger {
 // NewLogger 新建日志
 func NewLogger(srvName string) *zap.Logger {
 
-	directory := path.Join(config.LogPath,srvName)
+	directory := path.Join(config.LogPath, srvName)
 	writers := []zapcore.WriteSyncer{newRollingFile(directory)}
 	writers = append(writers, os.Stdout)
 	logger, dyn := newZapLogger(true, zapcore.NewMultiWriteSyncer(writers...))
@@ -38,7 +38,7 @@ func NewLogger(srvName string) *zap.Logger {
 	go func() {
 		ticker := time.NewTicker(30 * time.Second)
 		for range ticker.C {
-			updateLogLevel( srvName, dyn, false)
+			updateLogLevel(srvName, dyn, false)
 		}
 	}()
 
@@ -78,7 +78,6 @@ func updateLogLevel(serviceName string, dyn *zap.AtomicLevel, isProduction bool)
 		dyn.SetLevel(*newLevel)
 	}
 }
-
 
 func newRollingFile(directory string) zapcore.WriteSyncer {
 	if err := os.MkdirAll(directory, 0766); err != nil {
@@ -193,4 +192,3 @@ func (l *lumberjackWriteSyncer) sync() error {
 	}
 	return nil
 }
-

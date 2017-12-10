@@ -1,0 +1,5 @@
+CREATE TABLE type (
+  t_id INT(11) AUTO_INCREMENT NOT NULL COMMENT '类型id',
+  t_name char(50) DEFAULT '' COMMENT '类型名称',
+  PRIMARY KEY (`t_id`)
+) ENGINE = InnoDB DEFAULT CHARSET =utf8;

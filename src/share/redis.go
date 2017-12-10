@@ -1,11 +1,11 @@
 package share
 
 import (
-	"time"
 	"github.com/garyburd/redigo/redis"
+	"time"
 )
 
-func NewRedisPool(maxIdle, maxActive , DBNum int, timeout time.Duration, addr , password string) *redis.Pool {
+func NewRedisPool(maxIdle, maxActive, DBNum int, timeout time.Duration, addr, password string) *redis.Pool {
 
 	return &redis.Pool{
 		MaxActive:   maxActive,
