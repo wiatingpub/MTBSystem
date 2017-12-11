@@ -9,7 +9,7 @@ for var in `ls`
 do
     if [[ "${var}" != "data" ]]
      then
-            mysql -u root -D "$Database" -e "source $var"
+            mysql -u root -D "$Database" -e "source $var"ba
     fi
 done
 

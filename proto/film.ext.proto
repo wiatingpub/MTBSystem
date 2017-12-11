@@ -8,6 +8,14 @@ service FilmExtService {
 	rpc HotPlayMovies(HotPlayMoviesReq) returns(HotPlayMoviesRep){}
     // 电影详情
     rpc MovieDetail(MovieDetailReq) returns(MovieDetailRep) {}
+    // 获取导演与演员信息
+    rpc MovieCreditsWithTypes(MovieCreditsWithTypesReq) returns (MovieCreditsWithTypesRep) {}
+    // 获取海报信息
+    rpc ImageAll(ImageAllReq) returns (ImageAllRep) {}
+    // 精彩影评
+    rpc HotComment(HotCommentReq) returns(HotCommentRep) {}
+    // 即将上映的影片
+    rpc LocationMovies(LocationMoviesReq) returns(LocationMoviesRep) {}
 }
 
 message HotPlayMoviesReq {
@@ -93,4 +101,83 @@ message MovieDetailRep {
     string  runTime = 8 ;
     string  commonSpecial   = 9 ;
     string  director    =   10 ;
+    Release release  = 11 ;
+}
+
+message Release {
+    string location = 1 ;
+    string date = 2 ;
+}
+
+message MovieCreditsWithTypesReq {
+
+}
+
+message MovieCreditsWithTypesRep {
+    repeated Type types = 1 ;
+}
+
+message Type {
+    string typeName = 1;
+    string typeNameEc = 2 ;
+    repeated Persons persons = 3 ;
+}
+
+message Persons {
+    string image = 1 ;
+    string name = 2 ;
+    string nameEn = 3 ;
+    string roleCover = 4 ;
+    string personate = 5 ;
+}
+
+message ImageAllReq {
+
+}
+
+message ImageAllRep {
+    repeated Image images = 1 ;
+}
+
+message Image {
+    string image = 1 ;
+}
+
+message HotCommentReq {
+
+}
+
+message HotCommentRep {
+    CommentData data = 1 ;
+}
+
+message CommentData {
+    CommentMini mini = 1 ;
+    CommentPlus plus = 2 ;
+}
+
+message CommentMini {
+    repeated CommentRecord list = 1 ;
+    int64 total = 2 ;
+}
+
+message CommentPlus {
+    repeated CommentRecord list = 1 ;
+    int64 total = 2 ;
+}
+
+message CommentRecord {
+    string title = 1 ;
+    string content = 2 ;
+    string headImg = 3 ;
+    string nickname = 4 ;
+}
+
+message LocationMoviesReq {
+
+}
+
+message LocationMoviesRep {
+    string bImg = 1 ;
+
 }
