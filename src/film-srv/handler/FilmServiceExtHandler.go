@@ -165,3 +165,9 @@ func (f *FilmServiceExtHandler) HotComment(ctx context.Context, req *pb.HotComme
 	rsp.Data = &data
 	return nil
 }
+
+// 即将上映的影片
+func (f *FilmServiceExtHandler) LocationMovies(ctx context.Context, req *pb.LocationMoviesReq, rsp *pb.LocationMoviesRep) error {
+
+	return nil
+}

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"film-srv/db"
-	"film-srv/handler"
+	"place-srv/db"
+	"place-srv/handler"
 	"github.com/micro/cli"
 	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/server"
@@ -14,24 +14,22 @@ import (
 
 func main() {
 
-	log.Init("film")
+	log.Init("place")
 	logger := log.Instance()
 	service := micro.NewService(
-		micro.Name(config.Namespace+"film"),
+		micro.Name(config.Namespace+"place"),
 		micro.Version("latest"),
 	)
 	// 定义Service动作操作
 	service.Init(
 		micro.Action(func(c *cli.Context) {
-			logger.Info("Info", zap.Any("film-srv", "film-srv is start ..."))
-			// 注册redis
-			//redisPool := share.NewRedisPool(3, 3, 1,300*time.Second,":6379","redis")
-			// 先注册db
+			logger.Info("Info", zap.Any("place-srv", "place-srv is start ..."))
+
 			db.Init(config.MysqlDSN)
-			pb.RegisterFilmServiceExtHandler(service.Server(), handler.NewFilmServiceExtHandler(), server.InternalHandler(true))
+			pb.RegisterPlaceServiceExtHandler(service.Server(), handler.NewPlaceServiceExtHandler(), server.InternalHandler(true))
 		}),
 		micro.AfterStop(func() error {
-			logger.Info("Info", zap.Any("film-srv", "film-srv is stop ..."))
+			logger.Info("Info", zap.Any("place-srv", "place-srv is stop ..."))
 			return nil
 		}),
 		micro.AfterStart(func() error {
@@ -41,6 +39,6 @@ func main() {
 
 	//启动service
 	if err := service.Run(); err != nil {
-		logger.Panic("film-srv服务启动失败 ...")
+		logger.Panic("place-srv服务启动失败 ...")
 	}
 }

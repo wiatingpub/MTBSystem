@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pb;
 
-service FilmExtService {
+service FilmServiceExt {
 
 	// 获取正在售票的影片
 	rpc HotPlayMovies(HotPlayMoviesReq) returns(HotPlayMoviesRep){}

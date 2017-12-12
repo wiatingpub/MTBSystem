@@ -9,6 +9,7 @@ mkdir /etc/consul/
 cp /data/deploy/mtbsystem/dockerbase/conf/consul.json /etc/consul/consul.json
 # 重新用supervisor加载进程
 supervisorctl reload
+
 # 创建数据库和表
 mysql -u root -e "CREATE DATABASE $Database"
 R=/data/deploy/mtbsystem/sql/

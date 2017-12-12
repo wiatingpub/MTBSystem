@@ -34,8 +34,11 @@ case "$1" in
     port)
         docker port $Container
     ;;
+    sql)
+        docker exec $Container bash /data/deploy/$ProjectName/build_sql.sh
+    ;;
     *)
-        echo "Usage: build|run|init|start|stop|remove|login|info|port"
+        echo "Usage: build|run|init|start|stop|remove|login|info|port|sql"
         exit 3
     ;;
 esac
