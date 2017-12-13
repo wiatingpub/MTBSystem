@@ -16,6 +16,8 @@ service FilmServiceExt {
     rpc HotComment(HotCommentReq) returns(HotCommentRep) {}
     // 即将上映的影片
     rpc LocationMovies(LocationMoviesReq) returns(LocationMoviesRep) {}
+    //
+    rpc MovieComingNew(MovieComingNewReq) returns (MovieComingNewRep) {}
 }
 
 message HotPlayMoviesReq {
@@ -23,9 +25,16 @@ message HotPlayMoviesReq {
 }
 
 message HotPlayMoviesRep {
-    int64 test = 1 ; // test
-    repeated HotMovie movies = 2 ; // 正在上映的影片
+    repeated Movie movies = 1 ; // 正在上映的影片
 }
+
+message Movie {
+
+    string img = 1 ; // 影片logo
+    int64 movieId = 2 ; // 电影时长
+    string titleCn = 3 ; // 中文名字
+}
+
 
 message HotMovie {
     repeated string actorName = 1 ; // 演员名字
@@ -178,6 +187,13 @@ message LocationMoviesReq {
 }
 
 message LocationMoviesRep {
-    string bImg = 1 ;
+    repeated Movie movies = 1 ; // 正在上映的影片
+}
 
+message MovieComingNewReq {
+
+}
+
+message MovieComingNewRep {
+    repeated Movie movies = 1 ; // 正在上映的影片
 }

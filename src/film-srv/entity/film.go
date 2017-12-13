@@ -64,3 +64,11 @@ func (f Film) ToProtoDBHotPlayMovies() *pb.HotMovie {
 		WantedCount:   f.WantedCount,
 	}
 }
+
+func (f Film) ToProtoDBMovies() *pb.Movie {
+	return &pb.Movie{
+		TitleCn:	 	f.TitleCn,
+		Img:           f.Img,
+		MovieId:       f.MovieId,
+	}
+}

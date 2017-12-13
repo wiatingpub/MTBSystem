@@ -26,7 +26,7 @@ func (f *FilmServiceExtHandler) HotPlayMovies(ctx context.Context, req *pb.HotPl
 		f.logger.Error("err", zap.Any("films", err))
 		return err
 	}
-	hotMoviesPB := []*pb.HotMovie{}
+	MoviesPB := []*pb.Movie{}
 	for _, film := range films {
 		// 处理影片演员信息
 		filmActors,err := db.SelectFilmActorByMid(film.MovieId)
@@ -38,10 +38,10 @@ func (f *FilmServiceExtHandler) HotPlayMovies(ctx context.Context, req *pb.HotPl
 		}
 		// 处理影片种类信息
 
-		filmPB := film.ToProtoDBHotPlayMovies()
-		hotMoviesPB = append(hotMoviesPB, filmPB)
+		filmPB := film.ToProtoDBMovies()
+		MoviesPB = append(MoviesPB, filmPB)
 	}
-	rsp.Movies = hotMoviesPB
+	rsp.Movies = MoviesPB
 	return nil
 }
 
@@ -169,5 +169,54 @@ func (f *FilmServiceExtHandler) HotComment(ctx context.Context, req *pb.HotComme
 // 即将上映的影片
 func (f *FilmServiceExtHandler) LocationMovies(ctx context.Context, req *pb.LocationMoviesReq, rsp *pb.LocationMoviesRep) error {
 
+	films, err := db.SelectTickingFilims()
+	if err != nil {
+		f.logger.Error("err", zap.Any("films", err))
+		return err
+	}
+	MoviesPB := []*pb.Movie{}
+	for _, film := range films {
+		// 处理影片演员信息
+		filmActors,err := db.SelectFilmActorByMid(film.MovieId)
+		if err != nil {
+			return err
+		}
+		for _,filmActor := range filmActors {
+			film.ActorName =  append(film.ActorName,filmActor.ActorName)
+		}
+		// 处理影片种类信息
+
+		filmPB := film.ToProtoDBMovies()
+		MoviesPB = append(MoviesPB, filmPB)
+	}
+	rsp.Movies = MoviesPB
 	return nil
 }
+
+// 即将上映的影片
+func (f *FilmServiceExtHandler) MovieComingNew(ctx context.Context, req *pb.MovieComingNewReq, rsp *pb.MovieComingNewRep) error {
+
+	films, err := db.SelectTickingFilims()
+	if err != nil {
+		f.logger.Error("err", zap.Any("films", err))
+		return err
+	}
+	MoviesPB := []*pb.Movie{}
+	for _, film := range films {
+		// 处理影片演员信息
+		filmActors,err := db.SelectFilmActorByMid(film.MovieId)
+		if err != nil {
+			return err
+		}
+		for _,filmActor := range filmActors {
+			film.ActorName =  append(film.ActorName,filmActor.ActorName)
+		}
+		// 处理影片种类信息
+
+		filmPB := film.ToProtoDBMovies()
+		MoviesPB = append(MoviesPB, filmPB)
+	}
+	rsp.Movies = MoviesPB
+	return nil
+}
+
