@@ -220,3 +220,44 @@ func (f *FilmServiceExtHandler) MovieComingNew(ctx context.Context, req *pb.Movi
 	return nil
 }
 
+// 搜搜出来的影片信息
+func (f *FilmServiceExtHandler) Search(ctx context.Context, req *pb.SearchReq, rsp *pb.SearchRep) error {
+
+	rsp.Total = 2
+	genres1 := pb.Genres{
+		Type:"喜剧",
+	}
+	genres2 := pb.Genres{
+		Type:"悲剧",
+	}
+	rating := pb.Rating{
+		Average:3.7,
+	}
+	genres := []*pb.Genres{}
+	genres = append(genres,&genres1)
+	genres = append(genres,&genres2)
+	image1 := pb.Images{
+		Small:"https://img3.doubanio.com/view/celebrity/s_ratio_celebrity/public/p54250.jpg",
+	}
+	movie1 := pb.SearchMovie{
+		Image:&image1,
+		Genres:genres,
+		Title:"金钱掌控",
+		Id:"1",
+		Year:"2017",
+		Rating:&rating,
+	}
+	movie2 := pb.SearchMovie{
+		Image:&image1,
+		Genres:genres,
+		Title:"金钱掌控",
+		Id:"1",
+		Year:"2017",
+		Rating:&rating,
+	}
+	searchMovies := []*pb.SearchMovie{}
+	searchMovies = append(searchMovies, &movie1)
+	searchMovies = append(searchMovies, &movie2)
+	rsp.Subjects = searchMovies
+	return nil
+}

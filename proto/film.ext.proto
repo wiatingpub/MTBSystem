@@ -14,10 +14,12 @@ service FilmServiceExt {
     rpc ImageAll(ImageAllReq) returns (ImageAllRep) {}
     // 精彩影评
     rpc HotComment(HotCommentReq) returns(HotCommentRep) {}
-    // 即将上映的影片
+    // 正在热映的影片
     rpc LocationMovies(LocationMoviesReq) returns(LocationMoviesRep) {}
-    //
+    // 即将上映的影片
     rpc MovieComingNew(MovieComingNewReq) returns (MovieComingNewRep) {}
+    // 图片搜索
+    rpc Search(SearchReq) returns (SearchRep) {}
 }
 
 message HotPlayMoviesReq {
@@ -196,4 +198,34 @@ message MovieComingNewReq {
 
 message MovieComingNewRep {
     repeated Movie movies = 1 ; // 正在上映的影片
+}
+
+message SearchRep {
+    repeated SearchMovie subjects = 1 ; // 搜索的列表
+    int64 total = 2 ; // 列表总数
+}
+
+message SearchReq {
+    string q = 1 ; // 搜搜index
+}
+
+message SearchMovie {
+    string title = 1 ; // 名字
+    string id = 2 ; // id
+    Images image = 3 ; // 图片
+    repeated Genres genres = 4 ; // 类型
+    string year = 5 ; // 上映年份
+    Rating rating = 6 ; // 评分
+}
+
+message Genres {
+    string type = 1 ; // 电影类型
+}
+
+message Rating {
+	float average = 1 ; // 评分
+}
+
+message Images {
+    string small = 1 ; // 图片
 }
