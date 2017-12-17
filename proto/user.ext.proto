@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package pb;
+
+service UserServiceExt {
+   // 注册用户
+   rpc RegistAccount(RegistAccountReq) returns(RegistAccountRsp) {}
+   // 用户登录
+   rpc LoginAccount(LoginAccountReq) returns(LoginAccountRsp) {}
+   // 密码重置
+   rpc ResetAccount(ResetAccountReq) returns(ResetAccountRsp) {}
+}
+
+message RegistAccountReq {
+    string userName = 1 ;
+    string password = 2 ;
+}
+
+message RegistAccountRsp {
+}
+
+message LoginAccountReq {
+
+}
+
+message LoginAccountRsp {
+
+}
+
+message ResetAccountReq {
+
+}
+
+message ResetAccountRsp {
+
+}
+
