@@ -5,6 +5,8 @@ import (
 	"share/utils/log"
 	"share/pb"
 	"context"
+	"user-srv/db"
+	"share/errors"
 )
 
 type UserServiceExtHandler struct {
@@ -17,8 +19,18 @@ func NewUserServiceExtHandler() *UserServiceExtHandler {
 	}
 }
 
+// 账户注册
 func (u *UserServiceExtHandler) RegistAccount (ctx context.Context,req *pb.RegistAccountReq,rsp *pb.RegistAccountRsp) error {
-	return nil
+
+	userName := req.UserName
+	password := req.Password
+	u.logger.Debug("debug",zap.Any("userName",userName))
+	err := db.InsertUser(userName,password)
+	if err != nil {
+		u.logger.Error("error",zap.Error(err))
+		return errors.ErrorUserFailed
+	}
+	return errors.ErrorUserFailed
 }
 
 func (u *UserServiceExtHandler) LoginAccount (ctx context.Context,req *pb.LoginAccountReq,rsp *pb.LoginAccountRsp) error {

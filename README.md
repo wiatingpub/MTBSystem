@@ -20,6 +20,7 @@
 - 本地环境：go1.9
 - 容器：Docker
 - 进程管理：supervisor
+- 数据库备份：冷备份(rsync+mysqldump)
 
 #### 开发进程：
 - 1、搭建好开发框架 (get)

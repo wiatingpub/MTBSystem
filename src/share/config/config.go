@@ -6,3 +6,7 @@ const (
 	Namespace    = "com.mtbsystem."
 	LogPath      = "/data/goapp/log/"
 )
+
+var (
+	ServiceNameUser = "user"
+)
