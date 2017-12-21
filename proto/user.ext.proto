@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package pb;
+import "status.ext.proto";
 
 service UserServiceExt {
    // 注册用户
@@ -11,20 +12,25 @@ service UserServiceExt {
    rpc ResetAccount(ResetAccountReq) returns(ResetAccountRsp) {}
 }
 
+
+
 message RegistAccountReq {
+    string email = 1 ;
+    string userName = 2 ;
+    string password = 3 ;
+}
+
+message RegistAccountRsp {
+    Status status = 1 ;
+}
+
+message LoginAccountReq {
     string userName = 1 ;
     string password = 2 ;
 }
 
-message RegistAccountRsp {
-}
-
-message LoginAccountReq {
-
-}
-
 message LoginAccountRsp {
-
+    Status status = 1 ;
 }
 
 message ResetAccountReq {

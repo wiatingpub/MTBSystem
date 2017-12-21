@@ -13,6 +13,11 @@ type UserServiceExtHandler struct {
 	logger *zap.Logger
 }
 
+type test struct {
+	code string
+	message string
+}
+
 func NewUserServiceExtHandler() *UserServiceExtHandler {
 	return &UserServiceExtHandler{
 		logger: log.Instance(),
@@ -24,16 +29,41 @@ func (u *UserServiceExtHandler) RegistAccount (ctx context.Context,req *pb.Regis
 
 	userName := req.UserName
 	password := req.Password
-	u.logger.Debug("debug",zap.Any("userName",userName))
-	err := db.InsertUser(userName,password)
+	email := req.Email
+	user,err := db.SelectUserByEmail(email)
 	if err != nil {
 		u.logger.Error("error",zap.Error(err))
-		return errors.ErrorUserFailed
+		rsp.Status =  errors.ErrorUserFailed
+		return nil
 	}
-	return errors.ErrorUserFailed
+	if user != nil {
+		rsp.Status =  errors.ErrorUserAlready
+		return nil
+	}
+	err = db.InsertUser(userName,password,email)
+	if err != nil {
+		u.logger.Error("error",zap.Error(err))
+		rsp.Status =  errors.ErrorUserFailed
+		return nil
+	}
+	rsp.Status = errors.ErrorUserSuccess
+	return nil
 }
 
 func (u *UserServiceExtHandler) LoginAccount (ctx context.Context,req *pb.LoginAccountReq,rsp *pb.LoginAccountRsp) error {
+	userName := req.UserName
+	password := req.Password
+	user,err := db.SelectUserByPasswordName(userName,password)
+	if err != nil {
+		u.logger.Error("error",zap.Error(err))
+		rsp.Status =  errors.ErrorUserFailed
+		return nil
+	}
+	if user == nil {
+		rsp.Status =  errors.ErrorUserLoginFailed
+		return nil
+	}
+	rsp.Status = errors.ErrorUserSuccess
 	return nil
 }
 

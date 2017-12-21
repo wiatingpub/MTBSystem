@@ -3,5 +3,6 @@ CREATE TABLE user (
   user_name char(50) NOT NULL DEFAULT '' COMMENT '用户名称',
   password char(50) NOT NULL DEFAULT '' COMMENT '用户的密码',
   create_at char(50) NOT NULL DEFAULT '' COMMENT '用户的注册时间',
+  email char(50) NOT NULL DEFAULT '' COMMENT '用户的email',
   PRIMARY KEY (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET =utf8;

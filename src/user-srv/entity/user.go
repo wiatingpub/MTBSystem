@@ -5,4 +5,5 @@ type User struct {
 	UserName string `json:"user_name" db:"user_name"`
 	Password string `json:"password" db:"password"`
 	CreateAt string `json:"create_at" db:"create_at"`
+	Email	 string `json:"email" db:"email"`
 }
