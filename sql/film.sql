@@ -16,7 +16,6 @@ CREATE TABLE film
   common_special CHAR(50) DEFAULT '' COMMENT '影片简介',
   user_access_times INT(11) DEFAULT 0 COMMENT '用户访问次数',
   film_boxoffice FLOAT DEFAULT 0 COMMENT '影片票房',
-  director_name CHAR(255) DEFAULT '' COMMENT '影片导演',
   wanted_count  INT(11) DEFAULT 0 COMMENT '用户想看次数',
   user_comment_times  INT(11) DEFAULT 0 COMMENT '用户评分次数',
   company_issued  CHAR(255) DEFAULT '' COMMENT '发行公司',

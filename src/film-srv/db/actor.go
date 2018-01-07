@@ -5,13 +5,12 @@ import (
 	"database/sql"
 )
 
-func SelectActorsByMid (aid int64) (*entity.Actor,error){
+func SelectActors (fid int64,actor_type int64) ([]*entity.Actor,error){
 
-	actor := entity.Actor{}
-	err := db.Select(&actor,"SELECT `id`,`actor_name`,`actor_photo` FROM `actor` WHERE `id` = ?",aid)
+	actors := []*entity.Actor{}
+	err := db.Select(&actors,"SELECT `id`,`name_cn`,`name_en`,`actor_photo` FROM `actor` WHERE `actor_type` = ? AND `id` IN (SELECT `actor_id` FROM `film_actor` WHERE `film_id` = ? )",actor_type,fid)
 	if err == sql.ErrNoRows {
 		return nil,nil
 	}
-
-	return &actor,err
+	return actors,err
 }

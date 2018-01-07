@@ -9,4 +9,6 @@ const (
 
 var (
 	ServiceNameUser = "user"
+	ServiceNameFilm = "film"
+	ServiceNameComment = "comment"
 )

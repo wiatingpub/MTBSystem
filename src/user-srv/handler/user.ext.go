@@ -33,21 +33,17 @@ func (u *UserServiceExtHandler) RegistAccount (ctx context.Context,req *pb.Regis
 	user,err := db.SelectUserByEmail(email)
 	if err != nil {
 		u.logger.Error("error",zap.Error(err))
-		rsp.Status =  errors.ErrorUserFailed
-		return nil
+		return errors.ErrorUserFailed
 	}
 	if user != nil {
-		rsp.Status =  errors.ErrorUserAlready
-		return nil
+		return errors.ErrorUserAlready
 	}
 	err = db.InsertUser(userName,password,email)
 	if err != nil {
 		u.logger.Error("error",zap.Error(err))
-		rsp.Status =  errors.ErrorUserFailed
-		return nil
+		return errors.ErrorUserFailed
 	}
-	rsp.Status = errors.ErrorUserSuccess
-	return nil
+	return errors.ErrorUserSuccess
 }
 
 func (u *UserServiceExtHandler) LoginAccount (ctx context.Context,req *pb.LoginAccountReq,rsp *pb.LoginAccountRsp) error {
@@ -56,15 +52,12 @@ func (u *UserServiceExtHandler) LoginAccount (ctx context.Context,req *pb.LoginA
 	user,err := db.SelectUserByPasswordName(userName,password)
 	if err != nil {
 		u.logger.Error("error",zap.Error(err))
-		rsp.Status =  errors.ErrorUserFailed
-		return nil
+		return errors.ErrorUserFailed
 	}
 	if user == nil {
-		rsp.Status =  errors.ErrorUserLoginFailed
-		return nil
+		return errors.ErrorUserLoginFailed
 	}
-	rsp.Status = errors.ErrorUserSuccess
-	return nil
+	return errors.ErrorUserSuccess
 }
 
 func (u *UserServiceExtHandler) ResetAccount (ctx context.Context,req *pb.ResetAccountReq,rsp *pb.ResetAccountRsp) error {

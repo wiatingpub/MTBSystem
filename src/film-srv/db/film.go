@@ -14,3 +14,13 @@ func SelectTickingFilims() ([]*entity.Film, error) {
 	}
 	return films, err
 }
+
+// 获取影片详情
+func SelectFilmDetail(movieId int64) (*entity.Film,error) {
+	film := entity.Film{}
+	err := db.Get(&film,"SELECT * FROM `film` WHERE `movie_id` = ?",movieId)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	return &film, err
+}

@@ -2,39 +2,28 @@ package errors
 
 import (
 	"share/config"
-	"share/pb"
+	"github.com/micro/go-micro/errors"
 )
 
 
 const (
-	errorCodeUserSuccess = 0
-	errorCodeUserFailed  = 10001
-	errorCodeUserAlready = 10002
-	errorCodeUserLoginFailed = 10003
+	errorCodeUserSuccess = 200
 )
 
 var (
-	ErrorUserSuccess = &pb.Status{
-		Id:config.ServiceNameUser,
-		Code:errorCodeUserSuccess,
-		Detail:"操作成功",
-	}
+	ErrorUserSuccess = errors.New(
+		config.ServiceNameUser,"操作成功",errorCodeUserSuccess,
+	)
 
-	ErrorUserFailed = &pb.Status{
-		Id:config.ServiceNameUser,
-		Code:errorCodeUserFailed,
-		Detail:"操作异常",
-	}
+	ErrorUserFailed = errors.New(
+		config.ServiceNameUser,"操作异常",errorCodeUserSuccess,
+	)
 
-	ErrorUserAlready = &pb.Status{
-		Id:config.ServiceNameUser,
-		Code:errorCodeUserAlready,
-		Detail:"该邮箱已经被注册过了~",
-	}
+	ErrorUserAlready = errors.New(
+		config.ServiceNameUser,"该邮箱已经被注册过了~",errorCodeUserSuccess,
+	)
 
-	ErrorUserLoginFailed = &pb.Status{
-		Id:config.ServiceNameUser,
-		Code:errorCodeUserLoginFailed,
-		Detail:"密码或者用户名错误~",
-	}
+	ErrorUserLoginFailed = errors.New(
+		config.ServiceNameUser,"密码或者用户名错误~",errorCodeUserSuccess,
+	)
 )
