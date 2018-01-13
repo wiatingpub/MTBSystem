@@ -189,8 +189,6 @@ func (f *FilmServiceExtHandler) MovieComingNew(ctx context.Context, req *pb.Movi
 		for _,filmActor := range filmActors {
 			film.ActorName =  append(film.ActorName,filmActor.ActorName)
 		}
-		// 处理影片种类信息
-
 		filmPB := film.ToProtoDBMovies()
 		MoviesPB = append(MoviesPB, filmPB)
 	}
@@ -239,3 +237,5 @@ func (f *FilmServiceExtHandler) Search(ctx context.Context, req *pb.SearchReq, r
 	rsp.Subjects = searchMovies
 	return nil
 }
+
+

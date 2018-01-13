@@ -1,0 +1,7 @@
+CREATE TABLE movie_hall (
+  mh_id INT(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  mh_name CHAR(20) NOT NULL DEFAULT '',
+  mh_add TEXT NOT NULL DEFAULT '',
+  cinema_id INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY(mh_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

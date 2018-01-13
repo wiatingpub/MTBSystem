@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package pb;
+
+service OrderServiceExt {
+
+    // i want to ticket
+    rpc WantTicket(WantTicketReq) returns (WantTicketRsp) {}
+    // ticket
+    rpc Ticket(TicketReq) returns (TicketRsp) {}
+    // look orders
+    rpc LookOrders(LookOrdersReq) returns (LookOrdersRsp) {}
+    // pay order
+    rpc PayOrder(PayOrderReq) returns (PayOrderRsp) {}
+    // undo order
+    rpc UndoOrder(UndoOrderReq) returns (UndoOrderRsp) {}
+}
+
+message WantTicketReq {
+
+}
+
+message WantTicketRsp {
+
+}
+
+message TicketReq {
+
+}
+
+message TicketRsp {
+
+}
+
+message LookOrdersReq {
+
+}
+
+message LookOrdersRsp {
+
+}
+
+message PayOrderReq {
+
+}
+
+message PayOrderRsp {
+
+}
+
+message UndoOrderReq {
+
+}
+
+message UndoOrderRsp {
+
+}
