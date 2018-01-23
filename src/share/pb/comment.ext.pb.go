@@ -7,6 +7,7 @@ Package pb is a generated protocol buffer package.
 It is generated from these files:
 	comment.ext.proto
 	film.ext.proto
+	order.ext.proto
 	place.ext.proto
 	user.ext.proto
 
@@ -44,6 +45,17 @@ It has these top-level messages:
 	Genres
 	Rating
 	Images
+	WantTicketReq
+	WantTicketRsp
+	TicketReq
+	TicketRsp
+	Order
+	LookOrdersReq
+	LookOrdersRsp
+	PayOrderReq
+	PayOrderRsp
+	UndoOrderReq
+	UndoOrderRsp
 	HotCitiesByCinemaReq
 	HotCitiesByCinemaRep
 	Place
@@ -53,6 +65,8 @@ It has these top-level messages:
 	LoginAccountRsp
 	ResetAccountReq
 	ResetAccountRsp
+	WantScoreReq
+	WantScoreRsp
 */
 package pb
 

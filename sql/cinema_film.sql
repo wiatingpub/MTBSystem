@@ -4,7 +4,6 @@ CREATE TABLE cinema_film (
     film_id INT(11) NOT NULL DEFAULT 0,
     release_time_year INT(11) NOT NULL DEFAULT 0,
     release_time_month INT(11) NOT NULL DEFAULT 0,
-    release_time_year INT(11) NOT NULL DEFAULT 0,
     release_time CHAR(20) NOT NULL DEFAULT 0,
     release_type CHAR(20) NOT NULL DEFAULT '',
     release_add CHAR(20) NOT NULL DEFAULT '',

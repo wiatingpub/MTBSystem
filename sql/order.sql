@@ -1,4 +1,13 @@
-CREATE TABLE order (
-    order_id INT(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
-
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE film_order (
+    order_id INT(11) AUTO_INCREMENT NOT NULL DEFAULT 0,
+    order_num VARCHAR(50) NOT NULL DEFAULT '' COMMENT '订单编号',
+    order_status INT(11) NOT NULL DEFAULT 0 COMMENT '0:下单未支付，1：下单支付，2：退单',
+    order_price FLOAT NOT NULL DEFAULT 0.0,
+    create_at CHAR(20) NOT NULL DEFAULT '0',
+    pay_at CHAR(20) NOT NULL DEFAULT '0',
+    mh_id INT(11) NOT NULL DEFAULT 0 ,
+    user_id INT(11) NOT NULL DEFAULT 0 ,
+    movie_id INT(11) NOT NULL DEFAULT 0 ,
+    order_score INT(11) NOT NULL DEFAULT -1,
+    PRIMARY KEY (order_id)
+) ENGINE = InnoDB DEFAULT CHARSET =utf8;

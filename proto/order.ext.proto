@@ -4,44 +4,57 @@ package pb;
 
 service OrderServiceExt {
 
-    // i want to ticket
+    // 想看
     rpc WantTicket(WantTicketReq) returns (WantTicketRsp) {}
-    // ticket
+    // 下单
     rpc Ticket(TicketReq) returns (TicketRsp) {}
-    // look orders
+    // 查看所有订单
     rpc LookOrders(LookOrdersReq) returns (LookOrdersRsp) {}
-    // pay order
+    // 支付
     rpc PayOrder(PayOrderReq) returns (PayOrderRsp) {}
-    // undo order
+    // 取消订单
     rpc UndoOrder(UndoOrderReq) returns (UndoOrderRsp) {}
 }
 
 message WantTicketReq {
-
+    int64 userId = 1 ;
+    int64 filmId = 2 ;
 }
 
 message WantTicketRsp {
-
 }
 
 message TicketReq {
-
+    int64 userId = 1 ;
+    int64 filmId = 2 ;
+    int64 mhId = 3 ;
+    int64  sitId = 4 ;
 }
 
 message TicketRsp {
-
 }
+
+message Order {
+    string orderNum = 1 ; // 订单编号
+    string orderPrice = 2 ; // 订单价格
+    string createAt = 3 ; // 生成时间
+    string payAt = 4 ; // 支付时间
+    int64 mhId = 5 ; // 影厅编号
+    int64 userId = 6 ; // 用户编号
+    int64 movieId = 7 ; // 影片id
+}
+
 
 message LookOrdersReq {
 
 }
 
 message LookOrdersRsp {
-
+    repeated Order order = 1 ; //
 }
 
 message PayOrderReq {
-
+    int64 orderId = 1 ;
 }
 
 message PayOrderRsp {
@@ -49,7 +62,7 @@ message PayOrderRsp {
 }
 
 message UndoOrderReq {
-
+    int64 orderId = 1 ;
 }
 
 message UndoOrderRsp {

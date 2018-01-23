@@ -9,9 +9,7 @@ service UserServiceExt {
    rpc LoginAccount(LoginAccountReq) returns(LoginAccountRsp) {}
    // 密码重置
    rpc ResetAccount(ResetAccountReq) returns(ResetAccountRsp) {}
-   // i want to see
-   rpc WantSee(WantSeeReq) returns (WantSeeRsp) {}
-   // i want score
+   // 评分
    rpc WantScore(WantScoreReq) returns (WantScoreRsp) {}
 }
 
@@ -42,16 +40,10 @@ message ResetAccountRsp {
 
 }
 
-message WantSeeReq {
-
-}
-
-message WantSeeRsp {
-
-}
-
 message WantScoreReq {
-
+    int64 userId = 1 ;
+    string orderNum = 2 ; // 订单编号
+    int64 score = 3 ;
 }
 
 message WantScoreRsp {

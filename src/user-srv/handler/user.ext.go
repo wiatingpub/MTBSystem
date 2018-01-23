@@ -63,3 +63,13 @@ func (u *UserServiceExtHandler) LoginAccount (ctx context.Context,req *pb.LoginA
 func (u *UserServiceExtHandler) ResetAccount (ctx context.Context,req *pb.ResetAccountReq,rsp *pb.ResetAccountRsp) error {
 	return nil
 }
+
+func (u *UserServiceExtHandler) WantScore (ctx context.Context,req *pb.WantScoreReq,rsp *pb.WantScoreRsp) error {
+
+	err := db.UpdateOrderScore(req.OrderNum,req.Score)
+	if err != nil {
+		u.logger.Error("error",zap.Error(err))
+		return errors.ErrorUserFailed
+	}
+	return nil
+}
