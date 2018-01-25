@@ -240,6 +240,6 @@ func (f *FilmServiceExtHandler) Search(ctx context.Context, req *pb.SearchReq, r
 
 
 func (f *FilmServiceExtHandler) GetFilmsByCid(ctx context.Context, req *pb.GetFilmsByCidReq, rsp *pb.GetFilmsByCidRsp) error {
-	
+
 	return nil
 }
