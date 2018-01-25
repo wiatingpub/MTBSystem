@@ -26,7 +26,7 @@ type WantTicketReq struct {
 func (m *WantTicketReq) Reset()                    { *m = WantTicketReq{} }
 func (m *WantTicketReq) String() string            { return proto.CompactTextString(m) }
 func (*WantTicketReq) ProtoMessage()               {}
-func (*WantTicketReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
+func (*WantTicketReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
 
 func (m *WantTicketReq) GetUserId() int64 {
 	if m != nil {
@@ -48,7 +48,7 @@ type WantTicketRsp struct {
 func (m *WantTicketRsp) Reset()                    { *m = WantTicketRsp{} }
 func (m *WantTicketRsp) String() string            { return proto.CompactTextString(m) }
 func (*WantTicketRsp) ProtoMessage()               {}
-func (*WantTicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
+func (*WantTicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
 
 type TicketReq struct {
 	UserId int64 `protobuf:"varint,1,opt,name=userId" json:"userId,omitempty"`
@@ -60,7 +60,7 @@ type TicketReq struct {
 func (m *TicketReq) Reset()                    { *m = TicketReq{} }
 func (m *TicketReq) String() string            { return proto.CompactTextString(m) }
 func (*TicketReq) ProtoMessage()               {}
-func (*TicketReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
+func (*TicketReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
 
 func (m *TicketReq) GetUserId() int64 {
 	if m != nil {
@@ -96,7 +96,7 @@ type TicketRsp struct {
 func (m *TicketRsp) Reset()                    { *m = TicketRsp{} }
 func (m *TicketRsp) String() string            { return proto.CompactTextString(m) }
 func (*TicketRsp) ProtoMessage()               {}
-func (*TicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{3} }
+func (*TicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
 
 type Order struct {
 	OrderNum   string `protobuf:"bytes,1,opt,name=orderNum" json:"orderNum,omitempty"`
@@ -111,7 +111,7 @@ type Order struct {
 func (m *Order) Reset()                    { *m = Order{} }
 func (m *Order) String() string            { return proto.CompactTextString(m) }
 func (*Order) ProtoMessage()               {}
-func (*Order) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{4} }
+func (*Order) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{4} }
 
 func (m *Order) GetOrderNum() string {
 	if m != nil {
@@ -168,7 +168,7 @@ type LookOrdersReq struct {
 func (m *LookOrdersReq) Reset()                    { *m = LookOrdersReq{} }
 func (m *LookOrdersReq) String() string            { return proto.CompactTextString(m) }
 func (*LookOrdersReq) ProtoMessage()               {}
-func (*LookOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{5} }
+func (*LookOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{5} }
 
 type LookOrdersRsp struct {
 	Order []*Order `protobuf:"bytes,1,rep,name=order" json:"order,omitempty"`
@@ -177,7 +177,7 @@ type LookOrdersRsp struct {
 func (m *LookOrdersRsp) Reset()                    { *m = LookOrdersRsp{} }
 func (m *LookOrdersRsp) String() string            { return proto.CompactTextString(m) }
 func (*LookOrdersRsp) ProtoMessage()               {}
-func (*LookOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{6} }
+func (*LookOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{6} }
 
 func (m *LookOrdersRsp) GetOrder() []*Order {
 	if m != nil {
@@ -193,7 +193,7 @@ type PayOrderReq struct {
 func (m *PayOrderReq) Reset()                    { *m = PayOrderReq{} }
 func (m *PayOrderReq) String() string            { return proto.CompactTextString(m) }
 func (*PayOrderReq) ProtoMessage()               {}
-func (*PayOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{7} }
+func (*PayOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{7} }
 
 func (m *PayOrderReq) GetOrderId() int64 {
 	if m != nil {
@@ -208,7 +208,7 @@ type PayOrderRsp struct {
 func (m *PayOrderRsp) Reset()                    { *m = PayOrderRsp{} }
 func (m *PayOrderRsp) String() string            { return proto.CompactTextString(m) }
 func (*PayOrderRsp) ProtoMessage()               {}
-func (*PayOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{8} }
+func (*PayOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{8} }
 
 type UndoOrderReq struct {
 	OrderId int64 `protobuf:"varint,1,opt,name=orderId" json:"orderId,omitempty"`
@@ -217,7 +217,7 @@ type UndoOrderReq struct {
 func (m *UndoOrderReq) Reset()                    { *m = UndoOrderReq{} }
 func (m *UndoOrderReq) String() string            { return proto.CompactTextString(m) }
 func (*UndoOrderReq) ProtoMessage()               {}
-func (*UndoOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{9} }
+func (*UndoOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{9} }
 
 func (m *UndoOrderReq) GetOrderId() int64 {
 	if m != nil {
@@ -232,7 +232,7 @@ type UndoOrderRsp struct {
 func (m *UndoOrderRsp) Reset()                    { *m = UndoOrderRsp{} }
 func (m *UndoOrderRsp) String() string            { return proto.CompactTextString(m) }
 func (*UndoOrderRsp) ProtoMessage()               {}
-func (*UndoOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{10} }
+func (*UndoOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{10} }
 
 func init() {
 	proto.RegisterType((*WantTicketReq)(nil), "pb.WantTicketReq")
@@ -379,9 +379,9 @@ func (h *OrderServiceExt) UndoOrder(ctx context.Context, in *UndoOrderReq, out *
 	return h.OrderServiceExtHandler.UndoOrder(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("order.ext.proto", fileDescriptor2) }
+func init() { proto.RegisterFile("order.ext.proto", fileDescriptor3) }
 
-var fileDescriptor2 = []byte{
+var fileDescriptor3 = []byte{
 	// 398 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0xcf, 0x6e, 0xe2, 0x30,
 	0x10, 0xc6, 0x37, 0x40, 0x02, 0x19, 0x96, 0xcd, 0xae, 0xb5, 0x5a, 0x45, 0x39, 0x6c, 0x91, 0x2f,

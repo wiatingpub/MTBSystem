@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package pb;
+
+service CinemaServiceExt {
+    // 地点影城
+    rpc LocationCinema(LocationCinemaReq) returns(LocationCinemaRsp) {}
+}
+
+message LocationCinemaReq {
+
+    int64 locationId = 1 ; // 地点id
+}
+
+message LocationCinemaRsp {
+    repeated Cinema cinemas = 1 ;
+}
+
+message Cinema {
+    int64 cinemaId = 1 ;
+    string cinemaName = 2 ;
+    string cinemaAdd = 3 ;
+    int64 locationId = 4 ;
+    string cinemaTypes = 5 ;
+}

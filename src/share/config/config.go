@@ -7,8 +7,10 @@ const (
 	LogPath      = "/data/goapp/log/"
 )
 
-var (
+const (
 	ServiceNameUser = "user"
 	ServiceNameFilm = "film"
 	ServiceNameComment = "comment"
+	ServiceNameCinema = "cinema"
+
 )

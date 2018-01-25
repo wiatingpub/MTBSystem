@@ -18,6 +18,8 @@ service FilmServiceExt {
     rpc MovieComingNew(MovieComingNewReq) returns (MovieComingNewRep) {}
     // 图片搜索
     rpc Search(SearchReq) returns (SearchRep) {}
+    // 根据影院id获取正在销售的影片信息
+    rpc GetFilmsByCid(GetFilmsByCidReq) returns (GetFilmsByCidRsp) {}
 }
 
 message HotPlayMoviesReq {
@@ -197,4 +199,12 @@ message Rating {
 
 message Images {
     string small = 1 ; // 图片
+}
+
+message GetFilmsByCidReq {
+    int64 cinemaId = 1 ; // 影院id
+}
+
+message GetFilmsByCidRsp {
+    repeated Movie movies = 1 ; // 正在上映的影片
 }

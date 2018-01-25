@@ -24,7 +24,7 @@ type HotCitiesByCinemaReq struct {
 func (m *HotCitiesByCinemaReq) Reset()                    { *m = HotCitiesByCinemaReq{} }
 func (m *HotCitiesByCinemaReq) String() string            { return proto.CompactTextString(m) }
 func (*HotCitiesByCinemaReq) ProtoMessage()               {}
-func (*HotCitiesByCinemaReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
+func (*HotCitiesByCinemaReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 type HotCitiesByCinemaRep struct {
 	P []*Place `protobuf:"bytes,1,rep,name=p" json:"p,omitempty"`
@@ -33,7 +33,7 @@ type HotCitiesByCinemaRep struct {
 func (m *HotCitiesByCinemaRep) Reset()                    { *m = HotCitiesByCinemaRep{} }
 func (m *HotCitiesByCinemaRep) String() string            { return proto.CompactTextString(m) }
 func (*HotCitiesByCinemaRep) ProtoMessage()               {}
-func (*HotCitiesByCinemaRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
+func (*HotCitiesByCinemaRep) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
 
 func (m *HotCitiesByCinemaRep) GetP() []*Place {
 	if m != nil {
@@ -53,7 +53,7 @@ type Place struct {
 func (m *Place) Reset()                    { *m = Place{} }
 func (m *Place) String() string            { return proto.CompactTextString(m) }
 func (*Place) ProtoMessage()               {}
-func (*Place) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
+func (*Place) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
 
 func (m *Place) GetCount() int64 {
 	if m != nil {
@@ -155,9 +155,9 @@ func (h *PlaceServiceExt) HotCitiesByCinema(ctx context.Context, in *HotCitiesBy
 	return h.PlaceServiceExtHandler.HotCitiesByCinema(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("place.ext.proto", fileDescriptor3) }
+func init() { proto.RegisterFile("place.ext.proto", fileDescriptor4) }
 
-var fileDescriptor3 = []byte{
+var fileDescriptor4 = []byte{
 	// 223 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x90, 0x41, 0x4b, 0x03, 0x31,
 	0x10, 0x85, 0x9d, 0xac, 0x2b, 0x74, 0x2a, 0x16, 0x87, 0xa2, 0xc1, 0x83, 0x84, 0x9c, 0xf6, 0x14,

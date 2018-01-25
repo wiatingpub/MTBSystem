@@ -1,8 +1,9 @@
 #!/bin/bash
 ProjectName="mtbsystem"
 
+
 # 将supervisor的conf文件复制到指定目录并且重启supervisorctl
-cp /data/deploy/$ProjectName/dockerbase/supervisor/*conf /etc/supervisor/conf.d/
+#cp /data/deploy/$ProjectName/dockerbase/supervisor/*conf /etc/supervisor/conf.d/
 
 if [ $1 == "all" ]; then
     for srv in `ls src`; do

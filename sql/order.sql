@@ -1,5 +1,5 @@
 CREATE TABLE film_order (
-    order_id INT(11) AUTO_INCREMENT NOT NULL DEFAULT 0,
+    order_id INT(11) AUTO_INCREMENT NOT NULL,
     order_num VARCHAR(50) NOT NULL DEFAULT '' COMMENT '订单编号',
     order_status INT(11) NOT NULL DEFAULT 0 COMMENT '0:下单未支付，1：下单支付，2：退单',
     order_price FLOAT NOT NULL DEFAULT 0.0,
