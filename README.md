@@ -29,3 +29,14 @@
 - 4、前端开发(ing)
 - 5、联调
 - 6、优化
+
+### 如何启动程序：
+- 1、 ./ctrl.sh build
+- 2、 ./ctrl.sh run
+- 3、 ./ctrl.sh init
+- 4、 ./ctrl.sh start
+- 5、 ./ctrl.sh sql
+- 6、 ./ctrl.sh login
+- 7、 cd /data/deploy/mtbsystem/
+- 8、 bash ./build_local.sh all
+
