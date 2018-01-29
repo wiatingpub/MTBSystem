@@ -41,6 +41,23 @@ func (f *FilmServiceExtHandler) HotPlayMovies(ctx context.Context, req *pb.HotPl
 		// 处理影片种类信息
 
 		filmPB := film.ToProtoDBMovies()
+		tmp := ""
+		if film.Is3D == 1 {
+			tmp = tmp + "3D"+"|";
+		}
+		if film.IsDMAX == 1 {
+			tmp = tmp + "DMAX"+"|";
+		}
+		if film.IsIMAX == 1 {
+			tmp = tmp + "IMAX"+"|";
+		}
+		if film.IsIMAX3D == 1 {
+			tmp = tmp + "IMAX3D"+"|";
+		}
+		if tmp != "" {
+
+
+		}
 		MoviesPB = append(MoviesPB, filmPB)
 	}
 	rsp.Movies = MoviesPB

@@ -26,4 +26,8 @@ var (
 	ErrorUserLoginFailed = errors.New(
 		config.ServiceNameUser,"密码或者用户名错误~",errorCodeUserSuccess,
 	)
+
+	ErrorScoreForbid = errors.New(
+		config.ServiceNameUser,"你没有买过该电影票，无法进行评分～~",errorCodeUserSuccess,
+	)
 )

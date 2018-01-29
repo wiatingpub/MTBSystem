@@ -37,6 +37,7 @@ type Film struct {
 	RDay                 int64    `json:"r_day" db:"r_day"`
 	RMonth               int64    `json:"r_month" db:"r_month"`
 	RYear                int64    `json:"r_year" db:"r_year"`
+	FilmDirector		 string   `json:"film_director" db:"film_director"`
 }
 
 func (f Film) ToProtoDBHotPlayMovies() *pb.HotMovie {
@@ -70,5 +71,7 @@ func (f Film) ToProtoDBMovies() *pb.Movie {
 		TitleCn:	 	f.TitleCn,
 		Img:           f.Img,
 		MovieId:       f.MovieId,
+		FilmDirector:  f.FilmDirector,
+		FilmDrama:		f.FilmDrama,
 	}
 }

@@ -8,7 +8,7 @@ import (
 // 获取正在上映的电影
 func SelectTickingFilims() ([]*entity.Film, error) {
 	films := []*entity.Film{}
-	err := db.Select(&films, "SELECT `title_cn`,`img`,`movie_id` FROM `film`")
+	err := db.Select(&films, "SELECT `title_cn`,`is_3D`,`is_DMAX`,`is_IMAX`,`is_IMAX3D`,`img`,`movie_id`,`film_director`,`film_drama` FROM `film`")
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}

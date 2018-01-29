@@ -2,6 +2,7 @@ CREATE TABLE cinema_film (
     cf_id INT(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
     cinema_id INT(11) NOT NULL DEFAULT 0,
     film_id INT(11) NOT NULL DEFAULT 0,
+    hall_id INT(11) NOT NULL DEFAULT 0 COMMENT '哪个场',
     release_time_year INT(11) NOT NULL DEFAULT 0,
     release_time_month INT(11) NOT NULL DEFAULT 0,
     release_time CHAR(20) NOT NULL DEFAULT 0,

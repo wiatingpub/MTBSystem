@@ -19,7 +19,7 @@ service FilmServiceExt {
     // 图片搜索
     rpc Search(SearchReq) returns (SearchRep) {}
     // 根据影院id获取正在销售的影片信息
-    rpc GetFilmsByCid(GetFilmsByCidReq) returns (GetFilmsByCidRsp) {}
+    // rpc GetFilmsByCid(GetFilmsByCidReq) returns (GetFilmsByCidRsp) {}
 }
 
 message HotPlayMoviesReq {
@@ -33,8 +33,12 @@ message HotPlayMoviesRep {
 message Movie {
 
     string img = 1 ; // 影片logo
-    int64 movieId = 2 ; // 电影时长
+    int64 movieId = 2 ; // 电影id
     string titleCn = 3 ; // 中文名字
+    string movieSupportType = 4 ; // 影片支持的播放类型  如3D IMAX 要求返回格式 3D|IMAX
+    string filmDirector = 5 ; // 影片导演
+    repeated string actors = 6; // 主演
+    string filmDrama = 7 ; // 影片看点
 }
 
 

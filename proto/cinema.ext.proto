@@ -5,6 +5,8 @@ package pb;
 service CinemaServiceExt {
     // 地点影城
     rpc LocationCinema(LocationCinemaReq) returns(LocationCinemaRsp) {}
+    // 根据位置查看有销售对应电影的影院信息
+//    rpc GetCinemaMessage(GetCinemaMessageReq) returns(GetCinemaMessageRsp) {}
 }
 
 message LocationCinemaReq {
@@ -17,9 +19,27 @@ message LocationCinemaRsp {
 }
 
 message Cinema {
+
     int64 cinemaId = 1 ;
     string cinemaName = 2 ;
     string cinemaAdd = 3 ;
     int64 locationId = 4 ;
     string cinemaTypes = 5 ;
+}
+
+message GetCinemaMessageReq{
+
+    int64 movieId = 1; // 影片id
+    int64 locationId = 2 ; // 地点id
+    string day = 3 ; // 查询时间,今天明天后天
+}
+
+message GetCinemaMessageRsp{
+
+    string cinemaName = 1 ; // 影院名字
+    string cinemaAddress = 2 ; // 影院位置
+    string cinemaSupport = 3 ; // 影院支持的功能比如改签
+    int64 cinemaCard = 4 ; // 影城卡
+    int64 cinemaMinPrice = 5 ; // 几元起
+    int64 cinemaDiscount = 6 ; // 最低减价多少
 }

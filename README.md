@@ -38,5 +38,6 @@
 - 5、 ./ctrl.sh sql
 - 6、 ./ctrl.sh login
 - 7、 cd /data/deploy/mtbsystem/
-- 8、 bash ./build_local.sh all
+- 8、 bash ./build_local.sh api-rv
+- 9、 bash ./build_local.sh all
 

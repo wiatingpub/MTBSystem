@@ -6,6 +6,7 @@ CREATE TABLE film
   is_select_seat  int(11)  DEFAULT 0 COMMENT '是否支持选座',
   film_price FLOAT DEFAULT 0 COMMENT '影片价格',
   film_screenwriter CHAR(255) DEFAULT '' COMMENT '影片编剧',
+  film_director CHAR(255) DEFAULT '' COMMENT '影片导演',
   comment_num  int(11)  DEFAULT 0 COMMENT '评论人数',
   title_cn CHAR(100) COMMENT '影片名字',
   title_en CHAR(100) COMMENT '影片名字',

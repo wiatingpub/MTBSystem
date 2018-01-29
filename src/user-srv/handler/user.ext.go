@@ -66,7 +66,16 @@ func (u *UserServiceExtHandler) ResetAccount (ctx context.Context,req *pb.ResetA
 
 func (u *UserServiceExtHandler) WantScore (ctx context.Context,req *pb.WantScoreReq,rsp *pb.WantScoreRsp) error {
 
-	err := db.UpdateOrderScore(req.OrderNum,req.Score)
+	orderNum,err := db.SelectOrderByUidMid(req.MovieId,req.UserId)
+	if err != nil {
+		u.logger.Error("error",zap.Error(err))
+		return errors.ErrorUserFailed
+	}
+	if orderNum == 0{
+		u.logger.Error("error",zap.Error(err))
+		return errors.ErrorScoreForbid
+	}
+	err = db.UpdateOrderScore(req.MovieId,req.Score)
 	if err != nil {
 		u.logger.Error("error",zap.Error(err))
 		return errors.ErrorUserFailed

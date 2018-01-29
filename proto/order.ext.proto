@@ -19,6 +19,7 @@ service OrderServiceExt {
 message WantTicketReq {
     int64 userId = 1 ;
     int64 filmId = 2 ;
+    int64 type = 3 ; // 1为即将上映 2为正在热映 的电影
 }
 
 message WantTicketRsp {
