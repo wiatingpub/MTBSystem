@@ -6,6 +6,8 @@ CREATE TABLE film_order (
     create_at CHAR(20) NOT NULL DEFAULT '0',
     pay_at CHAR(20) NOT NULL DEFAULT '0',
     mh_id INT(11) NOT NULL DEFAULT 0 ,
+    order_x INT(11) NOT NULL DEFAULT 0 COMMENT '第几列',
+    order_y INT(11) NOT NULL DEFAULT 0 COMMENT '第几行',
     user_id INT(11) NOT NULL DEFAULT 0 ,
     movie_id INT(11) NOT NULL DEFAULT 0 ,
     order_score INT(11) NOT NULL DEFAULT -1,

@@ -8,6 +8,8 @@ import (
 	"share/utils/log"
 	errors "share/errors"
 	"strconv"
+	"time"
+	"share/utils/common"
 )
 
 type FilmServiceExtHandler struct {
@@ -35,10 +37,6 @@ func (f *FilmServiceExtHandler) HotPlayMovies(ctx context.Context, req *pb.HotPl
 		if err != nil {
 			return err
 		}
-		for _,filmActor := range filmActors {
-			film.ActorName =  append(film.ActorName,filmActor.ActorName)
-		}
-		// 处理影片种类信息
 
 		filmPB := film.ToProtoDBMovies()
 		tmp := ""
@@ -55,9 +53,14 @@ func (f *FilmServiceExtHandler) HotPlayMovies(ctx context.Context, req *pb.HotPl
 			tmp = tmp + "IMAX3D"+"|";
 		}
 		if tmp != "" {
-
-
+			tmp = tmp[0:len(tmp)-1]
 		}
+		filmPB.MovieSupportType = tmp
+		actors := ""
+		for _,filmActor := range filmActors {
+			actors =  actors + filmActor.ActorName+" "
+		}
+		filmPB.Actors = actors
 		MoviesPB = append(MoviesPB, filmPB)
 	}
 	rsp.Movies = MoviesPB
@@ -166,15 +169,16 @@ func (f *FilmServiceExtHandler) LocationMovies(ctx context.Context, req *pb.Loca
 
 	films, err := db.SelectTickingFilims()
 	if err != nil {
-		f.logger.Error("err", zap.Any("films", err))
-		return err
+		f.logger.Error("error",zap.Error(err))
+		return errors.ErrorFilmFailed
 	}
 	MoviesPB := []*pb.Movie{}
 	for _, film := range films {
 		// 处理影片演员信息
 		filmActors,err := db.SelectFilmActorByMid(film.MovieId)
 		if err != nil {
-			return err
+			f.logger.Error("error",zap.Error(err))
+			return errors.ErrorFilmFailed
 		}
 		for _,filmActor := range filmActors {
 			film.ActorName =  append(film.ActorName,filmActor.ActorName)
@@ -193,15 +197,16 @@ func (f *FilmServiceExtHandler) MovieComingNew(ctx context.Context, req *pb.Movi
 
 	films, err := db.SelectTickingFilims()
 	if err != nil {
-		f.logger.Error("err", zap.Any("films", err))
-		return err
+		f.logger.Error("error",zap.Error(err))
+		return errors.ErrorFilmFailed
 	}
 	MoviesPB := []*pb.Movie{}
 	for _, film := range films {
 		// 处理影片演员信息
 		filmActors,err := db.SelectFilmActorByMid(film.MovieId)
 		if err != nil {
-			return err
+			f.logger.Error("error",zap.Error(err))
+			return errors.ErrorFilmFailed
 		}
 		for _,filmActor := range filmActors {
 			film.ActorName =  append(film.ActorName,filmActor.ActorName)
@@ -210,6 +215,63 @@ func (f *FilmServiceExtHandler) MovieComingNew(ctx context.Context, req *pb.Movi
 		MoviesPB = append(MoviesPB, filmPB)
 	}
 	rsp.Movies = MoviesPB
+	return nil
+}
+
+// 根据影院id和时间获取正在销售的影片信息
+func (f *FilmServiceExtHandler) GetFilmsByCidADay(ctx context.Context, req *pb.GetFilmsByCidADayReq, rsp *pb.GetFilmsByCidADayRsp) error {
+
+	cinemaId := req.CinemaId
+	filmId := req.FilmId
+	dayNum := req.DayNum
+	var year int64
+	var month int64
+	var day int64
+	if dayNum == 0 {
+		year = int64(time.Now().Year())
+		month = common.SwitchMonth(time.Now().Month().String())
+		day = int64(time.Now().Day())
+	}
+	if dayNum == 1 {
+		tomTime := time.Now().AddDate(0,0,1)
+		year = int64(tomTime.Year())
+		month = common.SwitchMonth(tomTime.String())
+		day = int64(tomTime.Day())
+	}
+	if dayNum == 2 {
+		tomTime := time.Now().AddDate(0,0,2)
+		year = int64(tomTime.Year())
+		month = common.SwitchMonth(tomTime.String())
+		day = int64(tomTime.Day())
+	}
+	films,err := db.SelectFilmMessageCidADay(cinemaId,filmId,int64(year),month,int64(day))
+	if err != nil {
+		f.logger.Error("error",zap.Error(err))
+		return errors.ErrorFilmFailed
+	}
+	if films != nil{
+		dayMoviesPB := []*pb.DayMovie{}
+		for _,film := range films  {
+			mhName,err := db.SelectMHName(film.HallId)
+			if err != nil {
+				f.logger.Error("error",zap.Error(err))
+				return errors.ErrorFilmFailed
+			}
+			dayMoviePB := pb.DayMovie{
+				ReleaseTime:film.ReleaseTime,
+				ReleaseType:film.ReleaseType,
+				ReleaseDiscount:film.ReleaseDiscount,
+				Length:film.Length,
+				MhName:mhName,
+				MovieId:film.FilmId,
+				MhId:film.HallId,
+				CinemaId:film.CinemaId,
+				FilmName:film.FilmName,
+			}
+			dayMoviesPB = append(dayMoviesPB,&dayMoviePB)
+		}
+		rsp.DayMovie = dayMoviesPB
+	}
 	return nil
 }
 
@@ -255,8 +317,3 @@ func (f *FilmServiceExtHandler) Search(ctx context.Context, req *pb.SearchReq, r
 	return nil
 }
 
-
-func (f *FilmServiceExtHandler) GetFilmsByCid(ctx context.Context, req *pb.GetFilmsByCidReq, rsp *pb.GetFilmsByCidRsp) error {
-
-	return nil
-}

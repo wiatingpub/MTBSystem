@@ -7,6 +7,8 @@ import (
 	"context"
 	"cinema-srv/db"
 	errors "share/errors"
+	"time"
+	"share/utils/common"
 )
 
 type CinemaServiceExtHandler struct {
@@ -33,11 +35,93 @@ func (c *CinemaServiceExtHandler) LocationCinema (ctx context.Context,req *pb.Lo
 
 		pbCinema := pb.Cinema{
 			CinemaId:cinema.CinemaId,
-			CinemaAdd:cinema.CinemaAdd,
+			CinemaAddress:cinema.CinemaAdd,
+			CinemaName:cinema.CinemaName,
+			CinemaSupport:cinema.CinemaSupport,
+			CinemaCard:cinema.CinemaCard,
+			CinemaMinPrice:cinema.CinemaMinPrice,
+			CinemaDiscount:cinema.CinemaDiscount,
 		}
 		pbCinemas = append(pbCinemas,&pbCinema)
 
 	}
 	rsp.Cinemas = pbCinemas
+	return nil;
+}
+
+// 根据影院id和时间获取正在销售的影片信息和影院信息
+func (c *CinemaServiceExtHandler) GetCinemaMessageByCid (ctx context.Context,req *pb.GetCinemaMessageByCidReq,rsp *pb.GetCinemaMessageByCidRsp) error {
+
+	cinemaId := req.CinemaId
+	year:=time.Now().Year()
+	month:=time.Now().Month()
+	day:=time.Now().Day()
+	cinema,err := db.SelectCinemaByCid(cinemaId)
+	if err != nil {
+		c.logger.Error("error",zap.Error(err))
+		return errors.ErrorCinemaFailed
+	}
+	movieIds,err := db.SelectMidByCid(cinemaId,int64(year),common.SwitchMonth(month.String()),int64(day))
+	if err != nil {
+		c.logger.Error("error",zap.Error(err))
+		return errors.ErrorCinemaFailed
+	}
+	filmsPB := []*pb.FilmMessage{}
+	for _,movieId := range movieIds  {
+
+		film,err := db.SelectFilmMesage(movieId)
+		if err != nil {
+			c.logger.Error("error",zap.Error(err))
+			return errors.ErrorCinemaFailed
+		}
+		if film != nil {
+			actors,err := db.SelectActorNameByMid(film.MovieId)
+			if err != nil {
+				c.logger.Error("error",zap.Error(err))
+				return errors.ErrorCinemaFailed
+			}
+			if(actors != nil){
+				for _,actor := range actors {
+
+					film.ActorName = append(film.ActorName,actor.ActorName)
+				}
+			}
+			filmPB := pb.FilmMessage{
+
+				FilmName:film.TitleCn,
+				RatingFinal:film.RatingFinal,
+				Length:film.Length,
+				Type:film.Type,
+				MovieId:film.MovieId,
+				ActorName:film.ActorName,
+				Img:film.Img,
+			}
+			filmsPB = append(filmsPB,&filmPB)
+			rsp.FilmMessage = filmsPB
+		}
+	}
+	if cinema != nil{
+		cinemaPB := pb.Cinema{
+			CinemaName:cinema.CinemaName,
+			CinemaAddress:cinema.CinemaAdd,
+			CinemaSupport:cinema.CinemaSupport,
+			CinemaCard:cinema.CinemaCard,
+			CinemaMinPrice:cinema.CinemaMinPrice,
+			CinemaDiscount:cinema.CinemaDiscount,
+			CinemaId:cinema.CinemaId,
+		}
+		rsp.Cinema = &cinemaPB
+	}
+	return nil;
+}
+
+func (c *CinemaServiceExtHandler) GetMovieHallByMHId (ctx context.Context,req *pb.GetMovieHallByMHIdReq,rsp *pb.GetMovieHallByMHIdRsp) error {
+
+	mhAddress,err := db.SelectMHAddress(req.MhId)
+	if err != nil {
+		c.logger.Error("error",zap.Error(err))
+		return errors.ErrorCinemaFailed
+	}
+	rsp.MhAddress = mhAddress
 	return nil;
 }

@@ -2,20 +2,6 @@
 ProjectName="mtbsystem"
 
 
-# 将supervisor的conf文件复制到指定目录并且重启supervisorctl
-cp /data/deploy/mtbsystem/dockerbase/supervisor/*conf /etc/supervisor/conf.d/
-sudo supervisorctl reload
-# 暂停几秒
-ti1=`date +%s`    #获取时间戳
-ti2=`date +%s`
-i=$(($ti2 - $ti1 ))
-
-while [[ "$i" -ne "3" ]]
-    do
-        ti2=`date +%s`
-        i=$(($ti2 - $ti1 ))
-    done
-
 if [ $1 == "all" ]; then
     for srv in `ls src`; do
         if [[ ${srv:0-4} == "-srv" ]]; then

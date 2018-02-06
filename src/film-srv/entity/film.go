@@ -73,5 +73,6 @@ func (f Film) ToProtoDBMovies() *pb.Movie {
 		MovieId:       f.MovieId,
 		FilmDirector:  f.FilmDirector,
 		FilmDrama:		f.FilmDrama,
+		RatingFinal:   f.RatingFinal,
 	}
 }

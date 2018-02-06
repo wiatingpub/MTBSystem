@@ -4,7 +4,7 @@ DELETE FROM `actor`;
 
 INSERT INTO actor (
   `name_cn`,
-    `name_en`,
+  `name_en`,
   `actor_photo`,
   `actor_country`
 ) VALUES (

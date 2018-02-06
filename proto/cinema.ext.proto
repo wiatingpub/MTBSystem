@@ -6,12 +6,17 @@ service CinemaServiceExt {
     // 地点影城
     rpc LocationCinema(LocationCinemaReq) returns(LocationCinemaRsp) {}
     // 根据位置查看有销售对应电影的影院信息
-//    rpc GetCinemaMessage(GetCinemaMessageReq) returns(GetCinemaMessageRsp) {}
+    // rpc GetCinemaMessage(GetCinemaMessageReq) returns(GetCinemaMessageRsp) {}
+    // 根据id查看影院的信息和即将上映的影片信息
+    rpc GetCinemaMessageByCid(GetCinemaMessageByCidReq) returns(GetCinemaMessageByCidRsp) {}
+    // 根据mh_id获取影厅信息
+    rpc GetMovieHallByMHId(GetMovieHallByMHIdReq) returns(GetMovieHallByMHIdRsp) {}
 }
 
 message LocationCinemaReq {
 
-    int64 locationId = 1 ; // 地点id
+    int64 locationId = 1; // 地点id
+
 }
 
 message LocationCinemaRsp {
@@ -20,11 +25,13 @@ message LocationCinemaRsp {
 
 message Cinema {
 
-    int64 cinemaId = 1 ;
-    string cinemaName = 2 ;
-    string cinemaAdd = 3 ;
-    int64 locationId = 4 ;
-    string cinemaTypes = 5 ;
+    string cinemaName = 1 ; // 影院名字
+    string cinemaAddress = 2 ; // 影院位置
+    string cinemaSupport = 3 ; // 影院支持的功能比如改签，用|隔开
+    int64 cinemaCard = 4 ; // 是否支持影城卡
+    int64 cinemaMinPrice = 5 ; // 几元起
+    int64 cinemaDiscount = 6 ; // 最低减价多少
+    int64 cinemaId = 7 ; // 影院id
 }
 
 message GetCinemaMessageReq{
@@ -38,8 +45,38 @@ message GetCinemaMessageRsp{
 
     string cinemaName = 1 ; // 影院名字
     string cinemaAddress = 2 ; // 影院位置
-    string cinemaSupport = 3 ; // 影院支持的功能比如改签
-    int64 cinemaCard = 4 ; // 影城卡
+    string cinemaSupport = 3 ; // 影院支持的功能比如改签，用|隔开
+    int64 cinemaCard = 4 ; // 是否支持影城卡
     int64 cinemaMinPrice = 5 ; // 几元起
     int64 cinemaDiscount = 6 ; // 最低减价多少
+}
+
+message GetCinemaMessageByCidReq{
+
+    int64 cinemaId = 1 ;
+}
+
+message FilmMessage {
+
+    string filmName = 1 ;
+    float ratingFinal = 2 ;
+    int64 length = 3 ;
+    string type = 4 ; // 类型，如剧情
+    repeated string actorName = 5 ; // 主演名字
+    int64 movieId = 6 ; // 影片id
+    string img = 7 ; // 影片logo
+}
+
+message GetCinemaMessageByCidRsp{
+
+    Cinema cinema = 1 ;
+    repeated FilmMessage filmMessage = 2 ; // 影片信息
+}
+
+message GetMovieHallByMHIdReq{
+    int64 mhId = 1 ;
+}
+
+message GetMovieHallByMHIdRsp{
+    string mhAddress = 1 ;
 }

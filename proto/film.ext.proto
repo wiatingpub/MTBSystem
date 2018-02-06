@@ -18,8 +18,9 @@ service FilmServiceExt {
     rpc MovieComingNew(MovieComingNewReq) returns (MovieComingNewRep) {}
     // 图片搜索
     rpc Search(SearchReq) returns (SearchRep) {}
-    // 根据影院id获取正在销售的影片信息
-    // rpc GetFilmsByCid(GetFilmsByCidReq) returns (GetFilmsByCidRsp) {}
+    // 根据影院id和时间获取正在销售的影片信息
+    rpc GetFilmsByCidADay(GetFilmsByCidADayReq) returns (GetFilmsByCidADayRsp) {}
+
 }
 
 message HotPlayMoviesReq {
@@ -37,8 +38,9 @@ message Movie {
     string titleCn = 3 ; // 中文名字
     string movieSupportType = 4 ; // 影片支持的播放类型  如3D IMAX 要求返回格式 3D|IMAX
     string filmDirector = 5 ; // 影片导演
-    repeated string actors = 6; // 主演
+    string actors = 6; // 主演
     string filmDrama = 7 ; // 影片看点
+    float  ratingFinal = 8 ;
 }
 
 
@@ -205,10 +207,25 @@ message Images {
     string small = 1 ; // 图片
 }
 
-message GetFilmsByCidReq {
-    int64 cinemaId = 1 ; // 影院id
+message DayMovie{
+
+    string releaseTime = 1 ; // 上映时间
+    int64 length = 2 ; // 上映的时长
+    string releaseType = 3 ; // 上映类型
+    string mhName = 4 ; // 厅的名字
+    float releaseDiscount = 5 ; // 价格
+    int64 movieId = 6 ; // 电影id
+    int64 mhId = 7 ; // 厅的id
+    int64 cinemaId = 8 ; // 影院id
+    string filmName = 9 ; // 影片名称
 }
 
-message GetFilmsByCidRsp {
-    repeated Movie movies = 1 ; // 正在上映的影片
+message GetFilmsByCidADayReq {
+    int64 cinemaId = 1 ; // 影院id
+    int64 filmId = 2 ; // 影片id
+    int64 dayNum = 3 ; // 0：今天  1：明天  2：后天
+}
+
+message GetFilmsByCidADayRsp {
+    repeated DayMovie dayMovie = 1 ; // 正在上映的影片
 }
