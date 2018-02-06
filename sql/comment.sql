@@ -7,5 +7,6 @@ CREATE TABLE comment
   head_img VARCHAR(100) NOT NULL DEFAULT '',
   nick_name CHAR(50) NOT NULL DEFAULT '',
   create_at CHAR(20) NOT NULL DEFAULT '',
+  up_num SMALLINT UNSIGNED NOT NULL DEFAULT 0 '点赞人数',
   PRIMARY KEY (`comment_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
