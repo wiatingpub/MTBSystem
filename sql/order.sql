@@ -11,5 +11,7 @@ CREATE TABLE film_order (
     user_id INT(11) NOT NULL DEFAULT 0 ,
     movie_id INT(11) NOT NULL DEFAULT 0 ,
     order_score INT(11) NOT NULL DEFAULT -1,
+    start_time CHAR(20) NOT NULL DEFAULT '' COMMENT '格式如：2017-07-15 20:05',
+    end_time CHAR(20) NOT NULL DEFAULT '' COMMENT '格式如：2017-07-15 20:05',
     PRIMARY KEY (order_id)
 ) ENGINE = InnoDB DEFAULT CHARSET =utf8;

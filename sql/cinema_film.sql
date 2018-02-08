@@ -4,6 +4,7 @@ CREATE TABLE cinema_film (
     film_id INT(11) NOT NULL DEFAULT 0,
     hall_id INT(11) NOT NULL DEFAULT 0 COMMENT '哪个场，即几号厅',
     film_name CHAR(100) NOT NULL DEFAULT '' COMMENT '影片名字',
+    cinema_name CHAR(100) NOT NULL DEFAULT '' COMMENT '影院名字',
     release_time_year INT(11) NOT NULL DEFAULT 0,
     release_time_month INT(11) NOT NULL DEFAULT 0,
     release_time_day INT(11) NOT NULL DEFAULT 0,

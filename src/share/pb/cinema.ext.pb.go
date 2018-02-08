@@ -64,12 +64,21 @@ It has these top-level messages:
 	TicketReq
 	TicketRsp
 	Order
+	MovieTicket
 	LookOrdersReq
 	LookOrdersRsp
 	PayOrderReq
 	PayOrderRsp
 	UndoOrderReq
 	UndoOrderRsp
+	GetOrderMessageReq
+	GetOrderMessageRsp
+	TicketDetail
+	LookAlreadyOrdersReq
+	LookAlreadyOrdersRsp
+	AlreadyMovie
+	OrderCommentReq
+	OrderCommentRsp
 	HotCitiesByCinemaReq
 	HotCitiesByCinemaRep
 	Place

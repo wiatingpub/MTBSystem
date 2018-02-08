@@ -5,7 +5,6 @@ type CinemaFilm struct {
 	CinemaId  int64 `json:"cinema_id" db:"cinema_id"`
 	FilmId   int64  `json:"film_id" db:"film_id"`
 	FilmName string `json:"film_name" db:"film_name"`
-	CinemaName string `json:"cinema_name" db:"cinema_name"`
 	HallId int64 `json:"hall_id" db:"hall_id"`
 	ReleaseTimeYear    int64  `json:"release_time_year" db:"release_time_year"`
 	ReleaseTimeMonth  int64 `json:"release_time_month" db:"release_time_month"`

@@ -12,5 +12,5 @@ const (
 	ServiceNameFilm = "film"
 	ServiceNameComment = "comment"
 	ServiceNameCinema = "cinema"
-
+	ServiceNameOrder = "order"
 )
