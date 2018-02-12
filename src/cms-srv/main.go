@@ -1,14 +1,14 @@
 package main
 
 import (
+	"cms-srv/db"
+	"cms-srv/handler"
 	"share/config"
 	"share/pb"
 	"share/utils/log"
-	"user-srv/db"
-	"user-srv/handler"
 
 	"github.com/micro/cli"
-	"github.com/micro/go-micro"
+	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/server"
 	"go.uber.org/zap"
 )
@@ -18,7 +18,7 @@ func main() {
 	log.Init("user")
 	logger := log.Instance()
 	service := micro.NewService(
-		micro.Name(config.Namespace+config.ServiceNameUser),
+		micro.Name(config.Namespace+config.ServiceNameCMS),
 		micro.Version("latest"),
 	)
 	// 定义Service动作操作
@@ -27,7 +27,7 @@ func main() {
 			logger.Info("Info", zap.Any("user-srv", "user-srv is start ..."))
 
 			db.Init(config.MysqlDSN)
-			pb.RegisterUserServiceExtHandler(service.Server(), handler.NewUserServiceExtHandler(), server.InternalHandler(true))
+			pb.RegisterCMSServiceExtHandler(service.Server(), handler.NewCMSServiceExtHandler(), server.InternalHandler(true))
 		}),
 		micro.AfterStop(func() error {
 			logger.Info("Info", zap.Any("user-srv", "user-srv is stop ..."))

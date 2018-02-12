@@ -27,7 +27,7 @@ type RegistAccountReq struct {
 func (m *RegistAccountReq) Reset()                    { *m = RegistAccountReq{} }
 func (m *RegistAccountReq) String() string            { return proto.CompactTextString(m) }
 func (*RegistAccountReq) ProtoMessage()               {}
-func (*RegistAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{0} }
+func (*RegistAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{0} }
 
 func (m *RegistAccountReq) GetEmail() string {
 	if m != nil {
@@ -56,7 +56,7 @@ type RegistAccountRsp struct {
 func (m *RegistAccountRsp) Reset()                    { *m = RegistAccountRsp{} }
 func (m *RegistAccountRsp) String() string            { return proto.CompactTextString(m) }
 func (*RegistAccountRsp) ProtoMessage()               {}
-func (*RegistAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{1} }
+func (*RegistAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{1} }
 
 type LoginAccountReq struct {
 	UserName string `protobuf:"bytes,1,opt,name=userName" json:"userName,omitempty"`
@@ -66,7 +66,7 @@ type LoginAccountReq struct {
 func (m *LoginAccountReq) Reset()                    { *m = LoginAccountReq{} }
 func (m *LoginAccountReq) String() string            { return proto.CompactTextString(m) }
 func (*LoginAccountReq) ProtoMessage()               {}
-func (*LoginAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{2} }
+func (*LoginAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{2} }
 
 func (m *LoginAccountReq) GetUserName() string {
 	if m != nil {
@@ -88,7 +88,7 @@ type LoginAccountRsp struct {
 func (m *LoginAccountRsp) Reset()                    { *m = LoginAccountRsp{} }
 func (m *LoginAccountRsp) String() string            { return proto.CompactTextString(m) }
 func (*LoginAccountRsp) ProtoMessage()               {}
-func (*LoginAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{3} }
+func (*LoginAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{3} }
 
 type ResetAccountReq struct {
 }
@@ -96,7 +96,7 @@ type ResetAccountReq struct {
 func (m *ResetAccountReq) Reset()                    { *m = ResetAccountReq{} }
 func (m *ResetAccountReq) String() string            { return proto.CompactTextString(m) }
 func (*ResetAccountReq) ProtoMessage()               {}
-func (*ResetAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{4} }
+func (*ResetAccountReq) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{4} }
 
 type ResetAccountRsp struct {
 }
@@ -104,7 +104,7 @@ type ResetAccountRsp struct {
 func (m *ResetAccountRsp) Reset()                    { *m = ResetAccountRsp{} }
 func (m *ResetAccountRsp) String() string            { return proto.CompactTextString(m) }
 func (*ResetAccountRsp) ProtoMessage()               {}
-func (*ResetAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{5} }
+func (*ResetAccountRsp) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{5} }
 
 type WantScoreReq struct {
 	UserId  int64 `protobuf:"varint,1,opt,name=userId" json:"userId,omitempty"`
@@ -115,7 +115,7 @@ type WantScoreReq struct {
 func (m *WantScoreReq) Reset()                    { *m = WantScoreReq{} }
 func (m *WantScoreReq) String() string            { return proto.CompactTextString(m) }
 func (*WantScoreReq) ProtoMessage()               {}
-func (*WantScoreReq) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{6} }
+func (*WantScoreReq) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{6} }
 
 func (m *WantScoreReq) GetUserId() int64 {
 	if m != nil {
@@ -144,7 +144,7 @@ type WantScoreRsp struct {
 func (m *WantScoreRsp) Reset()                    { *m = WantScoreRsp{} }
 func (m *WantScoreRsp) String() string            { return proto.CompactTextString(m) }
 func (*WantScoreRsp) ProtoMessage()               {}
-func (*WantScoreRsp) Descriptor() ([]byte, []int) { return fileDescriptor5, []int{7} }
+func (*WantScoreRsp) Descriptor() ([]byte, []int) { return fileDescriptor6, []int{7} }
 
 func init() {
 	proto.RegisterType((*RegistAccountReq)(nil), "pb.RegistAccountReq")
@@ -270,9 +270,9 @@ func (h *UserServiceExt) WantScore(ctx context.Context, in *WantScoreReq, out *W
 	return h.UserServiceExtHandler.WantScore(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("user.ext.proto", fileDescriptor5) }
+func init() { proto.RegisterFile("user.ext.proto", fileDescriptor6) }
 
-var fileDescriptor5 = []byte{
+var fileDescriptor6 = []byte{
 	// 299 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x52, 0x31, 0x4f, 0xf3, 0x30,
 	0x10, 0xfd, 0x92, 0xe8, 0x2b, 0xf4, 0x54, 0x42, 0x31, 0x15, 0x8a, 0x32, 0x21, 0x4f, 0x4c, 0x91,

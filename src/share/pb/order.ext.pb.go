@@ -27,7 +27,7 @@ type WantTicketReq struct {
 func (m *WantTicketReq) Reset()                    { *m = WantTicketReq{} }
 func (m *WantTicketReq) String() string            { return proto.CompactTextString(m) }
 func (*WantTicketReq) ProtoMessage()               {}
-func (*WantTicketReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
+func (*WantTicketReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{0} }
 
 func (m *WantTicketReq) GetUserId() int64 {
 	if m != nil {
@@ -56,7 +56,7 @@ type WantTicketRsp struct {
 func (m *WantTicketRsp) Reset()                    { *m = WantTicketRsp{} }
 func (m *WantTicketRsp) String() string            { return proto.CompactTextString(m) }
 func (*WantTicketRsp) ProtoMessage()               {}
-func (*WantTicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
+func (*WantTicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{1} }
 
 type TicketReq struct {
 	UserId int64 `protobuf:"varint,1,opt,name=userId" json:"userId,omitempty"`
@@ -68,7 +68,7 @@ type TicketReq struct {
 func (m *TicketReq) Reset()                    { *m = TicketReq{} }
 func (m *TicketReq) String() string            { return proto.CompactTextString(m) }
 func (*TicketReq) ProtoMessage()               {}
-func (*TicketReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
+func (*TicketReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{2} }
 
 func (m *TicketReq) GetUserId() int64 {
 	if m != nil {
@@ -104,7 +104,7 @@ type TicketRsp struct {
 func (m *TicketRsp) Reset()                    { *m = TicketRsp{} }
 func (m *TicketRsp) String() string            { return proto.CompactTextString(m) }
 func (*TicketRsp) ProtoMessage()               {}
-func (*TicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
+func (*TicketRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{3} }
 
 type Order struct {
 	OrderNum   string `protobuf:"bytes,1,opt,name=orderNum" json:"orderNum,omitempty"`
@@ -119,7 +119,7 @@ type Order struct {
 func (m *Order) Reset()                    { *m = Order{} }
 func (m *Order) String() string            { return proto.CompactTextString(m) }
 func (*Order) ProtoMessage()               {}
-func (*Order) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{4} }
+func (*Order) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{4} }
 
 func (m *Order) GetOrderNum() string {
 	if m != nil {
@@ -180,7 +180,7 @@ type MovieTicket struct {
 func (m *MovieTicket) Reset()                    { *m = MovieTicket{} }
 func (m *MovieTicket) String() string            { return proto.CompactTextString(m) }
 func (*MovieTicket) ProtoMessage()               {}
-func (*MovieTicket) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{5} }
+func (*MovieTicket) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{5} }
 
 func (m *MovieTicket) GetFilmName() string {
 	if m != nil {
@@ -217,7 +217,7 @@ type LookOrdersReq struct {
 func (m *LookOrdersReq) Reset()                    { *m = LookOrdersReq{} }
 func (m *LookOrdersReq) String() string            { return proto.CompactTextString(m) }
 func (*LookOrdersReq) ProtoMessage()               {}
-func (*LookOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{6} }
+func (*LookOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{6} }
 
 func (m *LookOrdersReq) GetUserId() int64 {
 	if m != nil {
@@ -233,7 +233,7 @@ type LookOrdersRsp struct {
 func (m *LookOrdersRsp) Reset()                    { *m = LookOrdersRsp{} }
 func (m *LookOrdersRsp) String() string            { return proto.CompactTextString(m) }
 func (*LookOrdersRsp) ProtoMessage()               {}
-func (*LookOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{7} }
+func (*LookOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{7} }
 
 func (m *LookOrdersRsp) GetMovieTickets() []*MovieTicket {
 	if m != nil {
@@ -250,7 +250,7 @@ type PayOrderReq struct {
 func (m *PayOrderReq) Reset()                    { *m = PayOrderReq{} }
 func (m *PayOrderReq) String() string            { return proto.CompactTextString(m) }
 func (*PayOrderReq) ProtoMessage()               {}
-func (*PayOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{8} }
+func (*PayOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{8} }
 
 func (m *PayOrderReq) GetOrderNum() string {
 	if m != nil {
@@ -272,7 +272,7 @@ type PayOrderRsp struct {
 func (m *PayOrderRsp) Reset()                    { *m = PayOrderRsp{} }
 func (m *PayOrderRsp) String() string            { return proto.CompactTextString(m) }
 func (*PayOrderRsp) ProtoMessage()               {}
-func (*PayOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{9} }
+func (*PayOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{9} }
 
 type UndoOrderReq struct {
 	OrderId int64 `protobuf:"varint,1,opt,name=orderId" json:"orderId,omitempty"`
@@ -281,7 +281,7 @@ type UndoOrderReq struct {
 func (m *UndoOrderReq) Reset()                    { *m = UndoOrderReq{} }
 func (m *UndoOrderReq) String() string            { return proto.CompactTextString(m) }
 func (*UndoOrderReq) ProtoMessage()               {}
-func (*UndoOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{10} }
+func (*UndoOrderReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{10} }
 
 func (m *UndoOrderReq) GetOrderId() int64 {
 	if m != nil {
@@ -296,7 +296,7 @@ type UndoOrderRsp struct {
 func (m *UndoOrderRsp) Reset()                    { *m = UndoOrderRsp{} }
 func (m *UndoOrderRsp) String() string            { return proto.CompactTextString(m) }
 func (*UndoOrderRsp) ProtoMessage()               {}
-func (*UndoOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{11} }
+func (*UndoOrderRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{11} }
 
 type GetOrderMessageReq struct {
 	OrderNum string `protobuf:"bytes,1,opt,name=orderNum" json:"orderNum,omitempty"`
@@ -306,7 +306,7 @@ type GetOrderMessageReq struct {
 func (m *GetOrderMessageReq) Reset()                    { *m = GetOrderMessageReq{} }
 func (m *GetOrderMessageReq) String() string            { return proto.CompactTextString(m) }
 func (*GetOrderMessageReq) ProtoMessage()               {}
-func (*GetOrderMessageReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{12} }
+func (*GetOrderMessageReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{12} }
 
 func (m *GetOrderMessageReq) GetOrderNum() string {
 	if m != nil {
@@ -329,7 +329,7 @@ type GetOrderMessageRsp struct {
 func (m *GetOrderMessageRsp) Reset()                    { *m = GetOrderMessageRsp{} }
 func (m *GetOrderMessageRsp) String() string            { return proto.CompactTextString(m) }
 func (*GetOrderMessageRsp) ProtoMessage()               {}
-func (*GetOrderMessageRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{13} }
+func (*GetOrderMessageRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{13} }
 
 func (m *GetOrderMessageRsp) GetTicketDetail() *TicketDetail {
 	if m != nil {
@@ -357,7 +357,7 @@ type TicketDetail struct {
 func (m *TicketDetail) Reset()                    { *m = TicketDetail{} }
 func (m *TicketDetail) String() string            { return proto.CompactTextString(m) }
 func (*TicketDetail) ProtoMessage()               {}
-func (*TicketDetail) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{14} }
+func (*TicketDetail) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{14} }
 
 func (m *TicketDetail) GetFilmName() string {
 	if m != nil {
@@ -457,7 +457,7 @@ type LookAlreadyOrdersReq struct {
 func (m *LookAlreadyOrdersReq) Reset()                    { *m = LookAlreadyOrdersReq{} }
 func (m *LookAlreadyOrdersReq) String() string            { return proto.CompactTextString(m) }
 func (*LookAlreadyOrdersReq) ProtoMessage()               {}
-func (*LookAlreadyOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{15} }
+func (*LookAlreadyOrdersReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{15} }
 
 func (m *LookAlreadyOrdersReq) GetUserId() int64 {
 	if m != nil {
@@ -476,7 +476,7 @@ type LookAlreadyOrdersRsp struct {
 func (m *LookAlreadyOrdersRsp) Reset()                    { *m = LookAlreadyOrdersRsp{} }
 func (m *LookAlreadyOrdersRsp) String() string            { return proto.CompactTextString(m) }
 func (*LookAlreadyOrdersRsp) ProtoMessage()               {}
-func (*LookAlreadyOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{16} }
+func (*LookAlreadyOrdersRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{16} }
 
 func (m *LookAlreadyOrdersRsp) GetTotalMovie() int64 {
 	if m != nil {
@@ -511,7 +511,7 @@ type AlreadyMovie struct {
 func (m *AlreadyMovie) Reset()                    { *m = AlreadyMovie{} }
 func (m *AlreadyMovie) String() string            { return proto.CompactTextString(m) }
 func (*AlreadyMovie) ProtoMessage()               {}
-func (*AlreadyMovie) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{17} }
+func (*AlreadyMovie) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{17} }
 
 func (m *AlreadyMovie) GetFilmImg() string {
 	if m != nil {
@@ -566,7 +566,7 @@ type OrderCommentReq struct {
 func (m *OrderCommentReq) Reset()                    { *m = OrderCommentReq{} }
 func (m *OrderCommentReq) String() string            { return proto.CompactTextString(m) }
 func (*OrderCommentReq) ProtoMessage()               {}
-func (*OrderCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{18} }
+func (*OrderCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{18} }
 
 func (m *OrderCommentReq) GetUserId() int64 {
 	if m != nil {
@@ -609,7 +609,7 @@ type OrderCommentRsp struct {
 func (m *OrderCommentRsp) Reset()                    { *m = OrderCommentRsp{} }
 func (m *OrderCommentRsp) String() string            { return proto.CompactTextString(m) }
 func (*OrderCommentRsp) ProtoMessage()               {}
-func (*OrderCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{19} }
+func (*OrderCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor4, []int{19} }
 
 func init() {
 	proto.RegisterType((*WantTicketReq)(nil), "pb.WantTicketReq")
@@ -819,9 +819,9 @@ func (h *OrderServiceExt) OrderComment(ctx context.Context, in *OrderCommentReq,
 	return h.OrderServiceExtHandler.OrderComment(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("order.ext.proto", fileDescriptor3) }
+func init() { proto.RegisterFile("order.ext.proto", fileDescriptor4) }
 
-var fileDescriptor3 = []byte{
+var fileDescriptor4 = []byte{
 	// 843 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x56, 0xcd, 0x6e, 0xd3, 0x40,
 	0x10, 0xc6, 0x49, 0x93, 0xd4, 0x13, 0xa7, 0xa1, 0x4b, 0x55, 0x59, 0x16, 0x42, 0xd1, 0x0a, 0x41,

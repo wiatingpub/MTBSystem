@@ -6,6 +6,7 @@ Package pb is a generated protocol buffer package.
 
 It is generated from these files:
 	cinema.ext.proto
+	cms.ext.proto
 	comment.ext.proto
 	film.ext.proto
 	order.ext.proto
@@ -23,6 +24,8 @@ It has these top-level messages:
 	GetCinemaMessageByCidRsp
 	GetMovieHallByMHIdReq
 	GetMovieHallByMHIdRsp
+	UserLoginReq
+	UserLoginRsp
 	HotCommentReq
 	HotCommentRsp
 	CommentData

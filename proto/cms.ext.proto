@@ -4,5 +4,14 @@ package pb;
 
 service CMSServiceExt {
 
+    rpc UserLogin(UserLoginReq) returns(UserLolginRsp) {}
+
+}
+
+message UserLoginReq{
+
+}
+
+message UserLoginRsp{
 
 }

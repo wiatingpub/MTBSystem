@@ -8,9 +8,10 @@ const (
 )
 
 const (
-	ServiceNameUser = "user"
-	ServiceNameFilm = "film"
+	ServiceNameUser    = "user"
+	ServiceNameFilm    = "film"
 	ServiceNameComment = "comment"
-	ServiceNameCinema = "cinema"
-	ServiceNameOrder = "order"
+	ServiceNameCinema  = "cinema"
+	ServiceNameOrder   = "order"
+	ServiceNameCMS     = "cms"
 )

@@ -25,7 +25,7 @@ type HotCommentReq struct {
 func (m *HotCommentReq) Reset()                    { *m = HotCommentReq{} }
 func (m *HotCommentReq) String() string            { return proto.CompactTextString(m) }
 func (*HotCommentReq) ProtoMessage()               {}
-func (*HotCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{0} }
+func (*HotCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
 
 func (m *HotCommentReq) GetMovieId() int64 {
 	if m != nil {
@@ -41,7 +41,7 @@ type HotCommentRsp struct {
 func (m *HotCommentRsp) Reset()                    { *m = HotCommentRsp{} }
 func (m *HotCommentRsp) String() string            { return proto.CompactTextString(m) }
 func (*HotCommentRsp) ProtoMessage()               {}
-func (*HotCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{1} }
+func (*HotCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
 
 func (m *HotCommentRsp) GetData() *CommentData {
 	if m != nil {
@@ -58,7 +58,7 @@ type CommentData struct {
 func (m *CommentData) Reset()                    { *m = CommentData{} }
 func (m *CommentData) String() string            { return proto.CompactTextString(m) }
 func (*CommentData) ProtoMessage()               {}
-func (*CommentData) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{2} }
+func (*CommentData) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
 
 func (m *CommentData) GetMini() *CommentMini {
 	if m != nil {
@@ -82,7 +82,7 @@ type CommentMini struct {
 func (m *CommentMini) Reset()                    { *m = CommentMini{} }
 func (m *CommentMini) String() string            { return proto.CompactTextString(m) }
 func (*CommentMini) ProtoMessage()               {}
-func (*CommentMini) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{3} }
+func (*CommentMini) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{3} }
 
 func (m *CommentMini) GetList() []*CommentRecord {
 	if m != nil {
@@ -106,7 +106,7 @@ type CommentPlus struct {
 func (m *CommentPlus) Reset()                    { *m = CommentPlus{} }
 func (m *CommentPlus) String() string            { return proto.CompactTextString(m) }
 func (*CommentPlus) ProtoMessage()               {}
-func (*CommentPlus) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{4} }
+func (*CommentPlus) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{4} }
 
 func (m *CommentPlus) GetList() []*CommentRecord {
 	if m != nil {
@@ -132,7 +132,7 @@ type CommentRecord struct {
 func (m *CommentRecord) Reset()                    { *m = CommentRecord{} }
 func (m *CommentRecord) String() string            { return proto.CompactTextString(m) }
 func (*CommentRecord) ProtoMessage()               {}
-func (*CommentRecord) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{5} }
+func (*CommentRecord) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{5} }
 
 func (m *CommentRecord) GetTitle() string {
 	if m != nil {
@@ -174,7 +174,7 @@ type MakeCommentReq struct {
 func (m *MakeCommentReq) Reset()                    { *m = MakeCommentReq{} }
 func (m *MakeCommentReq) String() string            { return proto.CompactTextString(m) }
 func (*MakeCommentReq) ProtoMessage()               {}
-func (*MakeCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{6} }
+func (*MakeCommentReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{6} }
 
 func (m *MakeCommentReq) GetMovieId() int64 {
 	if m != nil {
@@ -224,7 +224,7 @@ type MakeCommentRsp struct {
 func (m *MakeCommentRsp) Reset()                    { *m = MakeCommentRsp{} }
 func (m *MakeCommentRsp) String() string            { return proto.CompactTextString(m) }
 func (*MakeCommentRsp) ProtoMessage()               {}
-func (*MakeCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor1, []int{7} }
+func (*MakeCommentRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{7} }
 
 func init() {
 	proto.RegisterType((*HotCommentReq)(nil), "pb.HotCommentReq")
@@ -314,9 +314,9 @@ func (h *CommentServiceExt) MakeComment(ctx context.Context, in *MakeCommentReq,
 	return h.CommentServiceExtHandler.MakeComment(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("comment.ext.proto", fileDescriptor1) }
+func init() { proto.RegisterFile("comment.ext.proto", fileDescriptor2) }
 
-var fileDescriptor1 = []byte{
+var fileDescriptor2 = []byte{
 	// 361 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x53, 0x4d, 0x4b, 0x2b, 0x31,
 	0x14, 0x7d, 0xd3, 0xaf, 0xf7, 0x7a, 0x87, 0x3e, 0x6d, 0x10, 0x19, 0xba, 0x2a, 0x11, 0xa1, 0x6e,

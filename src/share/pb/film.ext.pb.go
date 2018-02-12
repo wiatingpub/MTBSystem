@@ -25,7 +25,7 @@ type HotPlayMoviesReq struct {
 func (m *HotPlayMoviesReq) Reset()                    { *m = HotPlayMoviesReq{} }
 func (m *HotPlayMoviesReq) String() string            { return proto.CompactTextString(m) }
 func (*HotPlayMoviesReq) ProtoMessage()               {}
-func (*HotPlayMoviesReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{0} }
+func (*HotPlayMoviesReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{0} }
 
 func (m *HotPlayMoviesReq) GetLocation() int64 {
 	if m != nil {
@@ -41,7 +41,7 @@ type HotPlayMoviesRep struct {
 func (m *HotPlayMoviesRep) Reset()                    { *m = HotPlayMoviesRep{} }
 func (m *HotPlayMoviesRep) String() string            { return proto.CompactTextString(m) }
 func (*HotPlayMoviesRep) ProtoMessage()               {}
-func (*HotPlayMoviesRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{1} }
+func (*HotPlayMoviesRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{1} }
 
 func (m *HotPlayMoviesRep) GetMovies() []*Movie {
 	if m != nil {
@@ -64,7 +64,7 @@ type Movie struct {
 func (m *Movie) Reset()                    { *m = Movie{} }
 func (m *Movie) String() string            { return proto.CompactTextString(m) }
 func (*Movie) ProtoMessage()               {}
-func (*Movie) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{2} }
+func (*Movie) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{2} }
 
 func (m *Movie) GetImg() string {
 	if m != nil {
@@ -150,7 +150,7 @@ type HotMovie struct {
 func (m *HotMovie) Reset()                    { *m = HotMovie{} }
 func (m *HotMovie) String() string            { return proto.CompactTextString(m) }
 func (*HotMovie) ProtoMessage()               {}
-func (*HotMovie) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{3} }
+func (*HotMovie) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{3} }
 
 func (m *HotMovie) GetActorName() []string {
 	if m != nil {
@@ -342,7 +342,7 @@ type FilmAllMessage struct {
 func (m *FilmAllMessage) Reset()                    { *m = FilmAllMessage{} }
 func (m *FilmAllMessage) String() string            { return proto.CompactTextString(m) }
 func (*FilmAllMessage) ProtoMessage()               {}
-func (*FilmAllMessage) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{4} }
+func (*FilmAllMessage) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{4} }
 
 func (m *FilmAllMessage) GetLogo() string {
 	if m != nil {
@@ -562,7 +562,7 @@ type MovieDetailReq struct {
 func (m *MovieDetailReq) Reset()                    { *m = MovieDetailReq{} }
 func (m *MovieDetailReq) String() string            { return proto.CompactTextString(m) }
 func (*MovieDetailReq) ProtoMessage()               {}
-func (*MovieDetailReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{5} }
+func (*MovieDetailReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{5} }
 
 func (m *MovieDetailReq) GetLocationId() int64 {
 	if m != nil {
@@ -595,7 +595,7 @@ type MovieDetailRep struct {
 func (m *MovieDetailRep) Reset()                    { *m = MovieDetailRep{} }
 func (m *MovieDetailRep) String() string            { return proto.CompactTextString(m) }
 func (*MovieDetailRep) ProtoMessage()               {}
-func (*MovieDetailRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{6} }
+func (*MovieDetailRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{6} }
 
 func (m *MovieDetailRep) GetImage() string {
 	if m != nil {
@@ -682,7 +682,7 @@ type Release struct {
 func (m *Release) Reset()                    { *m = Release{} }
 func (m *Release) String() string            { return proto.CompactTextString(m) }
 func (*Release) ProtoMessage()               {}
-func (*Release) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{7} }
+func (*Release) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{7} }
 
 func (m *Release) GetLocation() string {
 	if m != nil {
@@ -705,7 +705,7 @@ type MovieCreditsWithTypesReq struct {
 func (m *MovieCreditsWithTypesReq) Reset()                    { *m = MovieCreditsWithTypesReq{} }
 func (m *MovieCreditsWithTypesReq) String() string            { return proto.CompactTextString(m) }
 func (*MovieCreditsWithTypesReq) ProtoMessage()               {}
-func (*MovieCreditsWithTypesReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{8} }
+func (*MovieCreditsWithTypesReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{8} }
 
 func (m *MovieCreditsWithTypesReq) GetMovieId() int64 {
 	if m != nil {
@@ -721,7 +721,7 @@ type MovieCreditsWithTypesRep struct {
 func (m *MovieCreditsWithTypesRep) Reset()                    { *m = MovieCreditsWithTypesRep{} }
 func (m *MovieCreditsWithTypesRep) String() string            { return proto.CompactTextString(m) }
 func (*MovieCreditsWithTypesRep) ProtoMessage()               {}
-func (*MovieCreditsWithTypesRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{9} }
+func (*MovieCreditsWithTypesRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{9} }
 
 func (m *MovieCreditsWithTypesRep) GetTypes() []*Type {
 	if m != nil {
@@ -739,7 +739,7 @@ type Type struct {
 func (m *Type) Reset()                    { *m = Type{} }
 func (m *Type) String() string            { return proto.CompactTextString(m) }
 func (*Type) ProtoMessage()               {}
-func (*Type) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{10} }
+func (*Type) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{10} }
 
 func (m *Type) GetTypeName() string {
 	if m != nil {
@@ -773,7 +773,7 @@ type Persons struct {
 func (m *Persons) Reset()                    { *m = Persons{} }
 func (m *Persons) String() string            { return proto.CompactTextString(m) }
 func (*Persons) ProtoMessage()               {}
-func (*Persons) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{11} }
+func (*Persons) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{11} }
 
 func (m *Persons) GetImage() string {
 	if m != nil {
@@ -817,7 +817,7 @@ type ImageAllReq struct {
 func (m *ImageAllReq) Reset()                    { *m = ImageAllReq{} }
 func (m *ImageAllReq) String() string            { return proto.CompactTextString(m) }
 func (*ImageAllReq) ProtoMessage()               {}
-func (*ImageAllReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{12} }
+func (*ImageAllReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{12} }
 
 func (m *ImageAllReq) GetMovieId() int64 {
 	if m != nil {
@@ -833,7 +833,7 @@ type ImageAllRep struct {
 func (m *ImageAllRep) Reset()                    { *m = ImageAllRep{} }
 func (m *ImageAllRep) String() string            { return proto.CompactTextString(m) }
 func (*ImageAllRep) ProtoMessage()               {}
-func (*ImageAllRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{13} }
+func (*ImageAllRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{13} }
 
 func (m *ImageAllRep) GetImages() []*Image {
 	if m != nil {
@@ -849,7 +849,7 @@ type Image struct {
 func (m *Image) Reset()                    { *m = Image{} }
 func (m *Image) String() string            { return proto.CompactTextString(m) }
 func (*Image) ProtoMessage()               {}
-func (*Image) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{14} }
+func (*Image) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{14} }
 
 func (m *Image) GetImage() string {
 	if m != nil {
@@ -864,7 +864,7 @@ type LocationMoviesReq struct {
 func (m *LocationMoviesReq) Reset()                    { *m = LocationMoviesReq{} }
 func (m *LocationMoviesReq) String() string            { return proto.CompactTextString(m) }
 func (*LocationMoviesReq) ProtoMessage()               {}
-func (*LocationMoviesReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{15} }
+func (*LocationMoviesReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{15} }
 
 type LocationMoviesRep struct {
 	Movies []*Movie `protobuf:"bytes,1,rep,name=movies" json:"movies,omitempty"`
@@ -873,7 +873,7 @@ type LocationMoviesRep struct {
 func (m *LocationMoviesRep) Reset()                    { *m = LocationMoviesRep{} }
 func (m *LocationMoviesRep) String() string            { return proto.CompactTextString(m) }
 func (*LocationMoviesRep) ProtoMessage()               {}
-func (*LocationMoviesRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{16} }
+func (*LocationMoviesRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{16} }
 
 func (m *LocationMoviesRep) GetMovies() []*Movie {
 	if m != nil {
@@ -888,7 +888,7 @@ type MovieComingNewReq struct {
 func (m *MovieComingNewReq) Reset()                    { *m = MovieComingNewReq{} }
 func (m *MovieComingNewReq) String() string            { return proto.CompactTextString(m) }
 func (*MovieComingNewReq) ProtoMessage()               {}
-func (*MovieComingNewReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{17} }
+func (*MovieComingNewReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{17} }
 
 type MovieComingNewRep struct {
 	Movies []*Movie `protobuf:"bytes,1,rep,name=movies" json:"movies,omitempty"`
@@ -897,7 +897,7 @@ type MovieComingNewRep struct {
 func (m *MovieComingNewRep) Reset()                    { *m = MovieComingNewRep{} }
 func (m *MovieComingNewRep) String() string            { return proto.CompactTextString(m) }
 func (*MovieComingNewRep) ProtoMessage()               {}
-func (*MovieComingNewRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{18} }
+func (*MovieComingNewRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{18} }
 
 func (m *MovieComingNewRep) GetMovies() []*Movie {
 	if m != nil {
@@ -914,7 +914,7 @@ type SearchRep struct {
 func (m *SearchRep) Reset()                    { *m = SearchRep{} }
 func (m *SearchRep) String() string            { return proto.CompactTextString(m) }
 func (*SearchRep) ProtoMessage()               {}
-func (*SearchRep) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{19} }
+func (*SearchRep) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{19} }
 
 func (m *SearchRep) GetSubjects() []*SearchMovie {
 	if m != nil {
@@ -937,7 +937,7 @@ type SearchReq struct {
 func (m *SearchReq) Reset()                    { *m = SearchReq{} }
 func (m *SearchReq) String() string            { return proto.CompactTextString(m) }
 func (*SearchReq) ProtoMessage()               {}
-func (*SearchReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{20} }
+func (*SearchReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{20} }
 
 func (m *SearchReq) GetQ() string {
 	if m != nil {
@@ -958,7 +958,7 @@ type SearchMovie struct {
 func (m *SearchMovie) Reset()                    { *m = SearchMovie{} }
 func (m *SearchMovie) String() string            { return proto.CompactTextString(m) }
 func (*SearchMovie) ProtoMessage()               {}
-func (*SearchMovie) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{21} }
+func (*SearchMovie) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{21} }
 
 func (m *SearchMovie) GetTitle() string {
 	if m != nil {
@@ -1009,7 +1009,7 @@ type Genres struct {
 func (m *Genres) Reset()                    { *m = Genres{} }
 func (m *Genres) String() string            { return proto.CompactTextString(m) }
 func (*Genres) ProtoMessage()               {}
-func (*Genres) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{22} }
+func (*Genres) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{22} }
 
 func (m *Genres) GetType() string {
 	if m != nil {
@@ -1025,7 +1025,7 @@ type Rating struct {
 func (m *Rating) Reset()                    { *m = Rating{} }
 func (m *Rating) String() string            { return proto.CompactTextString(m) }
 func (*Rating) ProtoMessage()               {}
-func (*Rating) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{23} }
+func (*Rating) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{23} }
 
 func (m *Rating) GetAverage() float32 {
 	if m != nil {
@@ -1041,7 +1041,7 @@ type Images struct {
 func (m *Images) Reset()                    { *m = Images{} }
 func (m *Images) String() string            { return proto.CompactTextString(m) }
 func (*Images) ProtoMessage()               {}
-func (*Images) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{24} }
+func (*Images) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{24} }
 
 func (m *Images) GetSmall() string {
 	if m != nil {
@@ -1065,7 +1065,7 @@ type DayMovie struct {
 func (m *DayMovie) Reset()                    { *m = DayMovie{} }
 func (m *DayMovie) String() string            { return proto.CompactTextString(m) }
 func (*DayMovie) ProtoMessage()               {}
-func (*DayMovie) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{25} }
+func (*DayMovie) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{25} }
 
 func (m *DayMovie) GetReleaseTime() string {
 	if m != nil {
@@ -1139,7 +1139,7 @@ type GetFilmsByCidADayReq struct {
 func (m *GetFilmsByCidADayReq) Reset()                    { *m = GetFilmsByCidADayReq{} }
 func (m *GetFilmsByCidADayReq) String() string            { return proto.CompactTextString(m) }
 func (*GetFilmsByCidADayReq) ProtoMessage()               {}
-func (*GetFilmsByCidADayReq) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{26} }
+func (*GetFilmsByCidADayReq) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{26} }
 
 func (m *GetFilmsByCidADayReq) GetCinemaId() int64 {
 	if m != nil {
@@ -1169,7 +1169,7 @@ type GetFilmsByCidADayRsp struct {
 func (m *GetFilmsByCidADayRsp) Reset()                    { *m = GetFilmsByCidADayRsp{} }
 func (m *GetFilmsByCidADayRsp) String() string            { return proto.CompactTextString(m) }
 func (*GetFilmsByCidADayRsp) ProtoMessage()               {}
-func (*GetFilmsByCidADayRsp) Descriptor() ([]byte, []int) { return fileDescriptor2, []int{27} }
+func (*GetFilmsByCidADayRsp) Descriptor() ([]byte, []int) { return fileDescriptor3, []int{27} }
 
 func (m *GetFilmsByCidADayRsp) GetDayMovie() []*DayMovie {
 	if m != nil {
@@ -1394,9 +1394,9 @@ func (h *FilmServiceExt) GetFilmsByCidADay(ctx context.Context, in *GetFilmsByCi
 	return h.FilmServiceExtHandler.GetFilmsByCidADay(ctx, in, out)
 }
 
-func init() { proto.RegisterFile("film.ext.proto", fileDescriptor2) }
+func init() { proto.RegisterFile("film.ext.proto", fileDescriptor3) }
 
-var fileDescriptor2 = []byte{
+var fileDescriptor3 = []byte{
 	// 1602 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x58, 0xdb, 0x6e, 0x1c, 0x37,
 	0x12, 0xf5, 0x5c, 0x34, 0x97, 0x1a, 0x5d, 0x69, 0x49, 0xdb, 0x9e, 0x95, 0x05, 0x2d, 0xb1, 0x8b,

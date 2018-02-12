@@ -11,6 +11,9 @@
 #### 数据库ER图
 ![数据库ER关系图.png](http://upload-images.jianshu.io/upload_images/3365849-9c1abcd5fedd1043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+#### 项目相关的微服务博客
+https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
+
 #### 技术方案：
 - 服务端：go-micro
 - 数据库：mysql
@@ -33,11 +36,20 @@
 ### 如何启动程序：
 - 1、 ./ctrl.sh build
 - 2、 ./ctrl.sh run
-- 3、 ./ctrl.sh init
+- 3、 ./ctrl.sh init chmod
 - 4、 ./ctrl.sh start
-- 5、 ./ctrl.sh sql
+- 5、 ./ctrl.sh init conf
 - 6、 ./ctrl.sh login
 - 7、 cd /data/deploy/mtbsystem/
 - 8、 bash ./build_local.sh api-rv
 - 9、 bash ./build_local.sh all
+
+### 如何添加服务
+- 1、 在proto下添加文件，如cms.ext.proto
+- 2、 在src下添加cms-srv
+- 3、 在dockerbase/supervisor下添加cms-srv-conf
+- 4、 ./ctrl.sh init conf
+- 5、 ./ctrl.sh login
+- 6、 cd /data/deploy/mtbsystem/
+- 7、 bash ./build_local.sh cms-rv
 
