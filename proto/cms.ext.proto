@@ -4,14 +4,27 @@ package pb;
 
 service CMSServiceExt {
 
-    rpc UserLogin(UserLoginReq) returns(UserLolginRsp) {}
-
+    rpc UserLogin(UserLoginReq) returns(UserLoginRsp) {}
+    rpc UpdateMessage(UpdateMessageReq) returns(UpdateMessageRsp){}
 }
 
 message UserLoginReq{
-
+    string user = 1 ; 
+    string password = 2;
 }
 
 message UserLoginRsp{
 
+    int64 adminNum = 2;
+    string cinemaName = 3;
+}
+
+message UpdateMessageReq{
+    string table = 1 ; // 表名
+    string json = 2 ; // {k:v}
+    string num = 3; //  权限值
+}
+
+message UpdateMessageRsp{
+    
 }

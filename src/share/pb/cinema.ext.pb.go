@@ -26,6 +26,8 @@ It has these top-level messages:
 	GetMovieHallByMHIdRsp
 	UserLoginReq
 	UserLoginRsp
+	UpdateMessageReq
+	UpdateMessageRsp
 	HotCommentReq
 	HotCommentRsp
 	CommentData

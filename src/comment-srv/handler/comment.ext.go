@@ -1,13 +1,14 @@
 package handler
 
 import (
-	"context"
 	"comment-srv/db"
-	"go.uber.org/zap"
+	"comment-srv/entity"
+	"context"
+	errors "share/errors"
 	"share/pb"
 	"share/utils/log"
-	errors "share/errors"
-	"comment-srv/entity"
+
+	"go.uber.org/zap"
 )
 
 type CommentServiceExtHandler struct {
@@ -24,24 +25,24 @@ func NewCommentServiceExtHandler() *CommentServiceExtHandler {
 func (f *CommentServiceExtHandler) HotComment(ctx context.Context, req *pb.HotCommentReq, rsp *pb.HotCommentRsp) error {
 
 	movieId := req.MovieId
-	comments,err := db.SelectHotComment(movieId)
+	comments, err := db.SelectHotComment(movieId)
 	if err != nil {
 		return errors.ErrorCommentFailed
 	}
 	records := []*pb.CommentRecord{}
-	for _,comment := range comments {
+	for _, comment := range comments {
 		record := pb.CommentRecord{
-			Title: comment.Title,
-			Content: comment.Content,
-			HeadImg:comment.HeadImg,
-			Nickname:comment.NickName,
+			Title:    comment.Title,
+			Content:  comment.Content,
+			HeadImg:  comment.HeadImg,
+			Nickname: comment.NickName,
 		}
 		records = append(records, &record)
 	}
 
 	plus := pb.CommentPlus{
-		Total:3,
-		List:records,
+		Total: 3,
+		List:  records,
 	}
 
 	data := pb.CommentData{
@@ -54,11 +55,11 @@ func (f *CommentServiceExtHandler) HotComment(ctx context.Context, req *pb.HotCo
 func (f *CommentServiceExtHandler) MakeComment(ctx context.Context, req *pb.MakeCommentReq, rsp *pb.MakeCommentRsp) error {
 
 	comment := entity.Comment{
-		Title:req.Title,
-		Content:req.Content,
-		HeadImg:req.HeadImg,
-		FilmId:req.MovieId,
-		NickName:req.Nickname,
+		Title:    req.Title,
+		Content:  req.Content,
+		HeadImg:  req.HeadImg,
+		FilmId:   req.MovieId,
+		NickName: req.Nickname,
 	}
 	err := db.InsertHotComment(&comment)
 	if err != nil {
