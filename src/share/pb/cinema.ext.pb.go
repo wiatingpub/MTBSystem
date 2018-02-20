@@ -28,6 +28,30 @@ It has these top-level messages:
 	UserLoginRsp
 	UpdateMessageReq
 	UpdateMessageRsp
+	AllFilmsReq
+	AllFilmsRsp
+	Film
+	AllUsersReq
+	AllUsersRsp
+	User
+	AllAdminUsersReq
+	AllAdminUsersRsp
+	AdminUser
+	AllCommentsReq
+	AllCommentsRsp
+	Comment
+	AllOrdersReq
+	AllOrdersRsp
+	OrderAll
+	AllAddressReq
+	AllAddressRsp
+	PlaceAll
+	AddFilmReq
+	AddFilmRsp
+	UpdateFilmReq
+	UpdateFilmRsp
+	DeleteFilmReq
+	DeleteFilmRsp
 	HotCommentReq
 	HotCommentRsp
 	CommentData

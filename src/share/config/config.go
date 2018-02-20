@@ -5,6 +5,7 @@ const (
 	MysqlDSN     = "root:@(localhost:3306)/mtbsystem"
 	Namespace    = "com.mtbsystem."
 	LogPath      = "/data/goapp/log/"
+	Num          = 20 // 分页每次取多少
 )
 
 const (

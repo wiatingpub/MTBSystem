@@ -20,7 +20,6 @@ type Film struct {
 	CommonSpecial        string   `json:"common_special" db:"common_special"`
 	UserAccessTimes      int64    `json:"user_access_times" db:"user_access_times"`
 	FilmBoxoffice        float32  `json:"film_boxoffice" db:"film_boxoffice"`
-	DirectorName         string   `json:"director_name" db:"director_name"`
 	WantedCount          int64    `json:"wanted_count" db:"wanted_count"`
 	UserCommentTimes     int64    `json:"user_comment_times" db:"user_comment_times"`
 	CompanyIssued        string   `json:"company_issued" db:"company_issued"`
@@ -40,39 +39,33 @@ type Film struct {
 	FilmDirector         string   `json:"film_director" db:"film_director"`
 }
 
-func (f Film) ToProtoDBHotPlayMovies() *pb.HotMovie {
-	return &pb.HotMovie{
-		ActorName:     f.ActorName,
+func (f Film) ToProtoMovies() *pb.Film {
+	return &pb.Film{
+		ActorNames:    f.ActorName,
 		TitleCn:       f.TitleCn,
+		FilmDirector:  f.FilmDirector,
 		TitleEn:       f.TitleEn,
+		CompanyIssued: f.CompanyIssued,
+		FilmPrice:     f.FilmPrice,
 		CommonSpecial: f.CommonSpecial,
-		DirectorName:  f.DirectorName,
 		Img:           f.Img,
+		FilmDrama:     f.FilmDrama,
 		Is3D:          f.Is3D,
+		Country:       f.Country,
 		IsDMAX:        f.IsDMAX,
 		IsFilter:      f.IsFilter,
+		IsSelectSeat:  f.IsSelectSeat,
 		IsHot:         f.IsHot,
 		IsIMAX:        f.IsIMAX,
 		IsIMAX3D:      f.IsIMAX3D,
 		IsNew:         f.IsNew,
 		Length:        f.Length,
-		MovieId:       f.MovieId,
+		MovieID:       f.MovieId,
 		RDay:          f.RDay,
 		RMonth:        f.RMonth,
 		RYear:         f.RYear,
 		RatingFinal:   f.RatingFinal,
 		Type:          f.Type,
 		WantedCount:   f.WantedCount,
-	}
-}
-
-func (f Film) ToProtoDBMovies() *pb.Movie {
-	return &pb.Movie{
-		TitleCn:      f.TitleCn,
-		Img:          f.Img,
-		MovieId:      f.MovieId,
-		FilmDirector: f.FilmDirector,
-		FilmDrama:    f.FilmDrama,
-		RatingFinal:  f.RatingFinal,
 	}
 }
