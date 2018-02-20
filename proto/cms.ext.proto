@@ -14,7 +14,12 @@ service CMSServiceExt {
     rpc AllComments(AllCommentsReq) returns(AllCommentsRsp){} // 所有评论的信息
     rpc AllOrders(AllOrdersReq) returns(AllOrdersRsp){} // 所有订单信息
     rpc AllAddress(AllAddressReq) returns(AllAddressRsp){} // 所有地点信息
-    rpc AddFilm(AddFilmReq) returns(AddFilmRsp){}
+    rpc AddFilm(AddFilmReq) returns(AddFilmRsp){} // 添加影片
+    rpc AddAdminUser(AddAdminUserReq) returns(AddAdminUserRsp){} // 添加管理员
+    rpc AddAddress(AddAddressReq) returns(AddAddressRsp){} // 添加地点信息
+    rpc UpdateAddress(UpdateAddressReq) returns(UpdateAddressRsp){} // 更新地点信息
+    rpc DeleteAddress(DeleteAddressReq) returns(DeleteAddressRsp){} // 删除地点信息
+    rpc DeleteAdminUser(DeleteAdminUserReq) returns(DeleteAdminUserRsp){} // 删除管理员信息
 }
 
 message UserLoginReq{
@@ -260,5 +265,60 @@ message DeleteFilmReq{
 }
 
 message DeleteFilmRsp{
+
+}
+
+message AddAdminUserReq{
+    int64 adminID = 1;
+    string AdminName = 2;
+    string AdminPassword= 3;
+    int64 AdminCinemaID = 4;
+    int64 AdminNum = 6;
+}
+
+message AddAdminUserRsp{
+
+}
+
+message AddAddressReq{
+    int64 adminID = 1;
+    int64 count = 2;
+    string name = 3;
+    string pinyinFull = 4;
+    string pinyinShort = 5;
+}
+
+message AddAddressRsp{
+
+}
+
+message UpdateAddressReq{
+    int64 id = 1;
+    int64 count = 2;
+    string name = 3;
+    string pinyinFull = 4;
+    string pinyinShort = 5;
+    int64 adminID = 6;
+}
+
+message UpdateAddressRsp{
+
+}
+
+message DeleteAddressReq{
+    int64 id = 1;
+    int64 adminID = 2;
+} 
+
+message DeleteAddressRsp{
+
+}
+
+message DeleteAdminUserReq{
+    int64 AuID = 1;
+    int64 adminID = 2;
+}
+
+message DeleteAdminUserRsp{
 
 }

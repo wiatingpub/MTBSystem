@@ -52,6 +52,16 @@ It has these top-level messages:
 	UpdateFilmRsp
 	DeleteFilmReq
 	DeleteFilmRsp
+	AddAdminUserReq
+	AddAdminUserRsp
+	AddAddressReq
+	AddAddressRsp
+	UpdateAddressReq
+	UpdateAddressRsp
+	DeleteAddressReq
+	DeleteAddressRsp
+	DeleteAdminUserReq
+	DeleteAdminUserRsp
 	HotCommentReq
 	HotCommentRsp
 	CommentData

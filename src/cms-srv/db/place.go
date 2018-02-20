@@ -24,3 +24,29 @@ func SelectPlaceTotal() (int64, error) {
 	}
 	return total, nil
 }
+
+func AddPlace(place *entity.Place) error {
+
+	_, err := db.Exec("INSERT INTO  `place`(`name`,`pinyin_full`,`pinyin_short`) VALUES(?,?,?)",
+		place.Name, place.PinyinFull, place.PinyinShort)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
+}
+
+func UpdatePlace(place *entity.Place) error {
+	_, err := db.Exec("UPDATE `place` SET `name` = ?,`pinyin_full` = ?,`pinyin_short` = ? WHERE `id` = ?", place.Name, place.PinyinFull, place.PinyinShort, place.Id)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
+}
+
+func DeletePlace(placeId int64) error {
+	_, err := db.Exec("DELETE FROM `place` WHERE `id` = ?", placeId)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
+}

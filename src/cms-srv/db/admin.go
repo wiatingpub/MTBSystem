@@ -32,7 +32,7 @@ func SelectAllAdmin(page int64, num int64) ([]*entity.Admin, error) {
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
-	return admins, nil
+	return admins, err
 }
 
 func SelectAdminTotal() (int64, error) {
@@ -42,5 +42,23 @@ func SelectAdminTotal() (int64, error) {
 	if err == sql.ErrNoRows {
 		return 0, nil
 	}
-	return total, nil
+	return total, err
+}
+
+func AddAdminUser(admin *entity.Admin) error {
+
+	_, err := db.Exec("INSERT INTO  `admin_user`(`admin_name`,`admin_password`,`admin_cinema_id`,`admin_num`) VALUES(?,?,?,?)",
+		admin.AdminName, admin.AdminPassword, admin.CinemaID, admin.AdminNum)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
+}
+
+func DeleteAdminUser(auID int64) error {
+	_, err := db.Exec("DELETE FROM `admin_user` WHERE `au_id` = ?", auID)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
 }

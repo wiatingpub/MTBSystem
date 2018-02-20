@@ -463,3 +463,145 @@ func (c *CMSServiceExtHandler) DeleteFilm(ctx context.Context, req *pb.DeleteFil
 	}
 	return nil
 }
+
+func (c *CMSServiceExtHandler) AddAdminUser(ctx context.Context, req *pb.AddAdminUserReq, rsp *pb.AddAdminUserRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		return errors.ErrorCMSForbiddenParam
+	}
+	adminUser := entity.Admin{
+		AdminName:     req.AdminName,
+		AdminPassword: req.AdminPassword,
+		AdminNum:      req.AdminNum,
+		CinemaID:      req.AdminCinemaID,
+	}
+	err = db.AddAdminUser(&adminUser)
+	if err != nil {
+		c.logger.Error("error", zap.Any("AddAdminUser", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) AddAddress(ctx context.Context, req *pb.AddAddressReq, rsp *pb.AddAddressRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		return errors.ErrorCMSForbiddenParam
+	}
+	place := entity.Place{
+		Name:        req.Name,
+		PinyinFull:  req.PinyinFull,
+		PinyinShort: req.PinyinShort,
+	}
+	err = db.AddPlace(&place)
+	if err != nil {
+		c.logger.Error("error", zap.Any("AddPlace", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) UpdateAddress(ctx context.Context, req *pb.UpdateAddressReq, rsp *pb.UpdateAddressRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		return errors.ErrorCMSForbiddenParam
+	}
+	place := entity.Place{
+		Id:          req.Id,
+		Name:        req.Name,
+		PinyinFull:  req.PinyinFull,
+		PinyinShort: req.PinyinShort,
+	}
+	err = db.UpdatePlace(&place)
+	if err != nil {
+		c.logger.Error("error", zap.Any("UpdatePlace", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) DeleteAddress(ctx context.Context, req *pb.DeleteAddressReq, rsp *pb.DeleteAddressRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		return errors.ErrorCMSForbiddenParam
+	}
+	err = db.DeletePlace(req.Id)
+	if err != nil {
+		c.logger.Error("error", zap.Any("DeletePlace", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) DeleteAdminUser(ctx context.Context, req *pb.DeleteAdminUserReq, rsp *pb.DeleteAdminUserRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		return errors.ErrorCMSForbiddenParam
+	}
+	err = db.DeleteAdminUser(req.AuID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("DeleteFilm", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
