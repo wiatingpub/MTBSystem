@@ -605,3 +605,347 @@ func (c *CMSServiceExtHandler) DeleteAdminUser(ctx context.Context, req *pb.Dele
 	}
 	return nil
 }
+
+func (c *CMSServiceExtHandler) AllMovieHall(ctx context.Context, req *pb.AllMovieHallReq, rsp *pb.AllMovieHallRsp) error {
+
+	adminID := req.AdminID
+	page := req.Page
+	if adminID == 0 || page == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	// 超级管理员可以查看所有的信息
+	if admin.AdminNum == 1 {
+		total, err := db.SelectMovieHallTotal()
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectMovieHallTotal", err))
+			return errors.ErrorCMSFailed
+
+		}
+		rsp.Total = total
+		movieHalls, err := db.SelectAllMovieHall(page, config.Num)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllMovieHall", err))
+			return errors.ErrorCMSFailed
+		}
+		movieHallsPB := []*pb.MovieHall{}
+		for _, movieHall := range movieHalls {
+			movieHallPB := movieHall.ToProtoMovieHall()
+			movieHallsPB = append(movieHallsPB, movieHallPB)
+		}
+		rsp.MovieHalls = movieHallsPB
+	}
+	// 影院管理员可以查看所属影院信息
+	if admin.AdminNum == 0 {
+		total, err := db.SelectMovieHallTotalByCinemaID(admin.CinemaID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectMovieHallTotalByCinemaID", err))
+			return errors.ErrorCMSFailed
+
+		}
+		rsp.Total = total
+		// 根据所属管理员id获取影院id
+		movieHalls, err := db.SelectAllMovieHallBycinemaID(page, config.Num, admin.CinemaID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllMovieHallBycinemaID", err))
+			return errors.ErrorCMSFailed
+		}
+		movieHallsPB := []*pb.MovieHall{}
+		for _, movieHall := range movieHalls {
+			movieHallPB := movieHall.ToProtoMovieHall()
+			movieHallsPB = append(movieHallsPB, movieHallPB)
+		}
+		rsp.MovieHalls = movieHallsPB
+	}
+
+	return nil
+}
+
+func (c *CMSServiceExtHandler) AddMovieHall(ctx context.Context, req *pb.AddMovieHallReq, rsp *pb.AddMovieHallRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		// 非超级管理员只能给自己影院添加影厅
+		if admin.CinemaID == req.CinemaId {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	movieHall := entity.MovieHall{
+		MhName:    req.MhName,
+		MhAddress: req.MhAddress,
+		CinemaId:  req.CinemaId,
+	}
+	err = db.AddMovieHall(&movieHall)
+	if err != nil {
+		c.logger.Error("error", zap.Any("AddMovieHall", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) UpdateMovieHall(ctx context.Context, req *pb.UpdateMovieHallReq, rsp *pb.UpdateMovieHallRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		// 非超级管理员只能给自己影院添加影厅
+		if admin.CinemaID == req.CinemaId {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	movieHall := entity.MovieHall{
+		MhName:    req.MhName,
+		MhAddress: req.MhAddress,
+		CinemaId:  req.CinemaId,
+		MhID:      req.MhId,
+	}
+	err = db.UpdateMovieHall(&movieHall)
+	if err != nil {
+		c.logger.Error("error", zap.Any("UpdateMovieHall", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) DeleteMovieHall(ctx context.Context, req *pb.DeleteMovieHallReq, rsp *pb.DeleteMovieHallRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		movieHall, err := db.SelectAllMovieHallByMHID(adminID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllMovieHallByMHID", err))
+			return errors.ErrorCMSFailed
+		}
+		// 非超级管理员只能给自己影院添加影厅
+		if admin.CinemaID == movieHall.CinemaId {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	err = db.DeleteMovieHall(req.MhId)
+	if err != nil {
+		c.logger.Error("error", zap.Any("DeleteMovieHall", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) AllCinemaFilms(ctx context.Context, req *pb.AllCinemaFilmsReq, rsp *pb.AllCinemaFilmsRsp) error {
+
+	adminID := req.AdminID
+	page := req.Page
+	if adminID == 0 || page == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	// 超级管理员可以查看所有的信息
+	if admin.AdminNum == 1 {
+		total, err := db.SelecttAllCinemaFilmTotal()
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelecttAllCinemaFilmTotal", err))
+			return errors.ErrorCMSFailed
+
+		}
+		rsp.Total = total
+		cinemaFilms, err := db.SelectAllCinemaFilm(page, config.Num)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllCinemaFilm", err))
+			return errors.ErrorCMSFailed
+		}
+		cinemaFilmsPB := []*pb.CinemaFilm{}
+		for _, cinemaFilm := range cinemaFilms {
+			cinemaFilmPB := cinemaFilm.ToProtoCinemaFilm()
+			cinemaFilmsPB = append(cinemaFilmsPB, cinemaFilmPB)
+		}
+		rsp.CinemaFilms = cinemaFilmsPB
+	}
+	// 影院管理员可以查看所属影院信息
+	if admin.AdminNum == 0 {
+		total, err := db.SelectAllCinemaFilmTotalByCinemaID(admin.CinemaID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllCinemaFilmTotalByCinemaID", err))
+			return errors.ErrorCMSFailed
+
+		}
+		rsp.Total = total
+		// 根据所属管理员id获取影院id
+		cinemaFilms, err := db.SelectAllCinemaFilmByCinemaID(page, config.Num, admin.CinemaID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllCinemaFilmByCinemaID", err))
+			return errors.ErrorCMSFailed
+		}
+		cinemaFilmsPB := []*pb.CinemaFilm{}
+		for _, cinemaFilm := range cinemaFilms {
+			cinemaFilmPB := cinemaFilm.ToProtoCinemaFilm()
+			cinemaFilmsPB = append(cinemaFilmsPB, cinemaFilmPB)
+		}
+		rsp.CinemaFilms = cinemaFilmsPB
+	}
+
+	return nil
+}
+
+func (c *CMSServiceExtHandler) AddCinemaFilm(ctx context.Context, req *pb.AddCinemaFilmReq, rsp *pb.AddCinemaFilmRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		// 非超级管理员只能给自己影院添加影片
+		if admin.CinemaID == req.CinemaID {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	cinemaFilm := entity.CinemaFilm{
+		CinemaId:         req.CinemaID,
+		FilmId:           req.FilmID,
+		HallId:           req.HallID,
+		FilmName:         req.FilmName,
+		CinemaName:       req.CinemaName,
+		ReleaseTimeYear:  req.ReleaseTimeYear,
+		ReleaseTimeMonth: req.ReleaseTimeMonth,
+		ReleaseTimeDay:   req.ReleaseTimeDay,
+		ReleaseTime:      req.ReleaseTime,
+		ReleaseType:      req.ReleaseType,
+		ReleaseAdd:       req.ReleaseAdd,
+		Length:           req.Length,
+		ReleaseDiscount:  req.ReleaseDiscount,
+	}
+	err = db.AddAllCinemaFilm(&cinemaFilm)
+	if err != nil {
+		c.logger.Error("error", zap.Any("AddAllCinemaFilm", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) UpdateCinemaFilm(ctx context.Context, req *pb.UpdateCinemaFilmReq, rsp *pb.UpdateCinemaFilmRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		// 非超级管理员只能给自己影院添加影厅
+		if admin.CinemaID == req.CinemaID {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	cinemaFilm := entity.CinemaFilm{
+		CfId:             req.CfID,
+		CinemaId:         req.CinemaID,
+		FilmId:           req.FilmID,
+		HallId:           req.HallID,
+		FilmName:         req.FilmName,
+		CinemaName:       req.CinemaName,
+		ReleaseTimeYear:  req.ReleaseTimeYear,
+		ReleaseTimeMonth: req.ReleaseTimeMonth,
+		ReleaseTimeDay:   req.ReleaseTimeDay,
+		ReleaseTime:      req.ReleaseTime,
+		ReleaseType:      req.ReleaseType,
+		ReleaseAdd:       req.ReleaseAdd,
+		Length:           req.Length,
+		ReleaseDiscount:  req.ReleaseDiscount,
+	}
+	err = db.UpdateCinemaFilm(&cinemaFilm)
+	if err != nil {
+		c.logger.Error("error", zap.Any("UpdateCinemaFilm", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}
+
+func (c *CMSServiceExtHandler) DeleteCinemaFilm(ctx context.Context, req *pb.DeleteCinemaFilmReq, rsp *pb.DeleteCinemaFilmRsp) error {
+
+	adminID := req.AdminID
+	if adminID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	admin, err := db.SelectAdminByAUID(adminID)
+	if err != nil {
+		c.logger.Error("error", zap.Any("SelectAdminByAUID", err))
+		return errors.ErrorCMSFailed
+	}
+	if admin == nil || admin.AuID == 0 {
+		return errors.ErrorCMSFailedParam
+	}
+	if admin.AdminNum == 0 {
+		movieHall, err := db.SelectAllMovieHallByMHID(adminID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllMovieHallByMHID", err))
+			return errors.ErrorCMSFailed
+		}
+		// 非超级管理员只能给自己影院添加影厅
+		if admin.CinemaID == movieHall.CinemaId {
+			return errors.ErrorCMSForbiddenParam
+		}
+	}
+	err = db.DeleteCinemaFilm(req.CfId)
+	if err != nil {
+		c.logger.Error("error", zap.Any("DeleteCinemaFilm", err))
+		return errors.ErrorCMSFailed
+	}
+	return nil
+}

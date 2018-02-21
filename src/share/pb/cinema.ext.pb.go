@@ -62,6 +62,24 @@ It has these top-level messages:
 	DeleteAddressRsp
 	DeleteAdminUserReq
 	DeleteAdminUserRsp
+	AllMovieHallReq
+	MovieHall
+	AllMovieHallRsp
+	AddMovieHallReq
+	AddMovieHallRsp
+	UpdateMovieHallReq
+	UpdateMovieHallRsp
+	DeleteMovieHallReq
+	DeleteMovieHallRsp
+	AllCinemaFilmsReq
+	CinemaFilm
+	AllCinemaFilmsRsp
+	AddCinemaFilmReq
+	AddCinemaFilmRsp
+	UpdateCinemaFilmReq
+	UpdateCinemaFilmRsp
+	DeleteCinemaFilmReq
+	DeleteCinemaFilmRsp
 	HotCommentReq
 	HotCommentRsp
 	CommentData

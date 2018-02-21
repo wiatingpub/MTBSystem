@@ -20,6 +20,14 @@ service CMSServiceExt {
     rpc UpdateAddress(UpdateAddressReq) returns(UpdateAddressRsp){} // 更新地点信息
     rpc DeleteAddress(DeleteAddressReq) returns(DeleteAddressRsp){} // 删除地点信息
     rpc DeleteAdminUser(DeleteAdminUserReq) returns(DeleteAdminUserRsp){} // 删除管理员信息
+    rpc AllMovieHall(AllMovieHallReq) returns(AllMovieHallRsp){} // 影厅管理
+    rpc AddMovieHall(AddMovieHallReq) returns(AddMovieHallRsp){} // 影厅管理
+    rpc UpdateMovieHall(UpdateMovieHallReq) returns(UpdateMovieHallRsp){} // 影厅管理
+    rpc DeleteMovieHall(DeleteMovieHallReq) returns(DeleteMovieHallRsp){} // 影厅管理
+    rpc AllCinemaFilms(AllCinemaFilmsReq) returns(AllCinemaFilmsRsp){} // 影院影片管理
+    rpc AddCinemaFilm(AddCinemaFilmReq) returns(AddCinemaFilmRsp){} // 影院影片管理
+    rpc UpdateCinemaFilm(UpdateCinemaFilmReq) returns(UpdateCinemaFilmRsp){} // 影院影片管理
+    rpc DeleteCinemaFilm(DeleteCinemaFilmReq) returns(DeleteCinemaFilmRsp){} // 影院影片管理
 }
 
 message UserLoginReq{
@@ -102,11 +110,11 @@ message AllUsersRsp{
 }
 
 message User{
-    int64  UserId = 1;
-    string UserName = 2;
-    string Password = 3;
-    string CreateAt = 4;
-    string Email = 5;
+    int64  userId = 1;
+    string userName = 2;
+    string password = 3;
+    string createAt = 4;
+    string email = 5;
     string phone = 6;
 }
 
@@ -183,7 +191,7 @@ message AllAddressReq{
 } 
 
 message AllAddressRsp{
-    repeated PlaceAll Places = 1;
+    repeated PlaceAll places = 1;
     int64 total = 2;
 }
 
@@ -320,5 +328,135 @@ message DeleteAdminUserReq{
 }
 
 message DeleteAdminUserRsp{
+
+}
+
+message AllMovieHallReq{
+    int64 page = 1;
+    int64 adminID = 2;
+}
+
+message MovieHall{
+    int64 mhId = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+}
+
+message AllMovieHallRsp{
+    repeated MovieHall movieHalls = 1;
+    int64 total = 2;
+}
+
+message AddMovieHallReq{
+    int64 adminID = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+}
+
+message AddMovieHallRsp{
+    
+}
+
+
+message UpdateMovieHallReq{
+    int64 adminID = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+    int64 mhId = 5;
+}
+
+message UpdateMovieHallRsp{
+
+}
+
+message DeleteMovieHallReq{
+    int64 adminID = 1;
+    int64 mhId = 2;
+}
+
+message DeleteMovieHallRsp{
+
+}
+
+message AllCinemaFilmsReq{
+    int64 page = 1;
+    int64 adminID = 2;
+}
+
+message CinemaFilm{
+    int64 cinemaID = 1;
+    int64 filmID = 2;
+    int64 hallID = 3;
+    string filmName = 4;
+    string cinemaName = 5;
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9;
+    string releaseType = 10;
+    string releaseAdd = 11;
+    int64 cfID = 12;
+    int64 length = 13;
+    float releaseDiscount = 14;
+}
+
+message AllCinemaFilmsRsp{
+    repeated CinemaFilm cinemaFilms = 1;
+    int64 total = 2;
+}
+
+message AddCinemaFilmReq{
+    int64 cinemaID = 1;
+    int64 filmID = 2;
+    int64 hallID = 3;
+    string filmName = 4;
+    string cinemaName = 5;
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9;
+    string releaseType = 10;
+    string releaseAdd = 11;
+    int64 adminID = 12; 
+    int64 length = 13;
+    float releaseDiscount = 14;
+}
+
+message AddCinemaFilmRsp{
+    
+}
+
+
+message UpdateCinemaFilmReq{
+    int64 cinemaID = 1;
+    int64 filmID = 2;
+    int64 hallID = 3;
+    string filmName = 4;
+    string cinemaName = 5;
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9;
+    string releaseType = 10;
+    string releaseAdd = 11;
+    int64 adminID = 12; 
+    int64 length = 13;
+    float releaseDiscount = 14;
+    int64 cfID = 15;
+}
+
+message UpdateCinemaFilmRsp{
+
+}
+
+message DeleteCinemaFilmReq{
+    int64 adminID = 1;
+    int64 cfId = 2;
+}
+
+message DeleteCinemaFilmRsp{
 
 }
