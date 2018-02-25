@@ -27,11 +27,11 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 
 #### 开发进程：
 - 1、搭建好开发框架 (get)
-- 2、数据库设计(ing)
-- 3、服务端开发(ing)
-- 4、前端开发(ing)
-- 5、联调
-- 6、优化
+- 2、数据库设计(get)
+- 3、服务端开发(get)
+- 4、前端开发(get)
+- 5、联调(ing)
+- 6、优化(ing)
 
 ### 如何启动程序：
 - 1、 ./ctrl.sh build
