@@ -18,7 +18,7 @@ func SelectAllCinemaFilm(page int64, num int64) ([]*entity.CinemaFilm, error) {
 func SelectAllCinemaFilmByCinemaID(page int64, num int64, cinemaID int64) ([]*entity.CinemaFilm, error) {
 
 	cinemaFilms := []*entity.CinemaFilm{}
-	err := db.Select(&cinemaFilms, "SELECT * FROM `cinema_film` WHERE `cinema_id` = ? ORDER BY `mh_id` DESC LIMIT ?,?", cinemaID, (page-1)*num, page*num)
+	err := db.Select(&cinemaFilms, "SELECT * FROM `cinema_film` WHERE `cinema_id` = ? ORDER BY `cf_id` DESC LIMIT ?,?", cinemaID, (page-1)*num, page*num)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}

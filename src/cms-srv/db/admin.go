@@ -62,3 +62,13 @@ func DeleteAdminUser(auID int64) error {
 	}
 	return err
 }
+
+func UpdateAdminUser(auID int64, adminName string, adminCinemaID int64) error {
+
+	_, err := db.Exec("UPDATE `admin_user` SET `admin_name` = ?,`admin_cinema_id` = ? WHERE `au_id` = ?",
+		adminName, adminCinemaID, auID)
+	if err == sql.ErrNoRows {
+		return nil
+	}
+	return err
+}

@@ -114,7 +114,7 @@ message MovieDetailRep {
     float rating   = 4 ;
     int64   year    = 5 ;
     string  content = 6 ;
-    repeated string  type    = 7 ;
+    string  type    = 7 ;
     int64  runTime = 8 ;
     string  commonSpecial   = 9 ;
     string  director    =   10 ;

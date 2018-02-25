@@ -80,6 +80,11 @@ It has these top-level messages:
 	UpdateCinemaFilmRsp
 	DeleteCinemaFilmReq
 	DeleteCinemaFilmRsp
+	RegisterCinemaReq
+	RegisterCinemaRsp
+	AllCinemaHallReq
+	AllCinemaHallRsp
+	HallAddressList
 	HotCommentReq
 	HotCommentRsp
 	CommentData

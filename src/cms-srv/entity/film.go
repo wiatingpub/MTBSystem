@@ -67,5 +67,6 @@ func (f Film) ToProtoMovies() *pb.Film {
 		RatingFinal:   f.RatingFinal,
 		Type:          f.Type,
 		WantedCount:   f.WantedCount,
+		IsTicking:     f.IsTicking,
 	}
 }

@@ -24,4 +24,7 @@ var (
 	ErrorCMSForbiddenParam = errors.New(
 		config.ServiceNameCMS, "没有查询的权限", errorCodeCMSFailed,
 	)
+	ErrorCMSAlreadyRegister = errors.New(
+		config.ServiceNameCMS, "已经添加过影院～", errorCodeCMSFailed,
+	)
 )

@@ -36,12 +36,12 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 ### 如何启动程序：
 - 1、 ./ctrl.sh build
 - 2、 ./ctrl.sh run
-- 3、 ./ctrl.sh init chmod
-- 4、 ./ctrl.sh start
-- 5、 ./ctrl.sh init conf
+- 3、 ./ctrl.sh init conf
+- 4、 ./ctrl.sh init chmod 
+- 5、 ./ctrl.sh start 
 - 6、 ./ctrl.sh login
 - 7、 cd /data/deploy/mtbsystem/
-- 8、 bash ./build_local.sh api-rv
+- 8、 bash ./build_local.sh api-srv
 - 9、 bash ./build_local.sh all
 
 ### 如何添加服务

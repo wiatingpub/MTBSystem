@@ -28,6 +28,8 @@ service CMSServiceExt {
     rpc AddCinemaFilm(AddCinemaFilmReq) returns(AddCinemaFilmRsp){} // 影院影片管理
     rpc UpdateCinemaFilm(UpdateCinemaFilmReq) returns(UpdateCinemaFilmRsp){} // 影院影片管理
     rpc DeleteCinemaFilm(DeleteCinemaFilmReq) returns(DeleteCinemaFilmRsp){} // 影院影片管理
+    rpc RegisterCinema(RegisterCinemaReq) returns(RegisterCinemaRsp){}
+    rpc AllCinemaHall(AllCinemaHallReq) returns(AllCinemaHallRsp){} // 返回影院所有影厅
 }
 
 message UserLoginReq{
@@ -37,8 +39,10 @@ message UserLoginReq{
 
 message UserLoginRsp{
 
+    int64 cinemaID = 1;
     int64 adminID = 2;
     string cinemaName = 3;
+    int64 adminNum = 4;
 }
 
 message UpdateMessageReq{
@@ -97,6 +101,7 @@ message Film {
     int64 rYear = 33;
     repeated string actorNames = 34;
     string rYMD = 35; // 时间格式化
+    string ticketStatus = 36; // 上映状态
 }
 
 message AllUsersReq{
@@ -237,7 +242,11 @@ message AddFilmReq{
     int64 rDay = 31;
     int64 rMonth = 32;
     int64 rYear = 33;
-    repeated string actorNames = 34;
+    string filmDirectorImg = 34;
+    string filmActor1 = 35;
+    string filmActor1Img = 36;
+    string filmActor2 = 37;
+    string filmActor2Img = 38;
 }
 
 message AddFilmRsp{
@@ -261,6 +270,7 @@ message UpdateFilmReq{
     int64 rYear = 15;
     string rYMD = 16;
     int64 adminID = 17;
+    int64 isTicking = 18;
 }
 
 message UpdateFilmRsp{
@@ -401,6 +411,7 @@ message CinemaFilm{
     int64 cfID = 12;
     int64 length = 13;
     float releaseDiscount = 14;
+    string hallName = 15;
 }
 
 message AllCinemaFilmsRsp{
@@ -409,19 +420,19 @@ message AllCinemaFilmsRsp{
 }
 
 message AddCinemaFilmReq{
-    int64 cinemaID = 1;
-    int64 filmID = 2;
-    int64 hallID = 3;
-    string filmName = 4;
-    string cinemaName = 5;
+    int64 cinemaID = 1; 
+    int64 movieID = 2;
+    int64 hallID = 3; 
+    string titleCn = 4;
+    string cinemaName = 5; 
     int64 releaseTimeYear = 6;
     int64 releaseTimeMonth = 7;
     int64 releaseTimeDay = 8;
-    string releaseTime = 9;
-    string releaseType = 10;
-    string releaseAdd = 11;
+    string releaseTime = 9; 
+    string type = 10;
+    string releaseAdd = 11; 
     int64 adminID = 12; 
-    int64 length = 13;
+    int64 length = 13; 
     float releaseDiscount = 14;
 }
 
@@ -459,4 +470,39 @@ message DeleteCinemaFilmReq{
 
 message DeleteCinemaFilmRsp{
 
+}
+
+message RegisterCinemaReq{
+
+    int64 adminID = 1; 
+    string cinemaName = 2;
+    string cinemaAddress = 3;
+    int64 locationID = 4; // 影院城市对应的位置
+    string cinemaTypes = 5;
+    int64 cinemaCard = 6; // 影城卡
+    int64 cinemaMinPrice = 7; // 几元起
+    string cinemaSupport = 8; // 影院提供的支持，包括退签等,用|隔开
+    int64 cinemaDiscount = 9; // 影城卡最低减价多少元
+    int64 cinemaPhone = 10; // 影院电话
+}
+
+message RegisterCinemaRsp{
+
+    int64 cinemaID = 1;
+}
+
+message AllCinemaHallReq{
+    
+    int64 cinemaID = 1;
+    int64 adminID = 2; 
+}
+
+message AllCinemaHallRsp{
+
+    repeated HallAddressList hallAddresses = 1;
+}
+
+message HallAddressList{
+    int64 mhID = 1;
+    string mhName = 2;
 }

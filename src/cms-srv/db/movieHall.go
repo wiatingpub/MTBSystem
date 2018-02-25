@@ -28,7 +28,7 @@ func SelectAllMovieHallBycinemaID(page int64, num int64, cinemaID int64) ([]*ent
 func SelectAllMovieHallByMHID(mhId int64) (*entity.MovieHall, error) {
 
 	movieHall := entity.MovieHall{}
-	err := db.Select(&movieHall, "SELECT * FROM `movie_hall` WHERE `mh_id` = ? ", mhId)
+	err := db.Get(&movieHall, "SELECT * FROM `movie_hall` WHERE `mh_id` = ? LIMIT 1", mhId)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
@@ -80,4 +80,24 @@ func UpdateMovieHall(movieHall *entity.MovieHall) error {
 		return nil
 	}
 	return err
+}
+
+func SelectAllMovieHallsBycinemaID(cinemaID int64) ([]*entity.MovieHall, error) {
+
+	movieHalls := []*entity.MovieHall{}
+	err := db.Select(&movieHalls, "SELECT * FROM `movie_hall` WHERE `cinema_id` = ? ORDER BY `mh_id` DESC", cinemaID)
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	return movieHalls, err
+}
+
+func SelectMovieHallHallName(mhID int64) (string, error) {
+
+	var hallName string
+	err := db.Get(&hallName, "SELECT `mh_name` FROM `movie_hall` WHERE `mh_id` = ? ", mhID)
+	if err == sql.ErrNoRows {
+		return hallName, nil
+	}
+	return hallName, err
 }
