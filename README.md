@@ -53,3 +53,9 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 6、 cd /data/deploy/mtbsystem/
 - 7、 bash ./build_local.sh cms-rv
 
+### mysql冷备份
+- 1、 启动： bash mysql_backup.sh
+- 2、 数据恢复：gzip -d mtbsystem-xxxx.sql.gz
+- 3、 数据回复：mysql -u username -p database < 文件名 
+
+

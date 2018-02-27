@@ -972,7 +972,7 @@ func (c *CMSServiceExtHandler) UpdateCinemaFilm(ctx context.Context, req *pb.Upd
 	}
 	if admin.AdminNum == 0 {
 		// 非超级管理员只能给自己影院添加影厅
-		if admin.CinemaID == req.CinemaID {
+		if admin.CinemaID != req.CinemaID {
 			return errors.ErrorCMSForbiddenParam
 		}
 	}

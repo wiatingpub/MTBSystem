@@ -41,7 +41,7 @@ func (f *CommentServiceExtHandler) HotComment(ctx context.Context, req *pb.HotCo
 	}
 
 	plus := pb.CommentPlus{
-		Total: 3,
+		Total: int64(len(comments)),
 		List:  records,
 	}
 
