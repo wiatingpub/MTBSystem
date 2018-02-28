@@ -236,17 +236,26 @@ func (f *FilmServiceExtHandler) GetFilmsByCidADay(ctx context.Context, req *pb.G
 		day = int64(time.Now().Day())
 	}
 	if dayNum == 1 {
-		tomTime := time.Now().AddDate(0, 0, 1)
+		dd, _ := time.ParseDuration("24h")
+		tomTime := time.Now().Add(dd)
 		year = int64(tomTime.Year())
-		month = common.SwitchMonth(tomTime.String())
+		month = common.SwitchMonth(tomTime.Month().String())
 		day = int64(tomTime.Day())
 	}
 	if dayNum == 2 {
-		tomTime := time.Now().AddDate(0, 0, 2)
+		dd, _ := time.ParseDuration("48h")
+		tomTime := time.Now().Add(dd)
 		year = int64(tomTime.Year())
-		month = common.SwitchMonth(tomTime.String())
+		month = common.SwitchMonth(tomTime.Month().String())
 		day = int64(tomTime.Day())
 	}
+	f.logger.Debug("month", zap.Any("cinemaId", cinemaId))
+	f.logger.Debug("debug", zap.Any("cinemaId", cinemaId))
+	f.logger.Debug("debug", zap.Any("filmId", filmId))
+	f.logger.Debug("debug", zap.Any("int64(year)", int64(year)))
+	f.logger.Debug("debug", zap.Any("month", month))
+	f.logger.Debug("debug", zap.Any("int64(day)", int64(day)))
+
 	films, err := db.SelectFilmMessageCidADay(cinemaId, filmId, int64(year), month, int64(day))
 	if err != nil {
 		f.logger.Error("error", zap.Error(err))
