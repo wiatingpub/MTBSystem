@@ -25,10 +25,10 @@ func SelectOrderTotal() (int64, error) {
 	return total, nil
 }
 
-func SelectOrderByFilmId(page int64, num int64, filmId int64) ([]*entity.Order, error) {
+func SelectOrderByFilmId(page int64, num int64, mhId int64) ([]*entity.Order, error) {
 
 	orders := []*entity.Order{}
-	err := db.Select(&orders, "SELECT * FROM `film_order`  WHERE `movie_id` = ? ORDER BY `order_id` DESC LIMIT ?,?", filmId, (page-1)*num, page*num)
+	err := db.Select(&orders, "SELECT * FROM `film_order`  WHERE `mh_id` = ? ORDER BY `order_id` DESC LIMIT ?,?", mhId, (page-1)*num, page*num)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}

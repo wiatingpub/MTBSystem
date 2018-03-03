@@ -1,14 +1,14 @@
 package db
 
 import (
-	"database/sql"
 	"cinema-srv/entity"
+	"database/sql"
 )
 
 // 获取影片详情
-func SelectFilmMesage(movieId int64) (*entity.Film,error) {
+func SelectFilmMesage(movieId int64) (*entity.Film, error) {
 	film := entity.Film{}
-	err := db.Get(&film,"SELECT `title_cn`,`rating_final`,`length`,`img`,`type`,`movie_id` FROM `film` WHERE `movie_id` = ?",movieId)
+	err := db.Get(&film, "SELECT `title_cn`,`rating_final`,`length`,`img`,`type`,`movie_id` FROM `film` WHERE `movie_id` = ?", movieId)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
@@ -16,13 +16,13 @@ func SelectFilmMesage(movieId int64) (*entity.Film,error) {
 }
 
 // 获取演员信息
-func SelectActorNameByMid(mid int64) ([]*entity.FilmActor,error){
+func SelectActorNameByMid(mid int64) ([]*entity.FilmActor, error) {
 
 	filmActors := []*entity.FilmActor{}
-	err := db.Select(&filmActors,"SELECT `actor_name` FROM `film_actor` WHERE `film_id` = ?",mid)
+	err := db.Select(&filmActors, "SELECT DISTINCT(`actor_name`) FROM `film_actor` WHERE `film_id` = ?", mid)
 	if err == sql.ErrNoRows {
-		return nil,nil
+		return nil, nil
 	}
 
-	return filmActors,err
+	return filmActors, err
 }

@@ -2,13 +2,16 @@ package handler
 
 import (
 	"context"
-	"go.uber.org/zap"
+	"fmt"
 	"order-srv/db"
+	"order-srv/entity"
+	errors "share/errors"
 	"share/pb"
 	"share/utils/log"
-	errors "share/errors"
-	"fmt"
-	"order-srv/entity"
+	"strconv"
+	"time"
+
+	"go.uber.org/zap"
 )
 
 type OrderServiceExtHandler struct {
@@ -39,19 +42,28 @@ func (o *OrderServiceExtHandler) Ticket(ctx context.Context, req *pb.TicketReq, 
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
 	}
-	err = db.InsertOrder(price, req.MhId, req.UserId, req.FilmId)
+	orderNum := time.Now().Unix()
+	err = db.InsertOrder(orderNum, price, req.MhId, req.UserId, req.FilmId, req.X, req.Y, req.StartTime, req.EndTime)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
 	}
+	rsp.OrderNumD = orderNum
 	return nil
 }
 
 func (o *OrderServiceExtHandler) PayOrder(ctx context.Context, req *pb.PayOrderReq, rsp *pb.PayOrderRsp) error {
 
-	err := db.UpdateOrderStatus(req.OrderNum,req.UserId)
+	err := db.UpdateOrderStatus(req.OrderNum, req.UserId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
+		return errors.ErrorOrderFailed
+	}
+	o.logger.Debug("debug", zap.Any(" req.Phone", req.Phone))
+	o.logger.Debug("debug", zap.Any(" req.UserId", req.UserId))
+	err = db.UpdateUserPhone(req.UserId, req.Phone)
+	if err != nil {
+		o.logger.Error("err", zap.Any("UpdateUserPhone", err))
 		return errors.ErrorOrderFailed
 	}
 	return nil
@@ -65,27 +77,27 @@ func (o *OrderServiceExtHandler) UndoOrder(ctx context.Context, req *pb.UndoOrde
 // 查看所有电影票
 func (o *OrderServiceExtHandler) LookOrders(ctx context.Context, req *pb.LookOrdersReq, rsp *pb.LookOrdersRsp) error {
 
-	o.logger.Debug("debug",zap.Any("debug",req.UserId))
+	o.logger.Debug("debug", zap.Any("debug", req.UserId))
 	userId := req.UserId
 	// 从order.sql获取电影id orderNum mhId startTime
-	orders,err := db.SelectOrderNumMovieIdMHIdStartTime(userId)
+	orders, err := db.SelectOrderNumMovieIdMHIdStartTime(userId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
 	}
 	movieTicketsPB := []*pb.MovieTicket{}
-	for _,order := range orders{
+	for _, order := range orders {
 		// 从film_id hall_id获取filmName
-		cinemafilm,err := db.SelectFilmNameCinemaName(order.MhId,order.MovieId)
+		cinemafilm, err := db.SelectFilmNameCinemaName(order.MhId, order.MovieId)
 		if err != nil {
 			o.logger.Error("err", zap.Any("order", err))
 			return errors.ErrorOrderFailed
 		}
 		movieTicketPB := pb.MovieTicket{
-			FilmName:cinemafilm.FilmName,
-			Cinema:cinemafilm.CinemaName,
-			StartTime:order.StartTime,
-			OrderNum:order.OrderNum,
+			FilmName:  cinemafilm.FilmName,
+			Cinema:    cinemafilm.CinemaName,
+			StartTime: order.StartTime,
+			OrderNum:  order.OrderNum,
 		}
 		movieTicketsPB = append(movieTicketsPB, &movieTicketPB)
 	}
@@ -98,36 +110,36 @@ func (o *OrderServiceExtHandler) LookOrders(ctx context.Context, req *pb.LookOrd
 func (o *OrderServiceExtHandler) LookAlreadyOrders(ctx context.Context, req *pb.LookAlreadyOrdersReq, rsp *pb.LookAlreadyOrdersRsp) error {
 
 	userId := req.UserId
-	orders,err := db.SelectLookAlreadyOrders(userId)
+	orders, err := db.SelectLookAlreadyOrders(userId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
 	}
 	var oneNoComment int64 = 0
 	movies := []*pb.AlreadyMovie{}
-	for _,order := range orders{
+	for _, order := range orders {
 
 		actorNames := []string{}
-		film,err := db.SelectFilmDetail(order.MovieId)
+		film, err := db.SelectFilmDetail(order.MovieId)
 		if err != nil {
 			o.logger.Error("err", zap.Any("order", err))
 			return errors.ErrorOrderFailed
 		}
-		actors,err := db.SelectFilmActorByMid(film.MovieId)
+		actors, err := db.SelectFilmActorByMid(film.MovieId)
 		if err != nil {
 			o.logger.Error("err", zap.Any("order", err))
 			return errors.ErrorOrderFailed
 		}
-		for _,actor := range actors {
+		for _, actor := range actors {
 			actorNames = append(actorNames, actor.FilmName)
 		}
 		movie := pb.AlreadyMovie{
-			FilmImg:film.Img,
-			FilmName:film.TitleCn,
-			Time:fmt.Sprintf("%d-%d-%d", film.RYear, film.RMonth,film.RDay),
-			Director:film.FilmDirector,
-			ActorNames:actorNames,
-			OrderNum:order.OrderNum,
+			FilmImg:    film.Img,
+			FilmName:   film.TitleCn,
+			Time:       fmt.Sprintf("%d-%d-%d", film.RYear, film.RMonth, film.RDay),
+			Director:   film.FilmDirector,
+			ActorNames: actorNames,
+			OrderNum:   order.OrderNum,
 		}
 		movies = append(movies, &movie)
 		if order.OrderScore == -1 {
@@ -146,42 +158,42 @@ func (o *OrderServiceExtHandler) OrderComment(ctx context.Context, req *pb.Order
 	userId := req.UserId
 	score := req.Score
 	orderNum := req.OrderNum
-	movieId := req.MovieId
 	content := req.CommentContent
-	order,err := db.SelectOrderScore(orderNum,userId)
+	order, err := db.SelectOrderScore(orderNum, userId)
 	if err != nil {
-		o.logger.Error("err", zap.Any("order", err))
+		o.logger.Error("err", zap.Any("SelectOrderScore", err))
 		return errors.ErrorOrderFailed
 	}
-	if(order == nil){
+	if order == nil {
 		return errors.ErrorOrderFailed
 	}
-	if(order.OrderScore != -1){
+	if order.OrderScore != -1 {
 		return errors.ErrorOrderAlreadyScore
 	}
-	err = db.UpdateOrderScore(score,userId,orderNum)
+	err = db.UpdateOrderScore(score, userId, orderNum)
 	if err != nil {
-		o.logger.Error("err", zap.Any("order", err))
+		o.logger.Error("err", zap.Any("UpdateOrderScore", err))
 		return errors.ErrorOrderFailed
 	}
-	err = db.UpdateFilmScore(movieId,score)
+	err = db.UpdateFilmScore(order.MovieId, score)
 	if err != nil {
-		o.logger.Error("err", zap.Any("order", err))
+		o.logger.Error("err", zap.Any("UpdateFilmScore", err))
 		return errors.ErrorOrderFailed
 	}
-	user,err := db.SelectUserNameByUserId(userId)
+	user, err := db.SelectUserPhoneByUserId(userId)
 	if err != nil {
-		o.logger.Error("err", zap.Any("order", err))
+		o.logger.Error("err", zap.Any("SelectUserPhoneByUserId", err))
 		return errors.ErrorOrderFailed
 	}
+
 	comment := entity.Comment{
-		FilmId:movieId,
-		Content:content,
-		NickName:user.UserName,
+		FilmId:   order.MovieId,
+		Content:  content,
+		NickName: strconv.Itoa(int(user.Phone)),
 	}
 	err = db.InsertComment(&comment)
 	if err != nil {
-		o.logger.Error("err", zap.Any("order", err))
+		o.logger.Error("err", zap.Any("InsertComment", err))
 		return errors.ErrorOrderFailed
 	}
 	return nil
@@ -193,49 +205,38 @@ func (o *OrderServiceExtHandler) GetOrderMessage(ctx context.Context, req *pb.Ge
 	orderNum := req.OrderNum
 	userId := req.UserId
 	// 通过orderNum 从 order 表获取startTime endTime mh_id movie_id order_x order_y create_at order_price
-	order,err := db.SelectOrderMessage(orderNum,userId)
+	order, err := db.SelectOrderMessage(orderNum, userId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
 	}
-	if order != nil {
-		return nil
-	}
+
 	// 通过movie_id 从 film 获取 title_cn img
-	film,err := db.SelectFilmMessage(order.MovieId)
+	film, err := db.SelectFilmMessage(order.MovieId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("film", err))
 		return errors.ErrorOrderFailed
 	}
-	if film != nil {
-		return nil
-	}
+
 	// 通过mh_id 从 movie_hall 获取 mh_name  cinema_id
-	hall,err := db.SelectMHNameMHId(order.MhId)
+	hall, err := db.SelectMHNameMHId(order.MhId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("hall", err))
 		return errors.ErrorOrderFailed
 	}
-	if hall != nil {
-		return nil
-	}
+
 	// 通过cinema_id 从 cinema 获取 cinema_name cinema_add cinema_phone
-	cinema,err := db.SelectCinemaByCid(hall.CinemaId)
+	cinema, err := db.SelectCinemaByCid(hall.CinemaId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("cinema", err))
 		return errors.ErrorOrderFailed
 	}
-	if cinema != nil {
-		return nil
-	}
+
 	// 通过user_id 从 user 获取 phone
-	user,err := db.SelectUserPhoneByUserId(userId)
+	user, err := db.SelectUserPhoneByUserId(userId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("user", err))
 		return errors.ErrorOrderFailed
-	}
-	if user != nil {
-		return nil
 	}
 
 	ticketDetailPB := pb.TicketDetail{
@@ -245,7 +246,7 @@ func (o *OrderServiceExtHandler) GetOrderMessage(ctx context.Context, req *pb.Ge
 		order.EndTime,
 		cinema.CinemaName,
 		hall.MhName,
-		fmt.Sprintf("%d排%d座", order.OrderX,order.OrderY),
+		fmt.Sprintf("%d排%d座", order.OrderX, order.OrderY),
 		orderNum,
 		cinema.CinemaAdd,
 		order.OrderPrice,
@@ -256,4 +257,3 @@ func (o *OrderServiceExtHandler) GetOrderMessage(ctx context.Context, req *pb.Ge
 	rsp.TicketDetail = &ticketDetailPB
 	return nil
 }
-

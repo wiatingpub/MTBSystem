@@ -188,6 +188,7 @@ message OrderAll{
     int64 orderScore = 12;
     string startTime = 13;
     string endTime = 14;
+    string orderStat = 15;
 }
 
 message AllAddressReq{

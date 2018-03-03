@@ -30,6 +30,10 @@ message LoginAccountReq {
 }
 
 message LoginAccountRsp {
+    int64 userID = 1;
+    string userName = 2;
+    string email = 3;
+    string phone = 4;
 }
 
 message ResetAccountReq {

@@ -8,6 +8,6 @@ CREATE TABLE cinema (
     cinema_min_price INT(11) NOT NULL DEFAULT 0 COMMENT '几元起',
     cinema_support CHAR(200) NOT NULL DEFAULT '' COMMENT '影院提供的支持，包括退签等,用|隔开',
     cinema_discount INT(11) NOT NULL DEFAULT 0 COMMENT '影城卡最低减价多少元',
-    cinema_phone int(11) NOT NULL DEFAULT 0 COMMENT '影院电话',
+    cinema_phone CHAR(15) NOT NULL DEFAULT '' COMMENT '影院电话',
     PRIMARY KEY(cinema_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

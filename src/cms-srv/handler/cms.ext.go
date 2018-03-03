@@ -294,27 +294,32 @@ func (c *CMSServiceExtHandler) AllOrders(ctx context.Context, req *pb.AllOrdersR
 		ordersPB := []*pb.OrderAll{}
 		for _, order := range orders {
 			orderPB := order.ToProtoOrder()
+			if order.OrderStatus == 0 {
+				orderPB.OrderStat = "未支付"
+			} else {
+				orderPB.OrderStat = "已支付"
+			}
 			ordersPB = append(ordersPB, orderPB)
 		}
 		rsp.Orders = ordersPB
 	}
 	// 影院管理员可以查看所属影院信息
 	if admin.AdminNum == 0 {
-		// 根据所属影院id获取影片id
-		filmIDs, err := db.SelectFilmsID(admin.CinemaID)
+		total, err := db.SelectOrderTotalByFilmId(admin.CinemaID)
 		if err != nil {
-			c.logger.Error("error", zap.Any("SelectFilmsID", err))
+			c.logger.Error("error", zap.Any("SelectOrderTotalByFilmId", err))
+			return errors.ErrorCMSFailed
+
+		}
+		rsp.Total = total
+		ordersPB := []*pb.OrderAll{}
+		movieHalls, err := db.SelectAllMovieHallsBycinemaID(admin.CinemaID)
+		if err != nil {
+			c.logger.Error("error", zap.Any("SelectAllMovieHallsBycinemaID", err))
 			return errors.ErrorCMSFailed
 		}
-		var total int64 = 0
-		ordersPB := []*pb.OrderAll{}
-		for _, filmID := range filmIDs {
-			total_tmp, err := db.SelectOrderTotalByFilmId(filmID)
-			if err != nil {
-				c.logger.Error("error", zap.Any("SelectOrderTotalByFilmId", err))
-				return errors.ErrorCMSFailed
-			}
-			orders, err := db.SelectOrderByFilmId(page, config.Num, filmID)
+		for _, movieHall := range movieHalls {
+			orders, err := db.SelectOrderByFilmId(page, config.Num, movieHall.MhID)
 			if err != nil {
 				c.logger.Error("error", zap.Any("SelectOrderByFilmId", err))
 				return errors.ErrorCMSFailed
@@ -323,10 +328,8 @@ func (c *CMSServiceExtHandler) AllOrders(ctx context.Context, req *pb.AllOrdersR
 				orderPB := order.ToProtoOrder()
 				ordersPB = append(ordersPB, orderPB)
 			}
-			total = total + total_tmp
-			rsp.Orders = ordersPB
 		}
-		rsp.Total = total
+		rsp.Orders = ordersPB
 	}
 
 	return nil
@@ -1056,11 +1059,12 @@ func (c *CMSServiceExtHandler) RegisterCinema(ctx context.Context, req *pb.Regis
 		return errors.ErrorCMSFailed
 	}
 	cinemaTmp, err := db.SelectCinema(&cinema)
+	c.logger.Debug("debug", zap.Any("cinemaTmp", cinemaTmp))
 	if err != nil {
 		c.logger.Error("error", zap.Any("SelectCinema", err))
 		return errors.ErrorCMSFailed
 	}
-	err = db.UpdateAdminUser(adminID, cinemaTmp.CinemaName, cinemaTmp.CinemaId)
+	err = db.UpdateAdminUser(adminID, req.CinemaName, cinemaTmp.CinemaId)
 	if err != nil {
 		c.logger.Error("error", zap.Any("UpdateAdminUser", err))
 		return errors.ErrorCMSFailed

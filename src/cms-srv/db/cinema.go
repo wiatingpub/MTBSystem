@@ -28,7 +28,7 @@ func InsertCinema(cinema *entity.Cinema) error {
 func SelectCinema(cinema *entity.Cinema) (*entity.Cinema, error) {
 
 	cinemaTmp := entity.Cinema{}
-	err := db.Get(&cinemaTmp, "SELECT * FROM `cinema` WHERE `cinema_name`=? AND `location_id`=? AND `cinema_phone`=?", cinema.CinemaName, cinema.LocationId, cinema.CinemaPhone)
+	err := db.Get(&cinemaTmp, "SELECT * FROM `cinema` WHERE  `cinema_phone`=?", cinema.CinemaName, cinema.LocationId, cinema.CinemaPhone)
 	if err == sql.ErrNoRows {
 		return &cinemaTmp, nil
 	}

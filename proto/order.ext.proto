@@ -34,13 +34,16 @@ message WantTicketRsp {
 
 message TicketReq {
     int64 userId = 1 ;
-
     int64 filmId = 2 ;
     int64 mhId = 3 ;
-    int64  sitId = 4 ;
+    int64  x = 4 ;
+    int64  y = 5 ;
+    string startTime = 6;
+    string endTime = 7;
 }
 
 message TicketRsp {
+    int64 orderNumD = 1;
 }
 
 message Order {
@@ -73,6 +76,7 @@ message LookOrdersRsp {
 message PayOrderReq {
     string orderNum = 1 ;
     int64 userId = 2 ;
+    int64 phone = 3;
 }
 
 message PayOrderRsp {

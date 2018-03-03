@@ -22,13 +22,16 @@ func NewCommentServiceExtHandler() *CommentServiceExtHandler {
 }
 
 // 获取评论
-func (f *CommentServiceExtHandler) HotComment(ctx context.Context, req *pb.HotCommentReq, rsp *pb.HotCommentRsp) error {
+func (c *CommentServiceExtHandler) HotComment(ctx context.Context, req *pb.HotCommentReq, rsp *pb.HotCommentRsp) error {
 
 	movieId := req.MovieId
+	c.logger.Debug("debug", zap.Any("movieId", movieId))
 	comments, err := db.SelectHotComment(movieId)
 	if err != nil {
+		c.logger.Error("err", zap.Error(err))
 		return errors.ErrorCommentFailed
 	}
+	c.logger.Debug("debug", zap.Any("comments", comments))
 	records := []*pb.CommentRecord{}
 	for _, comment := range comments {
 		record := pb.CommentRecord{
