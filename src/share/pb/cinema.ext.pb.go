@@ -93,6 +93,13 @@ It has these top-level messages:
 	CommentRecord
 	MakeCommentReq
 	MakeCommentRsp
+	UpNumCommentReq
+	UpNumCommentRsp
+	MyCommentsReq
+	MyCommentsRsp
+	MyComment
+	DeleteCommentReq
+	DeleteCommentRsp
 	HotPlayMoviesReq
 	HotPlayMoviesRep
 	Movie

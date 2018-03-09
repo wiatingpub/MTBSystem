@@ -43,7 +43,7 @@ func (o *OrderServiceExtHandler) Ticket(ctx context.Context, req *pb.TicketReq, 
 		return errors.ErrorOrderFailed
 	}
 	orderNum := time.Now().Unix()
-	err = db.InsertOrder(orderNum, price, req.MhId, req.UserId, req.FilmId, req.X, req.Y, req.StartTime, req.EndTime)
+	err = db.InsertOrder(strconv.Itoa(int(orderNum)), price, req.MhId, req.UserId, req.FilmId, req.X, req.Y, req.StartTime, req.EndTime)
 	if err != nil {
 		o.logger.Error("err", zap.Any("order", err))
 		return errors.ErrorOrderFailed
@@ -192,6 +192,7 @@ func (o *OrderServiceExtHandler) OrderComment(ctx context.Context, req *pb.Order
 		Content:  content,
 		Title:    strconv.Itoa(int(score)),
 		NickName: user.UserName,
+		UserId:   userId,
 	}
 	err = db.InsertComment(&comment)
 	if err != nil {

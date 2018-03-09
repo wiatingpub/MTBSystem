@@ -9,4 +9,5 @@ type Comment struct {
 	NickName  string `json:"nick_name" db:"nick_name"`
 	UpNum     int64  `json:"up_num" db:"up_num"`
 	CreateAt  string `json:"create_at" db:"create_at"`
+	UserId    int64  `json:"user_id" db:"user_id"`
 }
