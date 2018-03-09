@@ -44,13 +44,13 @@ func (u *UserServiceExtHandler) RegistAccount(ctx context.Context, req *pb.Regis
 		u.logger.Error("error", zap.Error(err))
 		return errors.ErrorUserFailed
 	}
-	return errors.ErrorUserSuccess
+	return nil
 }
 
 func (u *UserServiceExtHandler) LoginAccount(ctx context.Context, req *pb.LoginAccountReq, rsp *pb.LoginAccountRsp) error {
-	userName := req.UserName
+	email := req.Email
 	password := req.Password
-	user, err := db.SelectUserByPasswordName(userName, password)
+	user, err := db.SelectUserByPasswordName(email, password)
 	if err != nil {
 		u.logger.Error("error", zap.Error(err))
 		return errors.ErrorUserFailed
@@ -84,6 +84,36 @@ func (u *UserServiceExtHandler) WantScore(ctx context.Context, req *pb.WantScore
 	if err != nil {
 		u.logger.Error("error", zap.Error(err))
 		return errors.ErrorUserFailed
+	}
+	return nil
+}
+
+func (u *UserServiceExtHandler) UpdateUserProfile(ctx context.Context, req *pb.UpdateUserProfileReq, rsp *pb.UpdateUserProfileRsp) error {
+
+	userEmail := req.UserEmail
+	userName := req.UserName
+	userPhone := req.UserPhone
+	userID := req.UserID
+	if userEmail != "" {
+		err := db.UpdateUserEmailProfile(userEmail, userID)
+		if err != nil {
+			u.logger.Error("error", zap.Error(err))
+			return errors.ErrorUserFailed
+		}
+	}
+	if userName != "" {
+		err := db.UpdateUserNameProfile(userName, userID)
+		if err != nil {
+			u.logger.Error("error", zap.Error(err))
+			return errors.ErrorUserFailed
+		}
+	}
+	if userPhone != "" {
+		err := db.UpdateUserPhoneProfile(userPhone, userID)
+		if err != nil {
+			u.logger.Error("error", zap.Error(err))
+			return errors.ErrorUserFailed
+		}
 	}
 	return nil
 }

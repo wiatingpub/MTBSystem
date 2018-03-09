@@ -11,6 +11,8 @@ service UserServiceExt {
    rpc ResetAccount(ResetAccountReq) returns(ResetAccountRsp) {}
    // 评分
    rpc WantScore(WantScoreReq) returns (WantScoreRsp) {}
+   // 修改用户信息
+   rpc UpdateUserProfile(UpdateUserProfileReq) returns (UpdateUserProfileRsp) {}
 }
 
 
@@ -25,7 +27,7 @@ message RegistAccountRsp {
 }
 
 message LoginAccountReq {
-    string userName = 1 ;
+    string email = 1 ;
     string password = 2 ;
 }
 
@@ -51,5 +53,18 @@ message WantScoreReq {
 }
 
 message WantScoreRsp {
+
+}
+
+message UpdateUserProfileReq {
+    
+    string userImage = 1;
+    string userName = 2;
+    string userEmail = 3;
+    string userPhone = 4;
+    int64 userID = 5;
+}
+
+message UpdateUserProfileRsp {
 
 }

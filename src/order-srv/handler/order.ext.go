@@ -165,6 +165,7 @@ func (o *OrderServiceExtHandler) OrderComment(ctx context.Context, req *pb.Order
 		return errors.ErrorOrderFailed
 	}
 	if order == nil {
+		o.logger.Error("err", zap.Any("order", order))
 		return errors.ErrorOrderFailed
 	}
 	if order.OrderScore != -1 {
@@ -180,7 +181,7 @@ func (o *OrderServiceExtHandler) OrderComment(ctx context.Context, req *pb.Order
 		o.logger.Error("err", zap.Any("UpdateFilmScore", err))
 		return errors.ErrorOrderFailed
 	}
-	user, err := db.SelectUserPhoneByUserId(userId)
+	user, err := db.SelectUserNameByUserId(userId)
 	if err != nil {
 		o.logger.Error("err", zap.Any("SelectUserPhoneByUserId", err))
 		return errors.ErrorOrderFailed
@@ -189,7 +190,8 @@ func (o *OrderServiceExtHandler) OrderComment(ctx context.Context, req *pb.Order
 	comment := entity.Comment{
 		FilmId:   order.MovieId,
 		Content:  content,
-		NickName: strconv.Itoa(int(user.Phone)),
+		Title:    strconv.Itoa(int(score)),
+		NickName: user.UserName,
 	}
 	err = db.InsertComment(&comment)
 	if err != nil {

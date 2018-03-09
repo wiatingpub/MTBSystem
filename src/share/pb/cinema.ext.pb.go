@@ -152,6 +152,8 @@ It has these top-level messages:
 	ResetAccountRsp
 	WantScoreReq
 	WantScoreRsp
+	UpdateUserProfileReq
+	UpdateUserProfileRsp
 */
 package pb
 
