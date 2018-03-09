@@ -37,7 +37,7 @@ func SelectOrderNumMovieIdMHIdStartTime(userId int64) ([]*entity.Order, error) {
 func SelectLookAlreadyOrders(userId int64) ([]*entity.Order, error) {
 
 	orders := []*entity.Order{}
-	err := db.Select(&orders, "SELECT `order_score`,z`movie_id`,`order_num` FROM `film_order` WHERE `user_id` = ? ORDER BY order_id DESC", userId)
+	err := db.Select(&orders, "SELECT `order_score`,`movie_id`,`order_num` FROM `film_order` WHERE `user_id` = ? ORDER BY order_id DESC", userId)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
