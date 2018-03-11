@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package pb;
+
+service UserServiceExt {
+   // 注册用户
+   rpc RegistAccount(RegistAccountReq) returns(RegistAccountRsp) {}
+   // 用户登录
+   rpc LoginAccount(LoginAccountReq) returns(LoginAccountRsp) {}
+   // 密码重置
+   rpc ResetAccount(ResetAccountReq) returns(ResetAccountRsp) {}
+   // 评分
+   rpc WantScore(WantScoreReq) returns (WantScoreRsp) {}
+   // 修改用户信息
+   rpc UpdateUserProfile(UpdateUserProfileReq) returns (UpdateUserProfileRsp) {}
+}
+
+
+
+message RegistAccountReq {
+    string email = 1 ;
+    string userName = 2 ;
+    string password = 3 ;
+}
+
+message RegistAccountRsp {
+}
+
+message LoginAccountReq {
+    string email = 1 ;
+    string password = 2 ;
+}
+
+message LoginAccountRsp {
+    int64 userID = 1;
+    string userName = 2;
+    string email = 3;
+    string phone = 4;
+}
+
+message ResetAccountReq {
+
+}
+
+message ResetAccountRsp {
+
+}
+
+message WantScoreReq {
+    int64 userId = 1 ;
+    int64 movieId = 2 ; // 订单编号
+    int64 score = 3 ;
+}
+
+message WantScoreRsp {
+
+}
+
+message UpdateUserProfileReq {
+    
+    string userImage = 1;
+    string userName = 2;
+    string userEmail = 3;
+    string userPhone = 4;
+    int64 userID = 5;
+}
+
+message UpdateUserProfileRsp {
+
+}

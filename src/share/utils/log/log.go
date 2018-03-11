@@ -10,6 +10,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
+	"share/config"
 )
 
 var instance *zap.Logger
@@ -19,38 +20,32 @@ func Instance() *zap.Logger {
 	return instance
 }
 
-// Init 初始化,srvName 生成的日志文件夹名字
-func Init(srvName string) *zap.Logger {
-	instance = NewLogger(srvName)
+// Init 初始化
+func Init(serviceName string) *zap.Logger {
+	instance = NewLogger(serviceName)
 	return instance
 }
 
 // NewLogger 新建日志
 func NewLogger(srvName string) *zap.Logger {
 
-	directory := "/home/ricoder/gopath/src/mewe_job/GoMicroDemo/"
-	if len(directory) == 0 {
-		directory = path.Join("..", "log", srvName)
-	} else {
-		directory = path.Join(directory, "log", srvName)
-	}
+	directory := path.Join(config.LogPath, srvName)
 	writers := []zapcore.WriteSyncer{newRollingFile(directory)}
 	writers = append(writers, os.Stdout)
-	logger, _ := newZapLogger(true, zapcore.NewMultiWriteSyncer(writers...))
+	logger, dyn := newZapLogger(true, zapcore.NewMultiWriteSyncer(writers...))
 	zap.RedirectStdLog(logger)
 
-	/*updateLogLevel( serviceName, dyn, isProduction)
 	go func() {
 		ticker := time.NewTicker(30 * time.Second)
 		for range ticker.C {
-			updateLogLevel( serviceName, dyn, isProduction)
+			updateLogLevel(srvName, dyn, false)
 		}
-	}()*/
+	}()
 
 	return logger
 }
 
-/*func updateLogLevel(serviceName string, dyn *zap.AtomicLevel, isProduction bool) {
+func updateLogLevel(serviceName string, dyn *zap.AtomicLevel, isProduction bool) {
 
 	originLevelString := "info"
 	if !isProduction {
@@ -82,8 +77,7 @@ func NewLogger(srvName string) *zap.Logger {
 		log.Println("修改日志等级: ", dyn.Level().String(), "=>", newLevel.String())
 		dyn.SetLevel(*newLevel)
 	}
-}*/
-
+}
 
 func newRollingFile(directory string) zapcore.WriteSyncer {
 	if err := os.MkdirAll(directory, 0766); err != nil {
@@ -198,4 +192,3 @@ func (l *lumberjackWriteSyncer) sync() error {
 	}
 	return nil
 }
-

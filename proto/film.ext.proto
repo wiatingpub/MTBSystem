@@ -1,0 +1,231 @@
+syntax = "proto3";
+
+package pb;
+
+service FilmServiceExt {
+
+	// 获取正在售票的影片
+	rpc HotPlayMovies(HotPlayMoviesReq) returns(HotPlayMoviesRep){}
+    // 电影详情
+    rpc MovieDetail(MovieDetailReq) returns(MovieDetailRep) {}
+    // 获取导演与演员信息
+    rpc MovieCreditsWithTypes(MovieCreditsWithTypesReq) returns (MovieCreditsWithTypesRep) {}
+    // 获取海报信息
+    rpc ImageAll(ImageAllReq) returns (ImageAllRep) {}
+    // 正在热映的影片
+    rpc LocationMovies(LocationMoviesReq) returns(LocationMoviesRep) {}
+    // 即将上映的影片
+    rpc MovieComingNew(MovieComingNewReq) returns (MovieComingNewRep) {}
+    // 图片搜索
+    rpc Search(SearchReq) returns (SearchRep) {}
+    // 根据影院id和时间获取正在销售的影片信息
+    rpc GetFilmsByCidADay(GetFilmsByCidADayReq) returns (GetFilmsByCidADayRsp) {}
+
+}
+
+message HotPlayMoviesReq {
+    int64 location = 1 ; // 位置id
+}
+
+message HotPlayMoviesRep {
+    repeated Movie movies = 1 ; // 正在上映的影片
+}
+
+message Movie {
+
+    string img = 1 ; // 影片logo
+    int64 movieId = 2 ; // 电影id
+    string titleCn = 3 ; // 中文名字
+    string movieSupportType = 4 ; // 影片支持的播放类型  如3D IMAX 要求返回格式 3D|IMAX
+    string filmDirector = 5 ; // 影片导演
+    string actors = 6; // 主演
+    string filmDrama = 7 ; // 影片看点
+    float  ratingFinal = 8 ;
+}
+
+
+message HotMovie {
+    repeated string actorName = 1 ; // 演员名字
+    string commonSpecial = 2 ; // 影片简介
+    string directorName = 3 ; // 导演名字
+    string img = 4 ; // 影片logo
+    int64 is3D = 5 ; // 是否3D
+    int64 isDMAX = 6 ; // 是否DMAX
+    int64 isFilter = 7 ; // 是否过滤
+    int64 isHot = 8 ; // 是否热映
+    int64 isIMAX = 9 ; // 是否IMAX
+    int64 isIMAX3D = 10 ; // 是否IMAX3D
+    int64 isNew = 11 ; // 是否新上映
+    int64 length = 12 ; // 时长
+    int64 movieId = 13 ; // 电影时长
+    int64 rDay = 14 ; // 上映日期
+    int64 rMonth = 15 ; // 上映月份
+    int64 rYear = 16 ; // 上映年份
+    float ratingFinal = 17 ; // 最终评分
+    string t = 18 ; // 名字
+    string titleCn = 19 ; // 中文名字
+    string titleEn = 20 ; // 英文名字
+    string type = 21 ; // 影片类型
+    int64 wantedCount = 22 ; // 想看的人数
+}
+
+message FilmAllMessage {
+    string logo = 1 ;
+    int64 filmLong = 2 ;
+    int64 isSelectSeat = 3 ;
+    float filmPrice = 4 ;
+    string filmScreenwriter = 5 ;
+    int64 commentNum = 6 ;
+    string filmName = 7 ;
+    int64 isSupportInlineWatch = 8 ;
+    string createAt = 9 ;
+    int64 bigType = 10 ;
+    string filmDrama = 11 ;
+    int64 userAccessTimes = 12;
+    float filmBoxoffice = 13;
+    string filmDirector = 14 ;
+    int64 userLikeWatchTimes = 15 ;
+    int64 userCommentTimes = 16 ;
+    string companyIssued = 17 ;
+    string country = 18 ;
+    float commentScore = 19 ;
+    int64 is3D = 20 ;
+    int64 isDMAX = 21 ;
+    int64 isFilter = 22 ;
+    int64 isHot = 23 ;
+    int64 isIMAX = 24 ;
+    int64 isIMAX3D = 25 ;
+    int64 isNew = 26 ;
+    int64 rDay = 27 ;
+    int64 rMonth = 28 ;
+    int64 rYear = 29 ;
+    string commonSpecial = 30 ;
+}
+
+message MovieDetailReq {
+    int64 locationId = 1 ;
+    int64 movieId = 2 ;
+}
+
+message MovieDetailRep {
+    string image    = 1 ;
+    string titleCn  = 2 ;
+    string titleEn  = 3 ;
+    float rating   = 4 ;
+    int64   year    = 5 ;
+    string  content = 6 ;
+    string  type    = 7 ;
+    int64  runTime = 8 ;
+    string  commonSpecial   = 9 ;
+    string  director    =   10 ;
+    Release release  = 11 ;
+}
+
+message Release {
+    string location = 1 ;
+    string date = 2 ;
+}
+
+message MovieCreditsWithTypesReq {
+    int64 MovieId = 1 ;
+}
+
+message MovieCreditsWithTypesRep {
+    repeated Type types = 1 ;
+}
+
+message Type {
+    string typeName = 1;
+    string typeNameEc = 2 ;
+    repeated Persons persons = 3 ;
+}
+
+message Persons {
+    string image = 1 ;
+    string name = 2 ;
+    string nameEn = 3 ;
+    string roleCover = 4 ;
+    string personate = 5 ;
+}
+
+message ImageAllReq {
+    int64 movieId = 2 ;
+}
+
+message ImageAllRep {
+    repeated Image images = 1 ;
+}
+
+message Image {
+    string image = 1 ;
+}
+
+
+message LocationMoviesReq {
+
+}
+
+message LocationMoviesRep {
+    repeated Movie movies = 1 ; // 正在上映的影片
+}
+
+message MovieComingNewReq {
+
+}
+
+message MovieComingNewRep {
+    repeated Movie movies = 1 ; // 正在上映的影片
+}
+
+message SearchRep {
+    repeated SearchMovie subjects = 1 ; // 搜索的列表
+    int64 total = 2 ; // 列表总数
+}
+
+message SearchReq {
+    string q = 1 ; // 搜搜index
+}
+
+message SearchMovie {
+    string title = 1 ; // 名字
+    string id = 2 ; // id
+    Images image = 3 ; // 图片
+    repeated Genres genres = 4 ; // 类型
+    string year = 5 ; // 上映年份
+    Rating rating = 6 ; // 评分
+}
+
+message Genres {
+    string type = 1 ; // 电影类型
+}
+
+message Rating {
+	float average = 1 ; // 评分
+}
+
+message Images {
+    string small = 1 ; // 图片
+}
+
+message DayMovie{
+
+    string releaseTime = 1 ; // 上映时间
+    int64 length = 2 ; // 上映的时长
+    string releaseType = 3 ; // 上映类型
+    string mhName = 4 ; // 厅的名字
+    float releaseDiscount = 5 ; // 价格
+    int64 movieId = 6 ; // 电影id
+    int64 mhId = 7 ; // 厅的id
+    int64 cinemaId = 8 ; // 影院id
+    string filmName = 9 ; // 影片名称
+}
+
+message GetFilmsByCidADayReq {
+    int64 cinemaId = 1 ; // 影院id
+    int64 filmId = 2 ; // 影片id
+    int64 dayNum = 3 ; // 0：今天  1：明天  2：后天
+}
+
+message GetFilmsByCidADayRsp {
+    repeated DayMovie dayMovie = 1 ; // 正在上映的影片
+}

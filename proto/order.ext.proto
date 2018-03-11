@@ -1,0 +1,155 @@
+syntax = "proto3";
+
+package pb;
+
+service OrderServiceExt {
+
+    // 想看
+    rpc WantTicket(WantTicketReq) returns (WantTicketRsp) {}
+    // 下单
+    rpc Ticket(TicketReq) returns (TicketRsp) {}
+    // 支付
+    rpc PayOrder(PayOrderReq) returns (PayOrderRsp) {}
+    // 取消订单
+    rpc UndoOrder(UndoOrderReq) returns (UndoOrderRsp) {}
+
+    // 根据订单编号获取电影票具体信息
+    rpc GetOrderMessage(GetOrderMessageReq) returns (GetOrderMessageRsp) {}
+    // 查看所有电影票
+    rpc LookOrders(LookOrdersReq) returns (LookOrdersRsp) {}
+    // 查看所有看过的电影票
+    rpc LookAlreadyOrders(LookAlreadyOrdersReq) returns (LookAlreadyOrdersRsp) {}
+    // 进行评分
+    rpc OrderComment(OrderCommentReq) returns (OrderCommentRsp){}
+}
+
+message WantTicketReq {
+    int64 userId = 1 ;
+    int64 filmId = 2 ;
+    int64 type = 3 ; // 1为即将上映 2为正在热映 的电影
+}
+
+message WantTicketRsp {
+}
+
+message TicketReq {
+    int64 userId = 1 ;
+    int64 filmId = 2 ;
+    int64 mhId = 3 ;
+    int64  x = 4 ;
+    int64  y = 5 ;
+    string startTime = 6;
+    string endTime = 7;
+}
+
+message TicketRsp {
+    int64 orderNumD = 1;
+}
+
+message Order {
+    string orderNum = 1 ; // 订单编号
+    string orderPrice = 2 ; // 订单价格
+    string createAt = 3 ; // 生成时间
+    string payAt = 4 ; // 支付时间
+    int64 mhId = 5 ; // 影厅编号
+    int64 userId = 6 ; // 用户编号
+    int64 movieId = 7 ; // 影片id
+}
+
+message MovieTicket{
+
+    string filmName = 1 ; // 影片名字
+    string startTime = 2 ; // 上映时间
+    string cinema = 3 ; // 影院名字
+    string orderNum = 4 ; // 订单编号
+}
+
+message LookOrdersReq {
+
+    int64 userId = 1 ;
+}
+
+message LookOrdersRsp {
+    repeated MovieTicket movieTickets = 1 ;
+}
+
+message PayOrderReq {
+    string orderNum = 1 ;
+    int64 userId = 2 ;
+    int64 phone = 3;
+}
+
+message PayOrderRsp {
+
+}
+
+message UndoOrderReq {
+    int64 orderId = 1 ;
+}
+
+message UndoOrderRsp {
+
+}
+
+message GetOrderMessageReq{
+
+    string orderNum = 1; // 影片编号
+    int64 userId = 2 ; // 用户id
+}
+
+message GetOrderMessageRsp{
+
+    TicketDetail ticketDetail = 1;
+}
+
+message TicketDetail{
+
+    string filmName = 1 ;
+    string filmImg = 2;
+    string startTime = 3;
+    string endTime = 4;
+    string cinemaName = 5;
+    string mhName = 6;
+    string seat = 7;
+    string orderNum = 8;
+    string cinemaAddress = 9;
+    float price = 10;
+    string createAt = 11;
+    int64 phone = 12;
+    int64 cinemaPhone = 13;
+}
+
+message LookAlreadyOrdersReq{
+
+    int64 userId = 1 ;
+}
+
+// messages:{"totalMovie":2,"oneNoComment":2,"movies":[{"filmImg":"http://img5.mtime.cn/mt/2017/10/23/101938.17733324_1280X720X2.jpg","filmName":"悟空传","time":"2017-07-13","director":"果子酱","actorNames":["彭于晏","欧豪"],"orderNum":"201701021003123"},{"filmImg":"http://img5.mtime.cn/mt/2017/10/23/101938.17733324_1280X720X2.jpg","filmName":"悟空传","time":"2017-07-13","director":"果子酱","actorNames":["彭于晏","欧豪"],"orderNum":"201701021003123"}]}
+message LookAlreadyOrdersRsp{
+
+    int64 totalMovie = 1 ; // 看过的影片数量
+    int64 oneNoComment = 2 ; // 还没有评价的影片数量
+    repeated AlreadyMovie movies = 3 ;
+}
+
+message AlreadyMovie{
+
+    string filmImg = 1 ;
+    string filmName = 2 ;
+    string time = 3 ;
+    string director = 4 ;
+    repeated string actorNames = 5 ;
+    string orderNum = 6 ;
+}
+
+message OrderCommentReq{
+
+    int64 userId = 1 ;
+    int64 score = 2 ;
+    string commentContent = 3;
+    string orderNum = 4;
+    int64 movieId = 5;
+}
+
+message OrderCommentRsp{
+}

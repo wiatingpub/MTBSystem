@@ -1,0 +1,509 @@
+syntax = "proto3";
+
+package pb;
+
+service CMSServiceExt {
+
+    rpc UserLogin(UserLoginReq) returns(UserLoginRsp) {}
+    rpc UpdateMessage(UpdateMessageReq) returns(UpdateMessageRsp){}
+    rpc AllFilms(AllFilmsReq) returns(AllFilmsRsp){} // 所有影片信息
+    rpc UpdateFilm(UpdateFilmReq) returns(UpdateFilmRsp){} // 更新影片信息
+    rpc DeleteFilm(DeleteFilmReq) returns(DeleteFilmRsp){} // 删除影片信息
+    rpc AllUsers(AllUsersReq) returns(AllUsersRsp){} // 所有注册的用户信息
+    rpc AllAdminUsers(AllAdminUsersReq) returns(AllAdminUsersRsp){} // 所有管理员的信息
+    rpc AllComments(AllCommentsReq) returns(AllCommentsRsp){} // 所有评论的信息
+    rpc AllOrders(AllOrdersReq) returns(AllOrdersRsp){} // 所有订单信息
+    rpc AllAddress(AllAddressReq) returns(AllAddressRsp){} // 所有地点信息
+    rpc AddFilm(AddFilmReq) returns(AddFilmRsp){} // 添加影片
+    rpc AddAdminUser(AddAdminUserReq) returns(AddAdminUserRsp){} // 添加管理员
+    rpc AddAddress(AddAddressReq) returns(AddAddressRsp){} // 添加地点信息
+    rpc UpdateAddress(UpdateAddressReq) returns(UpdateAddressRsp){} // 更新地点信息
+    rpc DeleteAddress(DeleteAddressReq) returns(DeleteAddressRsp){} // 删除地点信息
+    rpc DeleteAdminUser(DeleteAdminUserReq) returns(DeleteAdminUserRsp){} // 删除管理员信息
+    rpc AllMovieHall(AllMovieHallReq) returns(AllMovieHallRsp){} // 影厅管理
+    rpc AddMovieHall(AddMovieHallReq) returns(AddMovieHallRsp){} // 影厅管理
+    rpc UpdateMovieHall(UpdateMovieHallReq) returns(UpdateMovieHallRsp){} // 影厅管理
+    rpc DeleteMovieHall(DeleteMovieHallReq) returns(DeleteMovieHallRsp){} // 影厅管理
+    rpc AllCinemaFilms(AllCinemaFilmsReq) returns(AllCinemaFilmsRsp){} // 影院影片管理
+    rpc AddCinemaFilm(AddCinemaFilmReq) returns(AddCinemaFilmRsp){} // 影院影片管理
+    rpc UpdateCinemaFilm(UpdateCinemaFilmReq) returns(UpdateCinemaFilmRsp){} // 影院影片管理
+    rpc DeleteCinemaFilm(DeleteCinemaFilmReq) returns(DeleteCinemaFilmRsp){} // 影院影片管理
+    rpc RegisterCinema(RegisterCinemaReq) returns(RegisterCinemaRsp){}
+    rpc AllCinemaHall(AllCinemaHallReq) returns(AllCinemaHallRsp){} // 返回影院所有影厅
+}
+
+message UserLoginReq{
+    string user = 1 ; 
+    string password = 2;
+}
+
+message UserLoginRsp{
+
+    int64 cinemaID = 1;
+    int64 adminID = 2;
+    string cinemaName = 3;
+    int64 adminNum = 4;
+}
+
+message UpdateMessageReq{
+    string table = 1 ; // 表名
+    string json = 2 ; // {k:v}
+    string num = 3; //  权限值
+}
+
+message UpdateMessageRsp{
+    
+}
+
+message AllFilmsReq{
+    int64 page = 1;
+    int64 adminID = 2;
+}
+
+message AllFilmsRsp{
+    int64 total = 1;
+    repeated Film films = 2;
+}
+
+message Film {
+    int64 movieID = 1;
+    string img = 2;
+    int64 length = 3;
+    int64 isSelectSeat = 4;
+    float filmPrice = 5;
+    string filmScreenwriter = 6; 
+    string filmDirector = 7;
+    int64 commentNum  = 8;
+    string titleCn = 9;
+    string titleEn = 10;
+    int64 isSupportInlineWatch = 11;
+    string createAt = 12;
+    string type = 13;
+    string filmDrama = 14;
+    string commonSpecial = 15;
+    int64 userAccessTimes = 16;
+    float filmBoxoffice = 17;
+    int64 wantedCount = 18;
+    int64 userCommentTimes = 19;
+    string companyIssued = 20;
+    string country = 21;
+    float ratingFinal = 22;
+    int64 is3D = 23;
+    int64 isDMAX = 24;
+    int64 isFilter = 25;
+    int64 isHot = 26;
+    int64 isIMAX = 27;
+    int64 isIMAX3D = 28;
+    int64 isNew = 29;
+    int64 isTicking = 30;
+    int64 rDay = 31;
+    int64 rMonth = 32;
+    int64 rYear = 33;
+    repeated string actorNames = 34;
+    string rYMD = 35; // 时间格式化
+    string ticketStatus = 36; // 上映状态
+}
+
+message AllUsersReq{
+    int64 page = 1;
+    int64 adminID = 2;
+} 
+
+message AllUsersRsp{
+    repeated User users = 1;
+    int64 total = 2;
+}
+
+message User{
+    int64  userId = 1;
+    string userName = 2;
+    string password = 3;
+    string createAt = 4;
+    string email = 5;
+    string phone = 6;
+}
+
+message AllAdminUsersReq{
+    int64 page = 1;
+    int64 adminID = 2;
+} 
+
+message AllAdminUsersRsp{
+    repeated AdminUser adminUsers = 1;
+    int64 total = 2;
+}
+
+message AdminUser{
+    int64 AuID = 1;
+    string AdminName = 2;
+    string AdminPassword = 3;
+    int64 AdminCinemaID = 4;
+    string AdminLastLoginTime = 5;
+    int64 AdminNum = 6;
+}
+
+message AllCommentsReq{
+    int64 page = 1;
+    int64 adminID = 2;
+} 
+
+message AllCommentsRsp{
+    repeated Comment comments = 1;
+    int64 total = 2;
+}
+
+message Comment{
+    int64 commentID = 1;
+    int64 filmID = 2;
+    string title = 3;
+    string content = 4;
+    string headImg = 5;
+    string nickName = 6;
+    string createAt = 7;
+    int64 upNum = 8;
+}
+
+message AllOrdersReq{
+    int64 page = 1;
+    int64 adminID = 2;
+} 
+
+message AllOrdersRsp{
+    repeated OrderAll orders = 1;
+    int64 total = 2;
+}
+
+message OrderAll{
+    int64 orderID = 1;
+    string orderNum = 2;
+    int64 orderStatus = 3;
+    float orderPrice = 4;
+    string createAt = 5;
+    string payAt = 6;
+    int64 mhID = 7;
+    int64 orderX = 8;
+    int64 orderY = 9;
+    int64 userID = 10;
+    int64 movieID = 11;
+    int64 orderScore = 12;
+    string startTime = 13;
+    string endTime = 14;
+    string orderStat = 15;
+}
+
+message AllAddressReq{
+    int64 page = 1;
+    int64 adminID = 2;
+} 
+
+message AllAddressRsp{
+    repeated PlaceAll places = 1;
+    int64 total = 2;
+}
+
+message PlaceAll{
+    int64 id = 1;
+    int64 count = 2;
+    string name = 3;
+    string pinyinFull = 4;
+    string pinyinShort = 5;
+}
+
+message AddFilmReq{
+    int64 adminID = 1;
+    string img = 2;
+    int64 length = 3;
+    int64 isSelectSeat = 4;
+    float filmPrice = 5;
+    string filmScreenwriter = 6; 
+    string filmDirector = 7;
+    int64 commentNum  = 8;
+    string titleCn = 9;
+    string titleEn = 10;
+    int64 isSupportInlineWatch = 11;
+    string createAt = 12;
+    string type = 13;
+    string filmDrama = 14;
+    string commonSpecial = 15;
+    int64 userAccessTimes = 16;
+    float filmBoxoffice = 17;
+    int64 wantedCount = 18;
+    int64 userCommentTimes = 19;
+    string companyIssued = 20;
+    string country = 21;
+    float ratingFinal = 22;
+    int64 is3D = 23;
+    int64 isDMAX = 24;
+    int64 isFilter = 25;
+    int64 isHot = 26;
+    int64 isIMAX = 27;
+    int64 isIMAX3D = 28;
+    int64 isNew = 29;
+    int64 isTicking = 30;
+    int64 rDay = 31;
+    int64 rMonth = 32;
+    int64 rYear = 33;
+    string filmDirectorImg = 34;
+    string filmActor1 = 35;
+    string filmActor1Img = 36;
+    string filmActor2 = 37;
+    string filmActor2Img = 38;
+}
+
+message AddFilmRsp{
+}
+
+message UpdateFilmReq{
+    int64 movieID = 1;
+    string img = 2;
+    int64 length = 3;
+    float filmPrice = 4;
+    string filmDirector = 5;
+    string titleCn = 6;
+    string titleEn = 7;
+    string type = 8;
+    string filmDrama = 9;
+    string commonSpecial = 10;
+    string companyIssued = 11;
+    string country = 12;
+    int64 rDay = 13;
+    int64 rMonth = 14;
+    int64 rYear = 15;
+    string rYMD = 16;
+    int64 adminID = 17;
+    int64 isTicking = 18;
+}
+
+message UpdateFilmRsp{
+
+}
+
+message DeleteFilmReq{
+    int64 movieID = 1;
+    int64 adminID = 2;
+}
+
+message DeleteFilmRsp{
+
+}
+
+message AddAdminUserReq{
+    int64 adminID = 1;
+    string AdminName = 2;
+    string AdminPassword= 3;
+    int64 AdminCinemaID = 4;
+    int64 AdminNum = 6;
+}
+
+message AddAdminUserRsp{
+
+}
+
+message AddAddressReq{
+    int64 adminID = 1;
+    int64 count = 2;
+    string name = 3;
+    string pinyinFull = 4;
+    string pinyinShort = 5;
+}
+
+message AddAddressRsp{
+
+}
+
+message UpdateAddressReq{
+    int64 id = 1;
+    int64 count = 2;
+    string name = 3;
+    string pinyinFull = 4;
+    string pinyinShort = 5;
+    int64 adminID = 6;
+}
+
+message UpdateAddressRsp{
+
+}
+
+message DeleteAddressReq{
+    int64 id = 1;
+    int64 adminID = 2;
+} 
+
+message DeleteAddressRsp{
+
+}
+
+message DeleteAdminUserReq{
+    int64 AuID = 1;
+    int64 adminID = 2;
+}
+
+message DeleteAdminUserRsp{
+
+}
+
+message AllMovieHallReq{
+    int64 page = 1;
+    int64 adminID = 2;
+}
+
+message MovieHall{
+    int64 mhId = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+}
+
+message AllMovieHallRsp{
+    repeated MovieHall movieHalls = 1;
+    int64 total = 2;
+}
+
+message AddMovieHallReq{
+    int64 adminID = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+}
+
+message AddMovieHallRsp{
+    
+}
+
+
+message UpdateMovieHallReq{
+    int64 adminID = 1;
+    string mhName = 2;
+    string mhAddress = 3;
+    int64 cinemaId = 4;
+    int64 mhId = 5;
+}
+
+message UpdateMovieHallRsp{
+
+}
+
+message DeleteMovieHallReq{
+    int64 adminID = 1;
+    int64 mhId = 2;
+}
+
+message DeleteMovieHallRsp{
+
+}
+
+message AllCinemaFilmsReq{
+    int64 page = 1;
+    int64 adminID = 2;
+}
+
+message CinemaFilm{
+    int64 cinemaID = 1;
+    int64 filmID = 2;
+    int64 hallID = 3;
+    string filmName = 4;
+    string cinemaName = 5;
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9;
+    string releaseType = 10;
+    string releaseAdd = 11;
+    int64 cfID = 12;
+    int64 length = 13;
+    float releaseDiscount = 14;
+    string hallName = 15;
+}
+
+message AllCinemaFilmsRsp{
+    repeated CinemaFilm cinemaFilms = 1;
+    int64 total = 2;
+}
+
+message AddCinemaFilmReq{
+    int64 cinemaID = 1; 
+    int64 movieID = 2;
+    int64 hallID = 3; 
+    string titleCn = 4;
+    string cinemaName = 5; 
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9; 
+    string type = 10;
+    string releaseAdd = 11; 
+    int64 adminID = 12; 
+    int64 length = 13; 
+    float releaseDiscount = 14;
+}
+
+message AddCinemaFilmRsp{
+    
+}
+
+
+message UpdateCinemaFilmReq{
+    int64 cinemaID = 1;
+    int64 filmID = 2;
+    int64 hallID = 3;
+    string filmName = 4;
+    string cinemaName = 5;
+    int64 releaseTimeYear = 6;
+    int64 releaseTimeMonth = 7;
+    int64 releaseTimeDay = 8;
+    string releaseTime = 9;
+    string releaseType = 10;
+    string releaseAdd = 11;
+    int64 adminID = 12; 
+    int64 length = 13;
+    float releaseDiscount = 14;
+    int64 cfID = 15;
+}
+
+message UpdateCinemaFilmRsp{
+
+}
+
+message DeleteCinemaFilmReq{
+    int64 adminID = 1;
+    int64 cfId = 2;
+}
+
+message DeleteCinemaFilmRsp{
+
+}
+
+message RegisterCinemaReq{
+
+    int64 adminID = 1; 
+    string cinemaName = 2;
+    string cinemaAddress = 3;
+    int64 locationID = 4; // 影院城市对应的位置
+    string cinemaTypes = 5;
+    int64 cinemaCard = 6; // 影城卡
+    int64 cinemaMinPrice = 7; // 几元起
+    string cinemaSupport = 8; // 影院提供的支持，包括退签等,用|隔开
+    int64 cinemaDiscount = 9; // 影城卡最低减价多少元
+    int64 cinemaPhone = 10; // 影院电话
+}
+
+message RegisterCinemaRsp{
+
+    int64 cinemaID = 1;
+}
+
+message AllCinemaHallReq{
+    
+    int64 cinemaID = 1;
+    int64 adminID = 2; 
+}
+
+message AllCinemaHallRsp{
+
+    repeated HallAddressList hallAddresses = 1;
+}
+
+message HallAddressList{
+    int64 mhID = 1;
+    string mhName = 2;
+}

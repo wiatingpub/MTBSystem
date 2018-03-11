@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+service PlaceServiceExt {
+    // 获取有电影院的地点
+    rpc HotCitiesByCinema (HotCitiesByCinemaReq) returns (HotCitiesByCinemaRep) {}
+}
+
+message HotCitiesByCinemaReq {
+
+}
+
+message HotCitiesByCinemaRep {
+    repeated Place p = 1 ;
+}
+
+message Place {
+    int64 count = 1 ;
+    int64 id = 2 ;
+    string n = 3 ;
+    string pinyinFull = 4 ;
+    string pinyinShort = 5 ;
+}

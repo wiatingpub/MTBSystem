@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package pb;
+
+service CommentServiceExt {
+    // 精彩影评
+    rpc HotComment(HotCommentReq) returns(HotCommentRsp) {}
+    // 进行评论
+    rpc MakeComment(MakeCommentReq) returns(MakeCommentRsp) {}
+    // 评论up
+    rpc UpNumComment(UpNumCommentReq) returns(UpNumCommentRsp){}
+    // 我的评论
+    rpc MyComments(MyCommentsReq) returns(MyCommentsRsp){}
+    // 删除评论
+    rpc DeleteComment(DeleteCommentReq) returns(DeleteCommentRsp){}
+}
+
+message HotCommentReq {
+    int64 movieId = 2 ;
+}
+
+message HotCommentRsp {
+    CommentData data = 1 ;
+}
+
+message CommentData {
+    CommentMini mini = 1 ;
+    CommentPlus plus = 2 ;
+}
+
+message CommentMini {
+    repeated CommentRecord list = 1 ;
+    int64 total = 2 ;
+}
+
+message CommentPlus {
+    repeated CommentRecord list = 1 ;
+    int64 total = 2 ;
+}
+
+message CommentRecord {
+    string title = 1 ;
+    string content = 2 ;
+    string headImg = 3 ;
+    string nickname = 4 ;
+    string createAt = 5;
+    int64 upNum = 6;
+    int64 commentID = 7;
+}
+
+message MakeCommentReq {
+    int64 movieId = 1 ; // 影片id
+    string title = 2 ; // 标题
+    string headImg = 3 ;
+    string nickname = 4 ; // 用户昵称
+    int64 userId = 5 ; // 用户id
+    string content = 6 ;
+}
+
+message MakeCommentRsp {
+}
+
+message UpNumCommentReq {
+    int64 commentID = 1;
+}
+
+message UpNumCommentRsp {
+    int64 upNum = 1;
+}
+
+message MyCommentsReq{
+    int64 userId = 1;
+}
+
+message MyCommentsRsp{
+    repeated MyComment myComments = 1;
+}
+
+message MyComment{
+    string filmImage = 1;
+    string filmName = 2;
+    string score = 3;
+    int64 commentID = 4;
+    string content = 5;
+    int64 upNum = 6;
+}
+
+message DeleteCommentReq{
+    int64 commentID = 1;
+}
+
+message DeleteCommentRsp{
+
+}

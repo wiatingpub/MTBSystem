@@ -1,0 +1,6 @@
+CREATE TABLE image (
+  image_id INT(11) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  movie_id INT(11) NOT NULL COMMENT '影片编号',
+  image_url CHAR(100) NOT NULL COMMENT '影片图片',
+  PRIMARY KEY (image_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

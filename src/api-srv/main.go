@@ -1,30 +1,36 @@
 package main
 
 import (
-	"net/http"
-	"github.com/micro/go-micro/cmd"
 	"domain/apid"
-	"share/config"
-	"log"
-	microErrors "github.com/micro/go-micro/errors"
 	"encoding/json"
+	"github.com/micro/go-micro/cmd"
+	microErrors "github.com/micro/go-micro/errors"
+	"go.uber.org/zap"
 	"io/ioutil"
+	"net/http"
+	"share/config"
+	"share/utils/log"
 	"strconv"
 )
 
 var (
-	cors = map[string]bool{"*": true}
+	cors   = map[string]bool{"*": true}
+	logger *zap.Logger
 )
+
+func init() {
+	logger = log.Init("api")
+
+}
 
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handleRPC)
-	log.Println("Listen on :8888")
-	http.ListenAndServe(":8888", mux)
+	http.ListenAndServe(":8082", mux)
+	logger.Info("Listen on :8082")
 }
 
 func handleRPC(w http.ResponseWriter, r *http.Request) {
-	log.Println("handleRPC coming ....")
 	if r.URL.Path == "/" {
 		w.Write([]byte("ok,this is the server ..."))
 		return
@@ -55,8 +61,7 @@ func handleRPC(w http.ResponseWriter, r *http.Request) {
 func handleJSONRPC(w http.ResponseWriter, r *http.Request) {
 
 	service, method := apid.PathToReceiver(config.Namespace, r.URL.Path)
-	log.Println("service:" + service)
-	log.Println("method:" + method)
+
 	br, _ := ioutil.ReadAll(r.Body)
 
 	request := json.RawMessage(br)
