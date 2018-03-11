@@ -1,6 +1,7 @@
 #### 采用go-micro开发的电影票在线购票系统
 
 -------------------
+#### 毕设项目(2017-12-01 ~ 2018-03-09)
 
 #### 模块划分：
 ![模块划分.png](http://upload-images.jianshu.io/upload_images/3365849-dfaec3d3a064fd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -34,15 +35,15 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 6、优化(ing)
 
 ### 如何启动程序：
-- 1、 ./ctrl.sh build
-- 2、 ./ctrl.sh run
-- 3、 ./ctrl.sh init conf
-- 4、 ./ctrl.sh init chmod 
-- 5、 ./ctrl.sh start 
-- 6、 ./ctrl.sh login
+- 1、 ./ctrl.sh build #构建docker环境，构建完成后可以省略该步骤
+- 2、 ./ctrl.sh run #启动docker容器环境
+- 3、 ./ctrl.sh init conf #环境配置，包括数据库 
+- 4、 ./ctrl.sh init chmod  #权限设定
+- 5、 ./ctrl.sh start  #启动容器
+- 6、 ./ctrl.sh login #登录容器
 - 7、 cd /data/deploy/mtbsystem/
-- 8、 bash ./build_local.sh api-srv
-- 9、 bash ./build_local.sh all
+- 8、 bash ./build_local.sh api-srv #启动api服务
+- 9、 bash ./build_local.sh all #启动所有服务
 
 ### 如何添加服务
 - 1、 在proto下添加文件，如cms.ext.proto
@@ -57,5 +58,9 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 1、 启动： bash mysql_backup.sh
 - 2、 数据恢复：gzip -d mtbsystem-xxxx.sql.gz
 - 3、 数据回复：mysql -u username -p database < 文件名 
+
+### 效果演示
+- 1、前台访问(手机网站)：http://front.lixifan.cn/
+- 2、后台访问:http://admin.lixifan.cn/#/login admin 123456 / 新光影城 xgyc 
 
 
