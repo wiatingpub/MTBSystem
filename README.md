@@ -1,7 +1,7 @@
 #### 采用go-micro开发的电影票在线购票系统
 
 -------------------
-#### 毕设项目(2017-12-01 ~ 2018-03-09)
+#### 毕设项目(2017-12-01 ~ 2018-03-09),对go和微服务有兴趣并且会继续研究，有工作交流兴趣的可以添加qq1359704355，并且备注来意
 
 #### 模块划分：
 ![模块划分.png](http://upload-images.jianshu.io/upload_images/3365849-dfaec3d3a064fd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
