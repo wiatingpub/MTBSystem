@@ -62,7 +62,5 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 1、前台访问(手机网站)：http://front.lixifan.cn/
 - 2、后台访问:http://admin.lixifan.cn/#/login admin 123456 / 新光影城 xgyc 
 
-### 说在最后:
-- 对go和微服务有兴趣并且会继续研究，有工作交流兴趣的可以添加qq1359704355，并且备注来意
 
 
