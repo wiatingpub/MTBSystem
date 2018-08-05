@@ -30,8 +30,8 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 2、数据库设计(get)
 - 3、服务端开发(get)
 - 4、前端开发(get)
-- 5、联调(ing)
-- 6、优化(ing)
+- 5、联调(get)
+- 6、优化(get)
 
 ### 如何启动程序：
 - 1、 ./ctrl.sh build #构建docker环境，构建完成后可以省略该步骤
