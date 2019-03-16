@@ -62,4 +62,11 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 - 1、前台访问(手机网站)：http://front.lixifan.cn/
 - 2、后台访问:http://admin.lixifan.cn/#/login admin 123456 / 新光影城 xgyc 
 
+---------
+
+
+系列博客可以关注公众号：
+
+![qrcode_for_gh_04e57fbebd02_258.jpg](http://upload-images.jianshu.io/upload_images/3365849-f14ff503e4288fc3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
