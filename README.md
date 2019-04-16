@@ -65,10 +65,16 @@ https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
 ---------
 
 
-系列博客可以关注公众号：
+系列博客：
+- https://mp.weixin.qq.com/s/UX_h-SgHk28ny8MLc0MXqg
+- https://mp.weixin.qq.com/s/IGQV_uxcs6n6S9trayShag
+- https://mp.weixin.qq.com/s/CngTpb50o9f7XWGviJ3P3Q
+- https://mp.weixin.qq.com/s/Yo2f-XtbbxI6jrYDTtKxKA
+
+
+关注公众号：
 
 ![qrcode_for_gh_04e57fbebd02_258.jpg](http://upload-images.jianshu.io/upload_images/3365849-f14ff503e4288fc3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-个人网站：http://myblog.lixifan.cn/
 
 
