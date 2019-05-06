@@ -18,9 +18,6 @@
 #### 数据库ER图
 ![数据库ER关系图.png](http://upload-images.jianshu.io/upload_images/3365849-9c1abcd5fedd1043.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-#### 项目相关的微服务博客
-https://juejin.im/user/58ae3e458fd9c50063c0209f/activities
-
 #### 技术方案：
 - 服务端：go-micro
 - 数据库：mysql
