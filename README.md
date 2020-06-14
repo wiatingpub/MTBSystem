@@ -1,5 +1,15 @@
 #### 采用go-micro开发的电影票在线购票系统
 
+-------------------
+
+系列博客：
+- https://mp.weixin.qq.com/s/5bn5ZkAJYR0IEaa5H0bsFg
+- https://mp.weixin.qq.com/s/SQ9HS4wKSz8HtNXHOA5oeg
+- https://mp.weixin.qq.com/s/Y55hfVF4a8A6XOI5OHHlgw
+- https://mp.weixin.qq.com/s/Yo2f-XtbbxI6jrYDTtKxKA
+
+-------------------
+
 #### 模块划分：
 ![模块划分.png](http://upload-images.jianshu.io/upload_images/3365849-dfaec3d3a064fd8a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -57,4 +67,9 @@
 - 1、前台访问(手机网站)：http://front.lixifan.cn/
 - 2、后台访问:http://admin.lixifan.cn/#/login admin 123456 / 新光影城 xgyc 
 
+-------
+
+**Java源码分析、go语言应用、微服务，更多干货欢迎关注公众号：**
+
+![公众号.jpg](https://user-gold-cdn.xitu.io/2019/5/29/16aff62fa6acf090?w=258&h=258&f=jpeg&s=16132)
 
